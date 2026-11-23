@@ -1246,8 +1246,8 @@
             <div class="form-group"><label>কোষাধ্যক্ষের নাম</label><input type="text" id="sCashName" /></div>
             <div class="form-group"><label>কোষাধ্যক্ষের ফোন</label><input type="text" id="sCashPhone" /></div>
             <div class="form-group"><label>দানের ফর্মের WhatsApp নম্বর</label><input type="text" id="sWhatsapp" placeholder="017XXXXXXXX" /></div>
-            <div class="form-group"><label>হোয়াটসঅ্যাপ গ্রুপ লিংক (ফুটার)</label><input type="url" id="sWaGroup" placeholder="https://chat.whatsapp.com/..." /></div>
-            <div class="form-group"><label>মেসেঞ্জার গ্রুপ লিংক (ফুটার)</label><input type="url" id="sMsgGroup" placeholder="https://m.me/..." /></div>
+            <div class="form-group"><label>হোয়াটসঅ্যাপ গ্রুপ লিংক (ফুটার)</label><input type="text" id="sWaGroup" placeholder="https://chat.whatsapp.com/..." /></div>
+            <div class="form-group"><label>মেসেঞ্জার গ্রুপ লিংক (ফুটার)</label><input type="text" id="sMsgGroup" placeholder="https://m.me/..." /></div>
             <div class="form-group"><label>বাংলা QR শিরোনাম / নোট</label><input type="text" id="sBqrNote" placeholder="যেমন: যেকোনো ব্যাংক বা মোবাইল ব্যাংকিং অ্যাপ থেকে স্ক্যান করুন" /></div>
             <div class="form-group"><label>বাংলা QR ছবি আপলোড করুন</label><input type="file" id="sBqrFile" accept="image/*" /></div>
             <div class="form-group"><label>নতুন এডমিন পাসকোড</label><input type="text" id="sPass" placeholder="খালি রাখলে আগেরটি থাকবে" /></div>
@@ -1464,6 +1464,7 @@ let db = (() => {
 let ghCfg = loadGhConfig();
 let hasUnpublishedChanges = false;
 let isSyncing = false;
+let pendingSyncAfterCurrent = false;
 let selectedCommitteeTerm = db.committeeTerms[0]?.id || '';
 let adminLoggedIn = false;
 let charts = {};
@@ -1489,9 +1490,18 @@ function utf8ToBase64(str) {
   return btoa(bin);
 }
 
+function safeLocalSave() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+  } catch (e) {
+    console.warn('LocalStorage full or blocked:', e);
+    showToast('⚠️ ফোনের স্টোরেজ পূর্ণ, তবে GitHub-এ সেভ করার চেষ্টা চলছে...');
+  }
+}
+
 function saveData(triggerAutoSync = true) {
   db.updatedAt = new Date().toISOString();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+  safeLocalSave();
   hasUnpublishedChanges = true;
   updateSyncUI();
   if (triggerAutoSync && ghCfg.autoSync && ghCfg.token && ghCfg.owner && ghCfg.repo) {
@@ -1506,12 +1516,21 @@ async function pullFromGitHub(manual = false) {
     if (res.ok) {
       const remote = await res.json();
       if (remote && remote.projects && remote.settings) {
-        db = mergeDb(remote);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
-        hasUnpublishedChanges = false;
-        renderAll();
-        badge.textContent = '🟢 লাইভ সিঙ্কড';
-        if (manual) showToast('GitHub থেকে সর্বশেষ লাইভ ডেটা লোড হয়েছে!');
+        const hasLocal = Boolean(localStorage.getItem(STORAGE_KEY));
+        const localTime = db.updatedAt ? new Date(db.updatedAt).getTime() : 0;
+        const remoteTime = remote.updatedAt ? new Date(remote.updatedAt).getTime() : 0;
+
+        // Only overwrite local data if manual pull, no local data, or remote is newer
+        if (manual || !hasLocal || remoteTime > localTime) {
+          db = mergeDb(remote);
+          safeLocalSave();
+          hasUnpublishedChanges = false;
+          renderAll();
+          badge.textContent = '🟢 লাইভ সিঙ্কড';
+          if (manual) showToast('GitHub থেকে সর্বশেষ লাইভ ডেটা লোড হয়েছে!');
+        } else {
+          badge.textContent = '🟢 লাইভ (লোকাল আপডেটেড)';
+        }
         return;
       }
     }
@@ -1522,7 +1541,10 @@ async function pullFromGitHub(manual = false) {
 }
 
 async function pushToGitHub(silent = false) {
-  if (isSyncing) return;
+  if (isSyncing) {
+    pendingSyncAfterCurrent = true;
+    return;
+  }
   if (!ghCfg.owner || !ghCfg.repo || !ghCfg.token) {
     if (!silent) {
       showToast('প্রথমে GitHub সেটআপ ট্যাবে গিয়ে Token ও রিপোজিটরি তথ্য দিন।');
@@ -1531,6 +1553,7 @@ async function pushToGitHub(silent = false) {
     return;
   }
   isSyncing = true;
+  pendingSyncAfterCurrent = false;
   const btn = document.getElementById('btnPushLive');
   if (btn) { btn.disabled = true; btn.textContent = '⏳ লাইভ আপডেট হচ্ছে...'; }
 
@@ -1569,11 +1592,15 @@ async function pushToGitHub(silent = false) {
     document.getElementById('liveSyncBadge').textContent = '🟢 লাইভ আপডেটেড';
     showToast('✅ সফল! ৩০-৬০ সেকেন্ডের মধ্যে সবার ফোনে আপডেট দেখা যাবে।');
   } catch (err) {
-    showToast('❌ সিঙ্ক ব্যর্থ: ' + err.message);
+    showToast('❌ GitHub সিঙ্ক ব্যর্থ: ' + err.message);
   } finally {
     isSyncing = false;
     if (btn) { btn.disabled = false; btn.textContent = '🚀 ১ ক্লিকে লাইভ আপডেট করুন'; }
     updateSyncUI();
+    if (pendingSyncAfterCurrent) {
+      pendingSyncAfterCurrent = false;
+      pushToGitHub(true);
+    }
   }
 }
 
