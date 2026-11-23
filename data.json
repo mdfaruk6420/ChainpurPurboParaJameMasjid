@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T15:05:25.852Z",
+  "updatedAt": "2026-11-23T15:09:20.150Z",
   "settings": {
     "name": "চৈনপুর পূর্বপাড়া জামে মসজিদ",
     "address": "চৈনপুর পূর্বপাড়া, বাঙ্গরা বাজার, মুরাদনগর, কুমিল্লা",
@@ -53,7 +53,7 @@
     "ramadanActive": false,
     "ramadanTitle": "পবিত্র রমাদান ১৪৪৮ হিজরি",
     "ramadanStart": "2027-02-09",
-    "eidAlertType": "fitr",
+    "eidAlertType": "none",
     "eidDate": "১০ মার্চ ২০২৭ (চাঁদ দেখা সাপেক্ষে)",
     "eidJamaat1": "সকাল ৭:৩০ মিনিট",
     "eidJamaat2": "সকাল ৮:৩০ মিনিট",
