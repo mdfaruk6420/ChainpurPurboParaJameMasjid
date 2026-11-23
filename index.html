@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>চৈনপুর পূর্বপাড়া জামে মসজিদ — প্রকল্প, দান ও ব্যবস্থাপনা</title>
+
+  <!-- Google Font: Hind Siliguri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Hind Siliguri"', 'sans-serif'],
+          },
+          colors: {
+            emeraldDeep: '#0b5d46',
+            emeraldDark: '#074231',
+            emeraldSoft: '#e9f4f0',
+            goldAccent: '#c9932c',
+            goldSoft: '#fdf6e7',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Hind Siliguri', sans-serif;
+      background-color: #f7f9f8;
+      color: #182722;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Smooth Minimal Marquee */
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeRun 42s linear infinite;
+    }
+    .ticker-wrap:hover .ticker-track,
+    .ticker-wrap.paused .ticker-track {
+      animation-play-state: paused;
+    }
+    @keyframes marqueeRun {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Hide scrollbars for horizontal nav */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Subtle section fade */
+    .section-view { display: none; }
+    .section-view.active {
+      display: block;
+      animation: fadeSlide 0.22s ease-out;
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col overflow-x-hidden antialiased">
+
+  <!-- ==================== STICKY MINIMAL HEADER ==================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#e6ece9] shadow-[0_2px_12px_rgba(11,93,70,0.04)]">
+    <div class="max-w-6xl mx-auto px-3.5 sm:px-6 py-3 flex items-center justify-between gap-3 flex-wrap">
+      <!-- Mosque Identity -->
+      <div class="flex items-center gap-3 min-w-0 cursor-pointer" onclick="switchTab('home')">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#0b5d46] text-white flex items-center justify-center text-xl shrink-0 shadow-sm">
+          🕌
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 id="siteName" class="text-base sm:text-lg font-bold text-[#0b5d46] leading-tight truncate">
+              চৈনপুর পূর্বপাড়া জামে মসজিদ
+            </h1>
+            <span id="liveSyncBadge" class="inline-flex items-center gap-1 text-[11px] font-semibold bg-[#e9f4f0] text-[#0b5d46] px-2 py-0.5 rounded-full whitespace-nowrap">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> লাইভ
+            </span>
+          </div>
+          <p id="siteAddress" class="text-xs text-[#60726b] truncate mt-0.5">
+            চৈনপুর পূর্বপাড়া, বাঙ্গরা বাজার, মুরাদনগর, কুমিল্লা
+          </p>
+        </div>
+      </div>
+
+      <!-- Top-Right Action Buttons -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="openAdminModal()" class="px-3 py-2 rounded-full border border-[#dce6e1] bg-[#f7f9f8] hover:bg-[#e9f4f0] text-[#182722] text-xs sm:text-sm font-semibold transition active:scale-95">
+          🔐 এডমিন
+        </button>
+        <button onclick="switchTab('donate')" class="px-4 py-2 rounded-full bg-[#c9932c] hover:bg-[#b58120] text-white text-xs sm:text-sm font-bold shadow-sm transition active:scale-95">
+          🤲 দান করুন এখানে
+        </button>
+      </div>
+    </div>
+
+    <!-- Clean Minimalist Horizontal Nav -->
+    <nav class="border-t border-[#eef3f0] bg-white">
+      <div class="max-w-6xl mx-auto px-2.5 sm:px-5 flex items-center gap-1 overflow-x-auto no-scrollbar">
+        <button data-tab="home" onclick="switchTab('home')" class="nav-btn px-3.5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 border-[#0b5d46] text-[#0b5d46] transition">
+          হোম
+        </button>
+        <button data-tab="donate" onclick="switchTab('donate')" class="nav-btn px-3.5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 border-transparent text-[#60726b] hover:text-[#0b5d46] transition">
+          প্রজেক্ট ভিত্তিক দান
+        </button>
+        <button data-tab="projects" onclick="switchTab('projects')" class="nav-btn px-3.5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 border-transparent text-[#60726b] hover:text-[#0b5d46] transition">
+          প্রকল্পসমূহ
+        </button>
+        <button data-tab="gallery" onclick="switchTab('gallery')" class="nav-btn px-3.5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 border-transparent text-[#60726b] hover:text-[#0b5d46] transition">
+          কাজের ছবি
+        </button>
+        <button data-tab="donors" onclick="switchTab('donors')" class="nav-btn px-3.5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 border-transparent text-[#60726b] hover:text-[#0b5d46] transition">
+          দাতাদের তালিকা
+        </button>
+        <button data-tab="committee" onclick="switchTab('committee')" class="nav-btn px-3.5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 border-transparent text-[#60726b] hover:text-[#0b5d46] transition">
+          মসজিদ কমিটি
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== SUBTLE GOLD RUNNING TICKER ==================== -->
+  <section aria-label="দৈনিক বাণী" class="bg-[#fdf6e7] border-b border-[#f2e2be]">
+    <div class="max-w-6xl mx-auto flex items-center overflow-hidden">
+      <div class="bg-[#c9932c] text-white font-bold text-xs px-3.5 py-2 shrink-0 z-10 tracking-wide">
+        দৈনিক বাণী
+      </div>
+      <div id="tickerWrap" class="ticker-wrap flex-1 overflow-hidden py-2 cursor-pointer select-none" title="থামাতে ট্যাপ বা মাউস রাখুন">
+        <div id="tickerTrack" class="ticker-track text-xs sm:text-sm font-medium text-[#5c4210]"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-3.5 sm:px-6 py-6 sm:py-8">
+
+    <!-- ==================== 1. HOME DASHBOARD ==================== -->
+    <section id="sec-home" class="section-view active space-y-7">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#182722]">সার্বিক প্রকল্প ও ফান্ড ড্যাশবোর্ড</h2>
+          <p class="text-xs sm:text-sm text-[#60726b]">মসজিদের উন্নয়নমূলক কার্যক্রমের স্বচ্ছ ও হালনাগাদ তথ্য</p>
+        </div>
+        <button onclick="switchTab('donate')" class="px-4 py-2 rounded-xl bg-[#0b5d46] hover:bg-[#074231] text-white font-semibold text-xs sm:text-sm transition">
+          🤲 এখনই দান করুন
+        </button>
+      </div>
+
+      <!-- 4 Minimal KPI Cards -->
+      <div id="homeKpis" class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4"></div>
+
+      <!-- 2 Clean Charts -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-7 bg-white rounded-2xl p-5 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+          <h3 class="text-sm sm:text-base font-bold text-[#182722] mb-4">প্রকল্পভিত্তিক সম্ভাব্য ব্যয় বনাম সংগৃহীত ফান্ড (৳)</h3>
+          <div class="relative h-64 sm:h-72 w-full">
+            <canvas id="homeBarChart"></canvas>
+          </div>
+        </div>
+        <div class="lg:col-span-5 bg-white rounded-2xl p-5 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+          <h3 class="text-sm sm:text-base font-bold text-[#182722] mb-4">প্রকল্পভিত্তিক ফান্ড বণ্টন</h3>
+          <div class="relative h-64 sm:h-72 w-full">
+            <canvas id="homeDonutChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ongoing Projects with Cover Photos -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between gap-2">
+          <div>
+            <h3 class="text-lg font-bold text-[#182722]">চলমান প্রকল্পসমূহ</h3>
+            <p class="text-xs text-[#60726b]">বর্তমানে বাস্তবায়নাধীন প্রকল্পের ছবি, অগ্রগতি ও মতামত</p>
+          </div>
+          <button onclick="switchTab('projects')" class="px-3.5 py-1.5 rounded-full border border-[#dce6e1] bg-white hover:border-[#0b5d46] text-[#0b5d46] text-xs font-semibold transition">
+            সব প্রকল্প দেখুন →
+          </button>
+        </div>
+        <div id="homeProjectsPreview" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </div>
+
+      <!-- Current Committee Preview -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between gap-2">
+          <div>
+            <h3 class="text-lg font-bold text-[#182722]">বর্তমান মসজিদ কমিটি</h3>
+            <p class="text-xs text-[#60726b]">মসজিদ পরিচালনায় নিয়োজিত প্রধান দায়িত্বশীলবৃন্দ</p>
+          </div>
+          <button onclick="switchTab('committee')" class="px-3.5 py-1.5 rounded-full border border-[#dce6e1] bg-white hover:border-[#0b5d46] text-[#0b5d46] text-xs font-semibold transition">
+            সকল সময়কাল →
+          </button>
+        </div>
+        <div id="homeCommitteePreview" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 2. PROJECT-BASED DONATION DASHBOARD ==================== -->
+    <section id="sec-donate" class="section-view space-y-7">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#182722]">প্রজেক্ট ভিত্তিক দান ড্যাশবোর্ড</h2>
+          <p class="text-xs sm:text-sm text-[#60726b]">প্রতিটি প্রকল্পের সম্ভাব্য ব্যয়, প্রত্যাশিত দান, কালেকশন ও দানের মাধ্যম</p>
+        </div>
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#fdf6e7] text-[#946716] border border-[#f2e2be]">
+          স্বচ্ছ ও সরাসরি হিসাব
+        </span>
+      </div>
+
+      <!-- 4 Donation KPI Cards -->
+      <div id="donateKpis" class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4"></div>
+
+      <!-- Grouped Bar Chart -->
+      <div class="bg-white rounded-2xl p-5 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+        <h3 class="text-sm sm:text-base font-bold text-[#182722] mb-4">সম্ভাব্য ব্যয়, প্রত্যাশিত দান ও কালেকশন তুলনা</h3>
+        <div class="relative h-72 w-full">
+          <canvas id="donateCompareChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Individual Project Financial Cards -->
+      <div class="space-y-3.5">
+        <h3 class="text-base sm:text-lg font-bold text-[#182722]">প্রতিটি প্রকল্পের আর্থিক অবস্থান</h3>
+        <div id="donateProjectCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+
+      <!-- Financial Summary Table -->
+      <div class="bg-white rounded-2xl border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)] overflow-hidden">
+        <div class="px-5 py-4 border-b border-[#e6ece9]">
+          <h3 class="text-sm sm:text-base font-bold text-[#182722]">প্রকল্পভিত্তিক ফান্ড সারসংক্ষেপ</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-[#f7f9f8] text-[#60726b] border-b border-[#e6ece9]">
+                <th class="py-3 px-4 font-semibold">প্রকল্পের নাম</th>
+                <th class="py-3 px-3 font-semibold">সম্ভাব্য ব্যয়</th>
+                <th class="py-3 px-3 font-semibold">প্রত্যাশিত দান</th>
+                <th class="py-3 px-3 font-semibold">কালেকশন</th>
+                <th class="py-3 px-3 font-semibold">অবশিষ্ট</th>
+                <th class="py-3 px-4 font-semibold text-right">অগ্রগতি</th>
+              </tr>
+            </thead>
+            <tbody id="donateSummaryTable" class="divide-y divide-[#eef3f0]"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Payment Methods (With Crisp SVG Logos) + Donation Receipt Form -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Payment Methods -->
+        <div class="bg-white rounded-2xl p-5 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)] space-y-4">
+          <h3 class="text-base sm:text-lg font-bold text-[#182722]">দানের মাধ্যমসমূহ</h3>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" onclick="switchPayTab('mobile', this)" class="pay-tab-btn py-2.5 px-2 rounded-xl border text-xs sm:text-sm font-semibold transition bg-[#0b5d46] text-white border-[#0b5d46]">
+              মোবাইল ব্যাংকিং
+            </button>
+            <button type="button" onclick="switchPayTab('bank', this)" class="pay-tab-btn py-2.5 px-2 rounded-xl border text-xs sm:text-sm font-semibold transition bg-[#f7f9f8] text-[#182722] border-[#e6ece9] hover:border-[#0b5d46]">
+              ব্যাংক ট্রান্সফার
+            </button>
+            <button type="button" onclick="switchPayTab('cash', this)" class="pay-tab-btn py-2.5 px-2 rounded-xl border text-xs sm:text-sm font-semibold transition bg-[#f7f9f8] text-[#182722] border-[#e6ece9] hover:border-[#0b5d46]">
+              সরাসরি নগদ
+            </button>
+          </div>
+          <div id="pay-mobile" class="pay-panel space-y-3"></div>
+          <div id="pay-bank" class="pay-panel hidden"></div>
+          <div id="pay-cash" class="pay-panel hidden"></div>
+        </div>
+
+        <!-- Public Donation Form -->
+        <div id="donationFormCard" class="bg-white rounded-2xl p-5 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+          <h3 class="text-base sm:text-lg font-bold text-[#182722] mb-1">দানের তথ্য ও রসিদ ফর্ম</h3>
+          <p class="text-xs text-[#60726b] mb-4">
+            অনুদান পাঠানোর পর নিচের ফর্মটি পূরণ করলে তাৎক্ষণিক রসিদ তৈরি হবে এবং ১ ক্লিকেই মসজিদের নির্ধারিত হোয়াটসঅ্যাপে পাঠাতে পারবেন।
+          </p>
+          <form onsubmit="submitPublicDonation(event)" class="space-y-3.5">
+            <div>
+              <label class="block text-xs font-semibold text-[#60726b] mb-1">প্রকল্প নির্বাচন করুন</label>
+              <select id="pubDonProject" required class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce6e1] bg-[#f7f9f8] focus:bg-white text-sm focus:outline-none focus:border-[#0b5d46]"></select>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-[#60726b] mb-1">দাতার নাম</label>
+                <input type="text" id="pubDonName" required placeholder="আপনার নাম লিখুন" class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce6e1] bg-[#f7f9f8] focus:bg-white text-sm focus:outline-none focus:border-[#0b5d46]" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[#60726b] mb-1">দাতার হোয়াটসঅ্যাপ / ফোন (ঐচ্ছিক)</label>
+                <input type="tel" id="pubDonPhone" placeholder="01XXXXXXXXX" class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce6e1] bg-[#f7f9f8] focus:bg-white text-sm focus:outline-none focus:border-[#0b5d46]" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-[#60726b] mb-1">দানের পরিমাণ (৳)</label>
+                <input type="number" id="pubDonAmount" min="10" required placeholder="যেমন: 1000" class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce6e1] bg-[#f7f9f8] focus:bg-white text-sm focus:outline-none focus:border-[#0b5d46]" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[#60726b] mb-1">দানের মাধ্যম</label>
+                <select id="pubDonMethod" required class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce6e1] bg-[#f7f9f8] focus:bg-white text-sm focus:outline-none focus:border-[#0b5d46]">
+                  <option value="মোবাইল ব্যাংকিং (বিকাশ)">মোবাইল ব্যাংকিং (বিকাশ)</option>
+                  <option value="মোবাইল ব্যাংকিং (নগদ)">মোবাইল ব্যাংকিং (নগদ)</option>
+                  <option value="মোবাইল ব্যাংকিং (রকেট)">মোবাইল ব্যাংকিং (রকেট)</option>
+                  <option value="ব্যাংক ট্রান্সফার">ব্যাংক ট্রান্সফার</option>
+                  <option value="নগদ (ক্যাশ)">সরাসরি নগদ (ক্যাশ)</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-[#60726b] mb-1">ট্রানজেকশন আইডি / শেষ ৪ ডিজিট (ঐচ্ছিক)</label>
+              <input type="text" id="pubDonTrx" placeholder="যেমন: 9X7K2L / 4521" class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce6e1] bg-[#f7f9f8] focus:bg-white text-sm focus:outline-none focus:border-[#0b5d46]" />
+            </div>
+            <label class="flex items-center gap-2 text-xs sm:text-sm text-[#60726b] cursor-pointer pt-0.5">
+              <input type="checkbox" id="pubDonAnon" class="w-4 h-4 accent-[#0b5d46] rounded" />
+              <span>নাম প্রকাশে অনিচ্ছুক হিসেবে সংরক্ষণ করুন</span>
+            </label>
+            <button type="submit" class="w-full py-3 rounded-xl bg-[#0b5d46] hover:bg-[#074231] text-white font-bold text-sm transition">
+              রসিদ তৈরি করুন
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. PROJECTS & COMMENTS ==================== -->
+    <section id="sec-projects" class="section-view space-y-5">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#182722]">মসজিদের সকল প্রকল্প</h2>
+          <p class="text-xs sm:text-sm text-[#60726b]">প্রতিটি প্রকল্পের অগ্রগতি দেখুন এবং আপনার মতামত বা পরামর্শ জানান</p>
+        </div>
+        <select id="projStatusFilter" onchange="renderProjects()" class="px-3.5 py-2 rounded-xl border border-[#dce6e1] bg-white text-sm font-semibold focus:outline-none focus:border-[#0b5d46]">
+          <option value="all">সকল অবস্থা</option>
+          <option value="চলমান">চলমান</option>
+          <option value="সম্পন্ন">সম্পন্ন</option>
+          <option value="পরিকল্পিত">পরিকল্পিত</option>
+        </select>
+      </div>
+      <div id="projectsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </section>
+
+    <!-- ==================== 4. WORK PROGRESS GALLERY ==================== -->
+    <section id="sec-gallery" class="section-view space-y-5">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#182722]">কাজের অগ্রগতির ছবি</h2>
+          <p class="text-xs sm:text-sm text-[#60726b]">ছবিতে ট্যাপ করে বড় আকারে দেখুন</p>
+        </div>
+        <select id="galleryProjFilter" onchange="renderGallery()" class="px-3.5 py-2 rounded-xl border border-[#dce6e1] bg-white text-sm font-semibold focus:outline-none focus:border-[#0b5d46]"></select>
+      </div>
+      <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </section>
+
+    <!-- ==================== 5. DONORS LIST ==================== -->
+    <section id="sec-donors" class="section-view space-y-5">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#182722]">সম্মানিত দাতাদের তালিকা</h2>
+          <p class="text-xs sm:text-sm text-[#60726b]">প্রকল্প ও মাধ্যম অনুযায়ী দাতাদের বিবরণ</p>
+        </div>
+        <span id="donorTotalBadge" class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-[#e9f4f0] text-[#0b5d46]"></span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <input type="text" id="donorSearch" oninput="renderDonors()" placeholder="🔍 দাতার নাম খুঁজুন..." class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce6e1] bg-white text-sm focus:outline-none focus:border-[#0b5d46]" />
+        <select id="donorProjFilter" onchange="renderDonors()" class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce6e1] bg-white text-sm focus:outline-none focus:border-[#0b5d46]"></select>
+        <select id="donorMethodFilter" onchange="renderDonors()" class="w-full px-3.5 py-2.5 rounded-xl border border-[#dce6e1] bg-white text-sm focus:outline-none focus:border-[#0b5d46]">
+          <option value="all">সকল মাধ্যম</option>
+          <option value="মোবাইল ব্যাংকিং">মোবাইল ব্যাংকিং</option>
+          <option value="ব্যাংক">ব্যাংক ট্রান্সফার</option>
+          <option value="নগদ">নগদ (ক্যাশ)</option>
+        </select>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)] overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-[#f7f9f8] text-[#60726b] border-b border-[#e6ece9]">
+                <th class="py-3 px-4 font-semibold">তারিখ</th>
+                <th class="py-3 px-4 font-semibold">দাতার নাম</th>
+                <th class="py-3 px-4 font-semibold">প্রকল্প</th>
+                <th class="py-3 px-4 font-semibold">মাধ্যম</th>
+                <th class="py-3 px-4 font-semibold text-right">পরিমাণ (৳)</th>
+              </tr>
+            </thead>
+            <tbody id="donorsTableBody" class="divide-y divide-[#eef3f0]"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 6. MOSQUE COMMITTEE ==================== -->
+    <section id="sec-committee" class="section-view space-y-5">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#182722]">মসজিদ কমিটি</h2>
+          <p class="text-xs sm:text-sm text-[#60726b]">বিভিন্ন সময়কাল অনুযায়ী সম্মানিত দায়িত্বশীলবৃন্দ</p>
+        </div>
+        <input type="text" id="committeeSearch" oninput="renderCommittee()" placeholder="🔍 নাম বা পদবি খুঁজুন..." class="w-full sm:w-64 px-3.5 py-2 rounded-xl border border-[#dce6e1] bg-white text-sm focus:outline-none focus:border-[#0b5d46]" />
+      </div>
+
+      <div id="committeeTermPills" class="flex items-center gap-2 flex-wrap"></div>
+      <div id="committeeMembersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+  </main>
+
+  <!-- ==================== GLOBAL FOOTER WITH MESSENGER & WHATSAPP ==================== -->
+  <footer class="bg-white border-t border-[#e6ece9] mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-7 space-y-5 text-center">
+      <!-- Social Community Links -->
+      <div class="flex items-center justify-center gap-3 flex-wrap">
+        <a id="footerMessengerLink" href="https://m.me/" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-[#dbeafe] bg-[#eff6ff] hover:bg-[#dbeafe] text-[#1d4ed8] text-xs sm:text-sm font-semibold transition">
+          <!-- Messenger Inline SVG Logo -->
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none">
+            <defs>
+              <linearGradient id="msgGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00B2FF"/>
+                <stop offset="55%" stop-color="#006AFF"/>
+                <stop offset="100%" stop-color="#A033FF"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.913 1.454 5.512 3.726 7.21V22l3.405-1.869c.909.252 1.872.388 2.869.388 5.523 0 10-4.145 10-9.259S17.523 2 12 2z" fill="url(#msgGrad)"/>
+            <path d="M12.992 14.462l-2.548-2.717-4.97 2.717 5.467-5.804 2.61 2.717 4.908-2.717-5.467 5.804z" fill="#fff"/>
+          </svg>
+          <span>মেসেঞ্জার গ্রুপে যুক্ত হোন</span>
+        </a>
+
+        <a id="footerWhatsappLink" href="https://wa.me/8801711000000" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-[#d1fae5] bg-[#ecfdf5] hover:bg-[#d1fae5] text-[#047857] text-xs sm:text-sm font-semibold transition">
+          <!-- WhatsApp Inline SVG Logo -->
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6.486 2 2 6.486 2 12c0 1.766.462 3.49 1.34 5.01L2 22l5.126-1.318A9.948 9.948 0 0012 22c5.514 0 10-4.486 10-10S17.514 2 12 2z" fill="#25D366"/>
+            <path d="M16.978 14.84c-.214-.107-1.267-.625-1.464-.697-.196-.071-.339-.107-.482.107-.143.214-.553.697-.678.84-.125.142-.25.16-.464.053-.214-.107-.904-.333-1.722-1.063-.636-.567-1.066-1.268-1.19-1.482-.126-.214-.014-.33.093-.437.096-.096.214-.25.321-.375.107-.125.143-.214.214-.357.072-.143.036-.268-.018-.375-.053-.107-.482-1.16-.66-1.589-.174-.417-.351-.36-.482-.367h-.41c-.143 0-.375.054-.572.268-.196.214-.75.732-.75 1.786s.768 2.071.875 2.214c.107.143 1.51 2.307 3.66 3.235.511.221.91.353 1.221.451.513.163.98.14 1.35.085.412-.061 1.267-.518 1.446-1.018.178-.5.178-.929.125-1.018-.054-.089-.197-.143-.411-.25z" fill="#fff"/>
+          </svg>
+          <span>হোয়াটসঅ্যাপে যোগাযোগ / গ্রুপ</span>
+        </a>
+      </div>
+
+      <div class="border-t border-[#eef3f0] pt-4 space-y-1">
+        <p class="text-sm font-bold text-[#0b5d46]" id="footerName">চৈনপুর পূর্বপাড়া জামে মসজিদ</p>
+        <p class="text-xs text-[#60726b]" id="footerAddress">চৈনপুর পূর্বপাড়া, বাঙ্গরা বাজার, মুরাদনগর, কুমিল্লা</p>
+        <p class="text-[11px] text-[#7c8e87]">আল্লাহ তাআলা মসজিদের খেদমতে অংশগ্রহণকারী সকলকে উত্তম প্রতিদান দান করুন।</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== PROJECT COMMENTS MODAL ==================== -->
+  <div id="commentsModal" onclick="if(event.target===this) closeModal('commentsModal')" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-3.5">
+    <div class="bg-white rounded-2xl max-w-lg w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-[#e6ece9]">
+        <div class="min-w-0 pr-2">
+          <h3 class="text-base font-bold text-[#182722]">💬 প্রকল্প নিয়ে মন্তব্য ও পরামর্শ</h3>
+          <p id="commentModalProjName" class="text-xs text-[#0b5d46] font-semibold truncate"></p>
+        </div>
+        <button onclick="closeModal('commentsModal')" class="w-8 h-8 rounded-full bg-[#f7f9f8] hover:bg-[#e6ece9] font-bold text-lg shrink-0">×</button>
+      </div>
+
+      <div id="commentListContainer" class="flex-1 overflow-y-auto p-5 space-y-3 bg-[#f7f9f8]"></div>
+
+      <form onsubmit="submitProjectComment(event)" class="p-4 border-t border-[#e6ece9] bg-white space-y-2.5">
+        <input type="hidden" id="commentModalProjId" />
+        <input type="text" id="visitorCommentName" required placeholder="আপনার নাম লিখুন" class="w-full px-3.5 py-2 rounded-xl border border-[#dce6e1] bg-[#f7f9f8] focus:bg-white text-sm focus:outline-none focus:border-[#0b5d46]" />
+        <div class="flex gap-2">
+          <input type="text" id="visitorCommentText" required placeholder="আপনার মন্তব্য বা পরামর্শ লিখুন..." class="flex-1 px-3.5 py-2 rounded-xl border border-[#dce6e1] bg-[#f7f9f8] focus:bg-white text-sm focus:outline-none focus:border-[#0b5d46]" />
+          <button type="submit" class="px-4 py-2 rounded-xl bg-[#0b5d46] hover:bg-[#074231] text-white text-xs sm:text-sm font-bold shrink-0 transition">
+            পোস্ট
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== LIGHTBOX MODAL ==================== -->
+  <div id="lightboxModal" onclick="if(event.target===this) closeModal('lightboxModal')" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-4 sm:p-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-[#e6ece9] pb-3 mb-3">
+        <h3 id="lbTitle" class="font-bold text-[#182722] text-base">ছবি</h3>
+        <button onclick="closeModal('lightboxModal')" class="w-8 h-8 rounded-full bg-[#f7f9f8] hover:bg-[#e6ece9] font-bold text-lg">×</button>
+      </div>
+      <img id="lbImg" src="" alt="" class="w-full max-h-[62vh] object-contain rounded-xl bg-[#f7f9f8]" />
+      <p id="lbDesc" class="text-sm text-[#60726b] mt-3"></p>
+    </div>
+  </div>
+
+  <!-- ==================== RECEIPT MODAL ==================== -->
+  <div id="receiptModal" onclick="if(event.target===this) closeModal('receiptModal')" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/65 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl text-center space-y-4">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-[#e9f4f0] flex items-center justify-center text-3xl">🤲</div>
+      <div>
+        <h3 class="text-xl font-bold text-[#0b5d46]">জাযাকাল্লাহু খাইরান!</h3>
+        <p class="text-xs sm:text-sm text-[#60726b] mt-1">আপনার দানের রসিদ প্রস্তুত হয়েছে। নিচের বাটনে ট্যাপ করে নির্ধারিত হোয়াটসঅ্যাপে পাঠিয়ে দিন।</p>
+      </div>
+      <div id="receiptBody" class="text-left bg-[#f7f9f8] border border-[#e6ece9] rounded-xl p-4 text-sm space-y-1.5"></div>
+      <div class="flex items-center justify-center gap-2.5 flex-wrap">
+        <a id="waReceiptLink" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5b] text-white font-bold text-sm transition">
+          💬 হোয়াটসঅ্যাপে রসিদ পাঠান
+        </a>
+        <button onclick="closeModal('receiptModal')" class="px-4 py-2.5 rounded-xl border border-[#dce6e1] text-[#182722] font-semibold text-sm hover:bg-[#f7f9f8] transition">
+          বন্ধ করুন
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CUSTOM CONFIRM MODAL (NO alert/confirm) ==================== -->
+  <div id="confirmModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl space-y-4">
+      <h3 class="text-base font-bold text-[#182722]">নিশ্চিত করুন</h3>
+      <p id="confirmMessage" class="text-sm text-[#60726b]"></p>
+      <div class="flex justify-end gap-2">
+        <button id="confirmCancelBtn" class="px-4 py-2 rounded-xl bg-[#f7f9f8] hover:bg-[#e6ece9] text-[#182722] text-sm font-semibold">বাতিল</button>
+        <button id="confirmOkBtn" class="px-4 py-2 rounded-xl bg-[#c62828] hover:bg-red-800 text-white text-sm font-semibold">নিশ্চিত করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN CONTROL PANEL MODAL ==================== -->
+  <div id="adminModal" onclick="if(event.target===this) closeModal('adminModal')" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/65 backdrop-blur-sm p-3 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-6 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-[#e6ece9] pb-3 mb-4">
+        <h3 class="text-base sm:text-lg font-bold text-[#0b5d46]">🔐 এডমিন কন্ট্রোল প্যানেল</h3>
+        <button onclick="closeModal('adminModal')" class="w-8 h-8 rounded-full bg-[#f7f9f8] hover:bg-[#e6ece9] font-bold text-lg">×</button>
+      </div>
+
+      <!-- Login View -->
+      <div id="adminLoginView" class="max-w-sm mx-auto py-6 text-center space-y-3">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-[#e9f4f0] text-2xl flex items-center justify-center">🔐</div>
+        <p class="text-sm text-[#60726b]">এডমিন পাসকোড দিন (প্রাথমিক পাসকোড: <strong class="text-[#0b5d46]">1234</strong>)</p>
+        <input type="password" id="adminPassInput" placeholder="পাসকোড লিখুন" onkeydown="if(event.key==='Enter') verifyAdmin()" class="w-full px-4 py-2.5 rounded-xl border border-[#dce6e1] text-center text-lg tracking-widest focus:outline-none focus:border-[#0b5d46]" />
+        <button onclick="verifyAdmin()" class="w-full py-2.5 rounded-xl bg-[#0b5d46] hover:bg-[#074231] text-white font-bold text-sm transition">
+          প্রবেশ করুন
+        </button>
+      </div>
+
+      <!-- Admin Dashboard View -->
+      <div id="adminDashView" class="hidden space-y-4">
+        <!-- 1-Click GitHub Sync Bar -->
+        <div id="ghSyncBar" class="rounded-xl p-3.5 text-white bg-[#0b5d46] flex items-center justify-between gap-3 flex-wrap">
+          <div id="ghSyncStatusText" class="text-xs sm:text-sm leading-relaxed">
+            <strong>🚀 GitHub ১-ক্লিক লাইভ সিঙ্ক</strong><br />
+            <span>কানেকশন যাচাই হচ্ছে...</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <button id="btnPushLive" onclick="pushToGitHub(false)" class="px-3.5 py-2 rounded-xl bg-[#c9932c] hover:bg-[#b58120] text-white font-bold text-xs shadow-sm transition">
+              🚀 ১ ক্লিকে লাইভ আপডেট করুন
+            </button>
+            <button onclick="switchAdminPaneById('ap-github')" class="px-3 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-xs transition">
+              ⚙️ GitHub সেটআপ
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 Admin Sub-Tabs -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-2 border-b border-[#e6ece9]">
+          <button data-pane="ap-projects" onclick="switchAdminPane('ap-projects', this)" class="admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#0b5d46] text-white">প্রকল্প</button>
+          <button data-pane="ap-donors" onclick="switchAdminPane('ap-donors', this)" class="admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#f7f9f8] text-[#182722] hover:bg-[#e9f4f0]">দাতা</button>
+          <button data-pane="ap-gallery" onclick="switchAdminPane('ap-gallery', this)" class="admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#f7f9f8] text-[#182722] hover:bg-[#e9f4f0]">ছবি পোস্ট</button>
+          <button data-pane="ap-comments" onclick="switchAdminPane('ap-comments', this)" class="admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#f7f9f8] text-[#182722] hover:bg-[#e9f4f0]">মন্তব্য</button>
+          <button data-pane="ap-ticker" onclick="switchAdminPane('ap-ticker', this)" class="admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#f7f9f8] text-[#182722] hover:bg-[#e9f4f0]">দৈনিক বাণী</button>
+          <button data-pane="ap-committee" onclick="switchAdminPane('ap-committee', this)" class="admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#f7f9f8] text-[#182722] hover:bg-[#e9f4f0]">কমিটি</button>
+          <button data-pane="ap-settings" onclick="switchAdminPane('ap-settings', this)" class="admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#f7f9f8] text-[#182722] hover:bg-[#e9f4f0]">পেমেন্ট ও সেটিংস</button>
+          <button data-pane="ap-github" onclick="switchAdminPane('ap-github', this)" class="admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#f7f9f8] text-[#182722] hover:bg-[#e9f4f0]">GitHub সিঙ্ক</button>
+        </div>
+
+        <!-- Pane 1: Projects (With Cover Photo Upload) -->
+        <div id="ap-projects" class="admin-pane space-y-4">
+          <form onsubmit="saveProject(event)" class="bg-[#f7f9f8] border border-[#e6ece9] p-4 rounded-xl space-y-3">
+            <input type="hidden" id="editProjId" />
+            <h4 class="font-bold text-sm text-[#0b5d46]">নতুন প্রকল্প যোগ / এডিট করুন</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div><label class="block text-xs font-semibold mb-1">প্রকল্পের নাম</label><input type="text" id="pName" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div>
+                <label class="block text-xs font-semibold mb-1">অবস্থা</label>
+                <select id="pStatus" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm">
+                  <option value="চলমান">চলমান</option>
+                  <option value="সম্পন্ন">সম্পন্ন</option>
+                  <option value="পরিকল্পিত">পরিকল্পিত</option>
+                </select>
+              </div>
+              <div><label class="block text-xs font-semibold mb-1">সম্ভাব্য ব্যয় (৳)</label><input type="number" id="pBudget" min="0" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">প্রত্যাশিত দান (৳)</label><input type="number" id="pExpected" min="0" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">সংগৃহীত ফান্ড (৳)</label><input type="number" id="pCollected" min="0" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">কাজের অগ্রগতি (%)</label><input type="number" id="pProgress" min="0" max="100" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+            </div>
+            <div><label class="block text-xs font-semibold mb-1">বিবরণ</label><textarea id="pDesc" rows="2" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm"></textarea></div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">প্রকল্পের কভার ছবি (ড্যাশবোর্ডে দেখাবে — ঐচ্ছিক)</label>
+              <input type="file" id="pCoverFile" accept="image/*" class="w-full text-xs" />
+            </div>
+            <div class="flex gap-2">
+              <button type="submit" class="px-4 py-2 rounded-lg bg-[#0b5d46] text-white text-xs font-bold">💾 সংরক্ষণ করুন</button>
+              <button type="button" onclick="resetProjForm()" class="px-4 py-2 rounded-lg border border-[#0b5d46] text-[#0b5d46] text-xs font-bold">রিসেট</button>
+            </div>
+          </form>
+          <div id="adminProjectsList" class="space-y-2"></div>
+        </div>
+
+        <!-- Pane 2: Donors -->
+        <div id="ap-donors" class="admin-pane hidden space-y-4">
+          <form onsubmit="addAdminDonor(event)" class="bg-[#f7f9f8] border border-[#e6ece9] p-4 rounded-xl space-y-3">
+            <h4 class="font-bold text-sm text-[#0b5d46]">➕ নতুন দাতা যোগ করুন (ফান্ডে স্বয়ংক্রিয়ভাবে যোগ হবে)</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div><label class="block text-xs font-semibold mb-1">দাতার নাম</label><input type="text" id="adName" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">প্রকল্প</label><select id="adProject" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm"></select></div>
+              <div><label class="block text-xs font-semibold mb-1">পরিমাণ (৳)</label><input type="number" id="adAmount" min="1" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div>
+                <label class="block text-xs font-semibold mb-1">মাধ্যম</label>
+                <select id="adMethod" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm">
+                  <option value="মোবাইল ব্যাংকিং (বিকাশ)">মোবাইল ব্যাংকিং (বিকাশ)</option>
+                  <option value="মোবাইল ব্যাংকিং (নগদ)">মোবাইল ব্যাংকিং (নগদ)</option>
+                  <option value="মোবাইল ব্যাংকিং (রকেট)">মোবাইল ব্যাংকিং (রকেট)</option>
+                  <option value="ব্যাংক ট্রান্সফার">ব্যাংক ট্রান্সফার</option>
+                  <option value="নগদ (ক্যাশ)">নগদ (ক্যাশ)</option>
+                </select>
+              </div>
+              <div><label class="block text-xs font-semibold mb-1">তারিখ</label><input type="date" id="adDate" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+            </div>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-[#0b5d46] text-white text-xs font-bold">➕ দাতা যুক্ত করুন</button>
+          </form>
+          <div id="adminDonorsList" class="space-y-2"></div>
+        </div>
+
+        <!-- Pane 3: Gallery -->
+        <div id="ap-gallery" class="admin-pane hidden space-y-4">
+          <form onsubmit="addGalleryPhoto(event)" class="bg-[#f7f9f8] border border-[#e6ece9] p-4 rounded-xl space-y-3">
+            <h4 class="font-bold text-sm text-[#0b5d46]">📸 কাজের নতুন ছবি আপলোড করুন (ক্যামেরা / গ্যালারি)</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div><label class="block text-xs font-semibold mb-1">প্রকল্প নির্বাচন</label><select id="gProject" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm"></select></div>
+              <div><label class="block text-xs font-semibold mb-1">ছবির শিরোনাম</label><input type="text" id="gTitle" required placeholder="যেমন: ছাদ ঢালাই কাজ" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+            </div>
+            <div><label class="block text-xs font-semibold mb-1">বিস্তারিত নোট</label><input type="text" id="gDesc" placeholder="কাজের অগ্রগতির সংক্ষিপ্ত বিবরণ" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+            <div><label class="block text-xs font-semibold mb-1">ছবি নির্বাচন করুন</label><input type="file" id="gFile" accept="image/*" capture="environment" required class="w-full text-xs" /></div>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-[#0b5d46] text-white text-xs font-bold">📤 ছবি পোস্ট করুন</button>
+          </form>
+          <div id="adminGalleryList" class="space-y-2"></div>
+        </div>
+
+        <!-- Pane 4: Comments Moderation -->
+        <div id="ap-comments" class="admin-pane hidden space-y-3">
+          <h4 class="font-bold text-sm text-[#0b5d46]">💬 ভিজিটরদের সকল মন্তব্য পরিচালনা</h4>
+          <div id="adminCommentsList" class="space-y-2"></div>
+        </div>
+
+        <!-- Pane 5: Ticker -->
+        <div id="ap-ticker" class="admin-pane hidden space-y-4">
+          <form onsubmit="addTickerItem(event)" class="bg-[#f7f9f8] border border-[#e6ece9] p-4 rounded-xl space-y-3">
+            <h4 class="font-bold text-sm text-[#0b5d46]">✨ নতুন হাদীস / কুরআনের আয়াত যোগ করুন</h4>
+            <textarea id="tText" rows="2" required placeholder="আয়াত, হাদীস বা ইসলামিক উক্তি লিখুন..." class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm"></textarea>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-[#0b5d46] text-white text-xs font-bold">➕ যোগ করুন</button>
+          </form>
+          <div id="adminTickerList" class="space-y-2"></div>
+        </div>
+
+        <!-- Pane 6: Committee (With Member Photo Upload & Edit) -->
+        <div id="ap-committee" class="admin-pane hidden space-y-4">
+          <form onsubmit="addCommitteeTerm(event)" class="bg-[#f7f9f8] border border-[#e6ece9] p-4 rounded-xl space-y-3">
+            <h4 class="font-bold text-sm text-[#0b5d46]">📅 নতুন কমিটির সময়কাল তৈরি করুন</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div><label class="block text-xs font-semibold mb-1">সময়কাল (যেমন: ২০২৬ - ২০২৮)</label><input type="text" id="ctLabel" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div>
+                <label class="block text-xs font-semibold mb-1">ধরন</label>
+                <select id="ctCurrent" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm">
+                  <option value="true">বর্তমান কমিটি</option>
+                  <option value="false">সাবেক কমিটি</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-[#0b5d46] text-white text-xs font-bold">➕ সময়কাল যোগ করুন</button>
+          </form>
+
+          <form onsubmit="saveCommitteeMember(event)" class="bg-[#f7f9f8] border border-[#e6ece9] p-4 rounded-xl space-y-3">
+            <input type="hidden" id="editMemberId" />
+            <input type="hidden" id="editMemberOldTerm" />
+            <h4 class="font-bold text-sm text-[#0b5d46]">👤 দায়িত্বশীল সদস্য যোগ / এডিট করুন (ছবিসহ)</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div><label class="block text-xs font-semibold mb-1">সময়কাল</label><select id="cmTerm" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm"></select></div>
+              <div><label class="block text-xs font-semibold mb-1">নাম</label><input type="text" id="cmName" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">পদবি</label><input type="text" id="cmRole" required placeholder="যেমন: সভাপতি / কোষাধ্যক্ষ" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">ফোন নম্বর</label><input type="tel" id="cmPhone" placeholder="01XXXXXXXXX" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+            </div>
+            <div><label class="block text-xs font-semibold mb-1">সংক্ষিপ্ত দায়িত্ব</label><input type="text" id="cmNote" placeholder="যেমন: সার্বিক তত্ত্বাবধান" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">সদস্যের ছবি আপলোড করুন (ঐচ্ছিক — অটো কমপ্রেস হবে)</label>
+              <input type="file" id="cmPhotoFile" accept="image/*" class="w-full text-xs" />
+            </div>
+            <div class="flex gap-2">
+              <button type="submit" class="px-4 py-2 rounded-lg bg-[#0b5d46] text-white text-xs font-bold">💾 সদস্য সংরক্ষণ করুন</button>
+              <button type="button" onclick="resetMemberForm()" class="px-4 py-2 rounded-lg border border-[#0b5d46] text-[#0b5d46] text-xs font-bold">রিসেট</button>
+            </div>
+          </form>
+
+          <div id="adminCommitteeList" class="space-y-2.5"></div>
+        </div>
+
+        <!-- Pane 7: Settings & Payment (Including Donation WhatsApp & Footer Social Links) -->
+        <div id="ap-settings" class="admin-pane hidden space-y-4">
+          <form onsubmit="saveSettings(event)" class="bg-[#f7f9f8] border border-[#e6ece9] p-4 rounded-xl space-y-3">
+            <h4 class="font-bold text-sm text-[#0b5d46]">🕌 মসজিদ, পেমেন্ট, হোয়াটসঅ্যাপ ও ফুটার লিংক সেটিংস</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div><label class="block text-xs font-semibold mb-1">মসজিদের নাম</label><input type="text" id="sName" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">ঠিকানা</label><input type="text" id="sAddress" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">বিকাশ নম্বর</label><input type="text" id="sBkash" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">নগদ নম্বর</label><input type="text" id="sNagad" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">রকেট নম্বর</label><input type="text" id="sRocket" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">ব্যাংকের নাম</label><input type="text" id="sBankName" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">শাখা</label><input type="text" id="sBankBranch" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">হিসাবের নাম</label><input type="text" id="sBankAccName" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">হিসাব নম্বর</label><input type="text" id="sBankAccNo" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">রাউটিং নম্বর</label><input type="text" id="sBankRouting" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">কোষাধ্যক্ষের নাম</label><input type="text" id="sCashName" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">কোষাধ্যক্ষের ফোন</label><input type="text" id="sCashPhone" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div class="sm:col-span-2 lg:col-span-1">
+                <label class="block text-xs font-bold text-[#0b5d46] mb-1">💬 দানের রসিদ পাঠানোর WhatsApp নম্বর</label>
+                <input type="text" id="sDonationWa" placeholder="যেমন: 01711000000" class="w-full px-3 py-2 rounded-lg border border-[#0b5d46]/40 bg-white text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-[#1d4ed8] mb-1">ফুটার মেসেঞ্জার গ্রুপ লিংক</label>
+                <input type="url" id="sMessengerUrl" placeholder="https://m.me/..." class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-[#047857] mb-1">ফুটার হোয়াটসঅ্যাপ লিংক / গ্রুপ</label>
+                <input type="url" id="sWhatsappUrl" placeholder="https://chat.whatsapp.com/..." class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" />
+              </div>
+              <div><label class="block text-xs font-semibold mb-1">নতুন এডমিন পাসকোড</label><input type="text" id="sPass" placeholder="খালি রাখলে আগেরটি থাকবে" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+            </div>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-[#0b5d46] text-white text-xs font-bold">💾 সব সেটিংস সেভ করুন</button>
+          </form>
+          <div class="flex gap-2 flex-wrap">
+            <button onclick="exportBackup()" class="px-3.5 py-2 rounded-lg border border-[#0b5d46] text-[#0b5d46] text-xs font-bold">⬇️ ব্যাকআপ (JSON) ডাউনলোড</button>
+            <button onclick="resetAllData()" class="px-3.5 py-2 rounded-lg bg-[#c62828] text-white text-xs font-bold">♻️ ডিফল্ট ডেটায় রিসেট করুন</button>
+          </div>
+        </div>
+
+        <!-- Pane 8: GitHub 1-Click Sync Setup -->
+        <div id="ap-github" class="admin-pane hidden space-y-4">
+          <div class="bg-[#e9f4f0] border border-[#cde5dc] rounded-xl p-3.5 text-xs sm:text-sm text-[#074231]">
+            <strong>🔒 নিরাপত্তা নোট:</strong> আপনার GitHub Token শুধুমাত্র আপনার ফোনের ব্রাউজারে সেভ থাকে—এটি কখনোই পাবলিক <code>data.json</code> ফাইলে প্রকাশ হয় না।
+          </div>
+          <form onsubmit="saveGhConfig(event)" class="bg-[#f7f9f8] border border-[#e6ece9] p-4 rounded-xl space-y-3">
+            <h4 class="font-bold text-sm text-[#0b5d46]">🚀 GitHub API কানেকশন সেটআপ (একবার করলেই হবে)</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div><label class="block text-xs font-semibold mb-1">GitHub ইউজারনেম (Owner)</label><input type="text" id="ghOwner" required placeholder="যেমন: rahim123" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">রিপোজিটরির নাম (Repo)</label><input type="text" id="ghRepo" required placeholder="যেমন: chainpur-masjid" class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+              <div><label class="block text-xs font-semibold mb-1">ব্রাঞ্চ</label><input type="text" id="ghBranch" value="main" required class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+            </div>
+            <div><label class="block text-xs font-semibold mb-1">GitHub Personal Access Token</label><input type="password" id="ghToken" required placeholder="github_pat_... অথবা ghp_..." class="w-full px-3 py-2 rounded-lg border border-[#dce6e1] bg-white text-sm" /></div>
+            <label class="flex items-center gap-2 text-xs sm:text-sm cursor-pointer">
+              <input type="checkbox" id="ghAutoSync" class="w-4 h-4 accent-[#0b5d46]" />
+              <span><strong>অটো-সিঙ্ক চালু রাখুন</strong> (এডমিনে যেকোনো পরিবর্তন সেভ করলেই নিজে থেকেই লাইভ আপডেট হবে)</span>
+            </label>
+            <div class="flex gap-2 flex-wrap pt-1">
+              <button type="submit" class="px-4 py-2 rounded-lg bg-[#0b5d46] text-white text-xs font-bold">💾 কানেকশন সেভ ও টেস্ট করুন</button>
+              <button type="button" onclick="pullFromGitHub(true)" class="px-3.5 py-2 rounded-lg border border-[#0b5d46] text-[#0b5d46] text-xs font-bold">🔄 GitHub থেকে লাইভ ডেটা আনুন</button>
+              <button type="button" onclick="clearGhConfig()" class="px-3.5 py-2 rounded-lg bg-[#c62828] text-white text-xs font-bold">✖ ডিসকানেক্ট</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 translate-y-24 opacity-0 pointer-events-none z-[70] bg-[#182722] text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-xl transition-all duration-300 max-w-[90vw] text-center"></div>
+
+  <script>
+    // =========================================================================
+    // 1. CONSTANTS & PRE-POPULATED REALISTIC DATA
+    // =========================================================================
+    const STORAGE_KEY = 'chainpur_masjid_v3_minimal';
+    const GH_CONFIG_KEY = 'chainpur_masjid_gh_cfg_v3';
+
+    const defaultData = {
+      updatedAt: new Date().toISOString(),
+      settings: {
+        name: 'চৈনপুর পূর্বপাড়া জামে মসজিদ',
+        address: 'চৈনপুর পূর্বপাড়া, বাঙ্গরা বাজার, মুরাদনগর, কুমিল্লা',
+        passcode: '1234',
+        bkash: '01700-000000 (পার্সোনাল)',
+        nagad: '01800-000000 (পার্সোনাল)',
+        rocket: '01900-000000-0 (পার্সোনাল)',
+        bankName: 'আল-আরাফাহ ইসলামী ব্যাংক পিএলসি',
+        bankBranch: 'বাঙ্গরা বাজার শাখা, কুমিল্লা',
+        bankAccName: 'চৈনপুর পূর্বপাড়া জামে মসজিদ ফান্ড',
+        bankAccNo: '0011223344556',
+        bankRouting: '015190123',
+        cashName: 'হাজী মোঃ আব্দুল করিম (কোষাধ্যক্ষ)',
+        cashPhone: '01711-000000',
+        donationWhatsapp: '01711000000',
+        messengerUrl: 'https://m.me/',
+        whatsappUrl: 'https://wa.me/8801711000000'
+      },
+      tickers: [
+        '“যে ব্যক্তি আল্লাহর সন্তুষ্টির জন্য একটি মসজিদ নির্মাণ করবে, আল্লাহ তার জন্য জান্নাতে অনুরূপ একটি ঘর নির্মাণ করবেন।” — সহীহ বুখারী ও মুসলিম',
+        '“তোমরা যা ব্যয় কর, তিনি তার প্রতিদান দেবেন। তিনি উত্তম রিজিকদাতা।” — সূরা সাবা: ৩৯',
+        '“দান-সদকা সম্পদ কমায় না, বরং আল্লাহ এর দ্বারা সম্মান ও বরকত বৃদ্ধি করেন।” — সহীহ মুসলিম',
+        'চৈনপুর পূর্বপাড়া জামে মসজিদের উন্নয়নমূলক প্রকল্পে আপনার সামর্থ্য অনুযায়ী অংশগ্রহণ করুন।'
+      ],
+      projects: [
+        {
+          id: 'p1',
+          name: 'দ্বিতীয় তলা ছাদ ঢালাই ও সম্প্রসারণ',
+          status: 'চলমান',
+          budget: 1200000,
+          expected: 1000000,
+          collected: 685000,
+          progress: 62,
+          coverImg: 'https://placehold.co/720x420/0b5d46/ffffff?text=দ্বিতীয়+তলা+সম্প্রসারণ+কাজ',
+          desc: 'মুসল্লিদের স্থান সংকুলানের জন্য মসজিদের দ্বিতীয় তলার ছাদ ও বারান্দা সম্প্রসারণ কাজ চলমান রয়েছে।'
+        },
+        {
+          id: 'p2',
+          name: 'আধুনিক অজুখানা ও শৌচাগার সংস্কার',
+          status: 'চলমান',
+          budget: 350000,
+          expected: 320000,
+          collected: 245000,
+          progress: 75,
+          coverImg: 'https://placehold.co/720x420/146c53/fdf6e7?text=আধুনিক+অজুখানা+সংস্কার',
+          desc: 'নিরবচ্ছিন্ন পানির ব্যবস্থা, টাইলস ও শীতকালে গরম পানির সুবিধাসহ আধুনিক অজুখানা নির্মাণ।'
+        },
+        {
+          id: 'p3',
+          name: 'সোলার প্যানেল ও সাউন্ড সিস্টেম স্থাপন',
+          status: 'সম্পন্ন',
+          budget: 180000,
+          expected: 180000,
+          collected: 180000,
+          progress: 100,
+          coverImg: 'https://placehold.co/720x420/c9932c/ffffff?text=সোলার+ও+সাউন্ড+সিস্টেম',
+          desc: 'বিদ্যুৎ বিভ্রাটমুক্ত নামাজ ও স্পষ্ট আজানের জন্য সোলার আইপিএস ও উন্নত সাউন্ড সিস্টেম স্থাপন সম্পন্ন।'
+        },
+        {
+          id: 'p4',
+          name: 'মসজিদের মেঝেতে মার্বেল টাইলস ও কার্পেট',
+          status: 'পরিকল্পিত',
+          budget: 450000,
+          expected: 400000,
+          collected: 95000,
+          progress: 15,
+          coverImg: 'https://placehold.co/720x420/335c50/ffffff?text=মার্বেল+টাইলস+ও+কার্পেট',
+          desc: 'মূল নামাজঘরের মেঝেতে উন্নত মানের টাইলস ও আরামদায়ক জায়নামাজ কার্পেট বিছানোর পরিকল্পনা।'
+        }
+      ],
+      comments: [
+        {
+          id: 'c1',
+          projectId: 'p1',
+          author: 'মোঃ মাহবুবুর রহমান',
+          text: 'মাশাআল্লাহ, দ্বিতীয় তলার কাজ খুব সুন্দরভাবে এগোচ্ছে। আল্লাহ কবুল করুন।',
+          date: '২০২৬-১১-১৯'
+        },
+        {
+          id: 'c2',
+          projectId: 'p2',
+          author: 'হাজী আব্দুল লতিফ',
+          text: 'শীতকালে গরম পানির ব্যবস্থা রাখলে বয়স্ক মুসল্লিদের অনেক উপকার হবে।',
+          date: '২০২৬-১১-১৮'
+        }
+      ],
+      donors: [
+        { id: 'd1', date: '2026-11-18', name: 'হাজী মোঃ রফিকুল ইসলাম', projectId: 'p1', method: 'ব্যাংক ট্রান্সফার', amount: 50000 },
+        { id: 'd2', date: '2026-11-16', name: 'নাম প্রকাশে অনিচ্ছুক', projectId: 'p1', method: 'মোবাইল ব্যাংকিং (বিকাশ)', amount: 15000 },
+        { id: 'd3', date: '2026-11-14', name: 'মোঃ সাইফুল ইসলাম', projectId: 'p2', method: 'মোবাইল ব্যাংকিং (নগদ)', amount: 10000 },
+        { id: 'd4', date: '2026-11-10', name: 'আলহাজ্ব শামসুল হক', projectId: 'p4', method: 'নগদ (ক্যাশ)', amount: 25000 },
+        { id: 'd5', date: '2026-11-05', name: 'মোঃ কামরুল হাসান', projectId: 'p3', method: 'মোবাইল ব্যাংকিং (বিকাশ)', amount: 5000 }
+      ],
+      gallery: [
+        {
+          id: 'g1',
+          projectId: 'p1',
+          title: 'দ্বিতীয় তলার পিলার ও রড বাঁধাই',
+          desc: 'মিস্ত্রিদের তত্ত্বাবধানে দ্বিতীয় তলার মূল পিলার ও বিমের রড বাঁধাই কাজ সম্পন্ন হয়েছে।',
+          date: '2026-11-15',
+          img: 'https://placehold.co/720x440/0b5d46/ffffff?text=দ্বিতীয়+তলার+পিলার+ও+রড+বাঁধাই'
+        },
+        {
+          id: 'g2',
+          projectId: 'p2',
+          title: 'অজুখানার টাইলস ও পানির লাইন',
+          desc: 'নতুন অজুখানায় পানির ট্যাপ ও দেয়ালের টাইলস বসানোর কাজ চলছে।',
+          date: '2026-11-12',
+          img: 'https://placehold.co/720x440/146c53/fdf6e7?text=অজুখানার+টাইলস+ও+পানির+লাইন'
+        },
+        {
+          id: 'g3',
+          projectId: 'p3',
+          title: 'সোলার প্যানেল ও সাউন্ড সিস্টেম',
+          desc: 'মসজিদের ছাদে সোলার প্যানেল ও নতুন সাউন্ড সিস্টেম স্থাপন সম্পন্ন হয়েছে।',
+          date: '2026-11-06',
+          img: 'https://placehold.co/720x440/c9932c/ffffff?text=সোলার+প্যানেল+স্থাপন'
+        }
+      ],
+      committeeTerms: [
+        {
+          id: 't1',
+          label: '২০২৪ - বর্তমান',
+          isCurrent: true,
+          members: [
+            { id: 'm1', name: 'আলহাজ্ব মোঃ নুরুল ইসলাম', role: 'সভাপতি', phone: '01711-111111', note: 'সার্বিক পরিচালনা ও তত্ত্বাবধান', photo: '' },
+            { id: 'm2', name: 'মোঃ জসিম উদ্দিন', role: 'সাধারণ সম্পাদক', phone: '01811-222222', note: 'সকল সভা ও প্রকল্প সমন্বয়', photo: '' },
+            { id: 'm3', name: 'হাজী মোঃ আব্দুল করিম', role: 'কোষাধ্যক্ষ', phone: '01711-000000', note: 'আয়-ব্যয় ও ফান্ড সংরক্ষণ', photo: '' },
+            { id: 'm4', name: 'মাওলানা মোঃ ইব্রাহিম খলিল', role: 'ইমাম ও খতিব', phone: '01911-333333', note: 'ইমামতি ও দ্বীনি শিক্ষা', photo: '' }
+          ]
+        },
+        {
+          id: 't2',
+          label: '২০২১ - ২০২৩',
+          isCurrent: false,
+          members: [
+            { id: 'm5', name: 'আলহাজ্ব মোঃ শামসুল হক', role: 'সাবেক সভাপতি', phone: '01712-444444', note: 'মসজিদের মূল ভবন সংস্কার', photo: '' },
+            { id: 'm6', name: 'মোঃ আবুল কালাম', role: 'সাবেক সাধারণ সম্পাদক', phone: '01812-555555', note: 'প্রশাসনিক ও উন্নয়ন কার্যক্রম', photo: '' }
+          ]
+        },
+        {
+          id: 't3',
+          label: '২০১৮ - ২০২০',
+          isCurrent: false,
+          members: [
+            { id: 'm7', name: 'মরহুম হাজী আব্দুল মালেক', role: 'সাবেক সভাপতি', phone: '', note: 'মসজিদের ভিত্তি ও জমি সম্প্রসারণে অবদান', photo: '' }
+          ]
+        }
+      ]
+    };
+
+    // =========================================================================
+    // 2. STATE & STORAGE MANAGEMENT
+    // =========================================================================
+    let db = loadLocalData();
+    let ghCfg = loadGhConfig();
+    let hasUnpublishedChanges = false;
+    let isSyncing = false;
+    let selectedCommitteeTerm = db.committeeTerms[0]?.id || '';
+    let adminLoggedIn = false;
+    let charts = {};
+
+    function loadLocalData() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return structuredClone(defaultData);
+        const parsed = JSON.parse(raw);
+        return Object.assign(structuredClone(defaultData), parsed, {
+          settings: Object.assign(structuredClone(defaultData.settings), parsed.settings || {}),
+          comments: Array.isArray(parsed.comments) ? parsed.comments : structuredClone(defaultData.comments)
+        });
+      } catch {
+        return structuredClone(defaultData);
+      }
+    }
+
+    function loadGhConfig() {
+      try {
+        const raw = localStorage.getItem(GH_CONFIG_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch {}
+      let owner = '', repo = '';
+      if (location.hostname.endsWith('.github.io')) {
+        owner = location.hostname.replace('.github.io', '');
+        const parts = location.pathname.split('/').filter(Boolean);
+        repo = parts[0] || (owner + '.github.io');
+      }
+      return { owner, repo, branch: 'main', token: '', autoSync: true };
+    }
+
+    function utf8ToBase64(str) {
+      const bytes = new TextEncoder().encode(str);
+      let bin = '';
+      for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      return btoa(bin);
+    }
+
+    function saveData(triggerAutoSync = true) {
+      db.updatedAt = new Date().toISOString();
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(db)); } catch {}
+      hasUnpublishedChanges = true;
+      updateSyncUI();
+      if (triggerAutoSync && ghCfg.autoSync && ghCfg.token && ghCfg.owner && ghCfg.repo) {
+        pushToGitHub(true);
+      }
+    }
+
+    // Compress uploaded image via Canvas to keep JSON light
+    function compressImageFile(file, maxW = 700, quality = 0.7) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('ফাইল পড়া যায়নি'));
+        reader.onload = ev => {
+          const img = new Image();
+          img.onerror = () => reject(new Error('ছবি লোড হয়নি'));
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const scale = Math.min(1, maxW / img.width);
+            canvas.width = Math.round(img.width * scale);
+            canvas.height = Math.round(img.height * scale);
+            canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // =========================================================================
+    // 3. UTILITIES (Format, Escape, Toast, Custom Confirm, Copy)
+    // =========================================================================
+    function fmtTaka(n) {
+      return '৳' + Number(n || 0).toLocaleString('bn-BD');
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.remove('translate-y-24', 'opacity-0');
+      t.classList.add('translate-y-0', 'opacity-100');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        t.classList.add('translate-y-24', 'opacity-0');
+        t.classList.remove('translate-y-0', 'opacity-100');
+      }, 3000);
+    }
+
+    function showConfirm(message) {
+      return new Promise((resolve) => {
+        const modal = document.getElementById('confirmModal');
+        document.getElementById('confirmMessage').textContent = message;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        const okBtn = document.getElementById('confirmOkBtn');
+        const cancelBtn = document.getElementById('confirmCancelBtn');
+        const finish = (val) => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+          okBtn.onclick = null;
+          cancelBtn.onclick = null;
+          resolve(val);
+        };
+        okBtn.onclick = () => finish(true);
+        cancelBtn.onclick = () => finish(false);
+      });
+    }
+
+    // iFrame-safe copy using document.execCommand('copy')
+    function copyText(text, label = 'নম্বর') {
+      const clean = String(text || '').replace(/\s*\(.*?\)\s*/g, '').trim();
+      const ta = document.createElement('textarea');
+      ta.value = clean;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(`${label} কপি হয়েছে: ${clean}`);
+      } catch {
+        showToast('কপি করা যায়নি।');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function getProjectCover(proj) {
+      if (proj.coverImg) return proj.coverImg;
+      const g = db.gallery.find(item => item.projectId === proj.id);
+      if (g && g.img) return g.img;
+      return `https://placehold.co/720x420/0b5d46/ffffff?text=${encodeURIComponent(proj.name.slice(0, 18))}`;
+    }
+
+    function getProjectCommentCount(projId) {
+      return (db.comments || []).filter(c => c.projectId === projId).length;
+    }
+
+    function statusBadgeHtml(status) {
+      if (status === 'সম্পন্ন') return '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#e9f4f0] text-[#0b5d46]">সম্পন্ন</span>';
+      if (status === 'পরিকল্পিত') return '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#fdf6e7] text-[#946716]">পরিকল্পিত</span>';
+      return '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#eff6ff] text-[#1d4ed8]">চলমান</span>';
+    }
+
+    // =========================================================================
+    // 4. GITHUB API 1-CLICK LIVE SYNC
+    // =========================================================================
+    async function pullFromGitHub(manual = false) {
+      const badge = document.getElementById('liveSyncBadge');
+      try {
+        const res = await fetch('./data.json?t=' + Date.now(), { cache: 'no-store' });
+        if (res.ok) {
+          const remote = await res.json();
+          if (remote && remote.projects && remote.settings) {
+            db = Object.assign(structuredClone(defaultData), remote, {
+              settings: Object.assign(structuredClone(defaultData.settings), remote.settings || {}),
+              comments: Array.isArray(remote.comments) ? remote.comments : []
+            });
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(db)); } catch {}
+            hasUnpublishedChanges = false;
+            renderAll();
+            badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> লাইভ সিঙ্কড';
+            if (manual) showToast('GitHub থেকে সর্বশেষ লাইভ ডেটা লোড হয়েছে!');
+            return;
+          }
+        }
+        if (manual) showToast('এখনো GitHub-এ data.json তৈরি হয়নি। ১ ক্লিকে লাইভ আপডেট করুন।');
+      } catch {
+        if (manual) showToast('লোকাল প্রিভিউ মোডে আছেন বা data.json পাওয়া যায়নি।');
+      }
+    }
+
+    async function pushToGitHub(silent = false) {
+      if (isSyncing) return;
+      if (!ghCfg.owner || !ghCfg.repo || !ghCfg.token) {
+        if (!silent) {
+          showToast('প্রথমে GitHub সিঙ্ক ট্যাবে গিয়ে Token ও রিপোজিটরি তথ্য দিন।');
+          switchAdminPaneById('ap-github');
+        }
+        return;
+      }
+      isSyncing = true;
+      const btn = document.getElementById('btnPushLive');
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ আপডেট হচ্ছে...'; }
+
+      const apiUrl = `https://api.github.com/repos/${ghCfg.owner}/${ghCfg.repo}/contents/data.json`;
+      const headers = {
+        'Authorization': `Bearer ${ghCfg.token}`,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      };
+
+      try {
+        let sha = undefined;
+        const getRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(ghCfg.branch || 'main')}&t=${Date.now()}`, { headers });
+        if (getRes.ok) {
+          const fileInfo = await getRes.json();
+          sha = fileInfo.sha;
+        } else if (getRes.status !== 404) {
+          const errData = await getRes.json().catch(() => ({}));
+          throw new Error(errData.message || `HTTP ${getRes.status}`);
+        }
+
+        const payload = {
+          message: `Update masjid data (${new Date().toLocaleString('bn-BD')})`,
+          content: utf8ToBase64(JSON.stringify(db, null, 2)),
+          branch: ghCfg.branch || 'main'
+        };
+        if (sha) payload.sha = sha;
+
+        const putRes = await fetch(apiUrl, { method: 'PUT', headers, body: JSON.stringify(payload) });
+        if (!putRes.ok) {
+          const errData = await putRes.json().catch(() => ({}));
+          throw new Error(errData.message || `HTTP ${putRes.status}`);
+        }
+
+        hasUnpublishedChanges = false;
+        document.getElementById('liveSyncBadge').innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> লাইভ আপডেটেড';
+        showToast('✅ সফল! ৩০-৬০ সেকেন্ডের মধ্যে সবার ফোনে আপডেট দেখা যাবে।');
+      } catch (err) {
+        showToast('❌ সিঙ্ক ব্যর্থ: ' + err.message);
+      } finally {
+        isSyncing = false;
+        if (btn) { btn.disabled = false; btn.textContent = '🚀 ১ ক্লিকে লাইভ আপডেট করুন'; }
+        updateSyncUI();
+      }
+    }
+
+    function updateSyncUI() {
+      const bar = document.getElementById('ghSyncBar');
+      const txt = document.getElementById('ghSyncStatusText');
+      if (!bar || !txt) return;
+      const connected = Boolean(ghCfg.owner && ghCfg.repo && ghCfg.token);
+      bar.className = connected
+        ? 'rounded-xl p-3.5 text-white bg-[#0b5d46] flex items-center justify-between gap-3 flex-wrap'
+        : 'rounded-xl p-3.5 text-white bg-[#5c4238] flex items-center justify-between gap-3 flex-wrap';
+
+      if (!connected) {
+        txt.innerHTML = '<strong>⚠️ GitHub সিঙ্ক সেটআপ করা নেই</strong><br><span>১ ক্লিকে সবার জন্য লাইভ আপডেট চালু করতে “GitHub সেটআপ” বাটনে ক্লিক করুন।</span>';
+      } else if (hasUnpublishedChanges) {
+        txt.innerHTML = `<strong>🟡 নতুন পরিবর্তন অপেক্ষমাণ (${escapeHtml(ghCfg.owner)}/${escapeHtml(ghCfg.repo)})</strong><br><span>“১ ক্লিকে লাইভ আপডেট করুন” বাটনে ট্যাপ করলে সবার ফোনে আপডেট হবে।</span>`;
+      } else {
+        txt.innerHTML = `<strong>🟢 GitHub সংযুক্ত (${escapeHtml(ghCfg.owner)}/${escapeHtml(ghCfg.repo)})</strong><br><span>${ghCfg.autoSync ? 'অটো-সিঙ্ক চালু আছে — প্রতিটি সেভ সাথে সাথেই লাইভ হয়।' : 'সব তথ্য লাইভ ওয়েবসাইটে প্রকাশিত আছে।'}</span>`;
+      }
+    }
+
+    async function saveGhConfig(e) {
+      e.preventDefault();
+      ghCfg = {
+        owner: document.getElementById('ghOwner').value.trim(),
+        repo: document.getElementById('ghRepo').value.trim(),
+        branch: document.getElementById('ghBranch').value.trim() || 'main',
+        token: document.getElementById('ghToken').value.trim(),
+        autoSync: document.getElementById('ghAutoSync').checked
+      };
+      try { localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(ghCfg)); } catch {}
+      updateSyncUI();
+      showToast('কানেকশন সেভ হয়েছে! লাইভ সিঙ্ক টেস্ট হচ্ছে...');
+      await pushToGitHub(false);
+    }
+
+    async function clearGhConfig() {
+      if (!(await showConfirm('GitHub Token এই ফোন থেকে মুছে ফেলবেন?'))) return;
+      try { localStorage.removeItem(GH_CONFIG_KEY); } catch {}
+      ghCfg = loadGhConfig();
+      renderAdminLists();
+      updateSyncUI();
+      showToast('GitHub ডিসকানেক্ট করা হয়েছে।');
+    }
+
+    // =========================================================================
+    // 5. NAVIGATION & TABS
+    // =========================================================================
+    function switchTab(tabId) {
+      document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
+      document.getElementById('sec-' + tabId)?.classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        const active = btn.dataset.tab === tabId;
+        btn.className = active
+          ? 'nav-btn px-3.5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 border-[#0b5d46] text-[#0b5d46] transition'
+          : 'nav-btn px-3.5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 border-transparent text-[#60726b] hover:text-[#0b5d46] transition';
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (tabId === 'home') setTimeout(renderHomeCharts, 40);
+      if (tabId === 'donate') setTimeout(renderDonateChart, 40);
+    }
+
+    function switchPayTab(key, btn) {
+      document.querySelectorAll('.pay-tab-btn').forEach(b => {
+        b.className = 'pay-tab-btn py-2.5 px-2 rounded-xl border text-xs sm:text-sm font-semibold transition bg-[#f7f9f8] text-[#182722] border-[#e6ece9] hover:border-[#0b5d46]';
+      });
+      btn.className = 'pay-tab-btn py-2.5 px-2 rounded-xl border text-xs sm:text-sm font-semibold transition bg-[#0b5d46] text-white border-[#0b5d46]';
+
+      document.querySelectorAll('.pay-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById('pay-' + key).classList.remove('hidden');
+    }
+
+    function goDonateForProject(projId) {
+      switchTab('donate');
+      setTimeout(() => {
+        const sel = document.getElementById('pubDonProject');
+        if (sel) sel.value = projId;
+        document.getElementById('donationFormCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 150);
+    }
+
+    // =========================================================================
+    // 6. MAIN RENDERERS
+    // =========================================================================
+    function renderAll() {
+      const s = db.settings;
+      document.getElementById('siteName').textContent = s.name;
+      document.getElementById('siteAddress').textContent = s.address;
+      document.getElementById('footerName').textContent = s.name;
+      document.getElementById('footerAddress').textContent = s.address;
+
+      // Footer Messenger & WhatsApp links
+      document.getElementById('footerMessengerLink').href = s.messengerUrl || 'https://m.me/';
+      document.getElementById('footerWhatsappLink').href = s.whatsappUrl || 'https://wa.me/';
+
+      // Marquee ticker
+      const tickerHtml = db.tickers.map(t => `<span class="mx-6 inline-flex items-center gap-2"><span class="text-[#c9932c]">✦</span> ${escapeHtml(t)}</span>`).join('');
+      document.getElementById('tickerTrack').innerHTML = tickerHtml + tickerHtml;
+
+      renderHome();
+      renderDonateDashboard();
+      renderProjects();
+      renderGalleryFilters();
+      renderGallery();
+      renderDonorFilters();
+      renderDonors();
+      renderCommittee();
+      if (adminLoggedIn) renderAdminLists();
+    }
+
+    function renderHome() {
+      const totalBudget = db.projects.reduce((s, p) => s + Number(p.budget), 0);
+      const totalCollected = db.projects.reduce((s, p) => s + Number(p.collected), 0);
+      const remaining = Math.max(0, totalBudget - totalCollected);
+      const avgProg = db.projects.length ? Math.round(db.projects.reduce((s, p) => s + Number(p.progress), 0) / db.projects.length) : 0;
+
+      document.getElementById('homeKpis').innerHTML = `
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+          <div class="text-xs font-semibold text-[#60726b]">মোট প্রকল্প</div>
+          <div class="text-xl sm:text-2xl font-bold text-[#182722] mt-1">${db.projects.length.toLocaleString('bn-BD')} টি</div>
+          <div class="text-[11px] text-[#0b5d46] font-medium mt-1">গড় অগ্রগতি ${avgProg.toLocaleString('bn-BD')}%</div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+          <div class="text-xs font-semibold text-[#60726b]">মোট সম্ভাব্য ব্যয়</div>
+          <div class="text-xl sm:text-2xl font-bold text-[#182722] mt-1">${fmtTaka(totalBudget)}</div>
+          <div class="text-[11px] text-[#60726b] mt-1">সকল প্রকল্পের প্রাক্কলিত ব্যয়</div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+          <div class="text-xs font-semibold text-[#60726b]">মোট সংগৃহীত ফান্ড</div>
+          <div class="text-xl sm:text-2xl font-bold text-[#0b5d46] mt-1">${fmtTaka(totalCollected)}</div>
+          <div class="text-[11px] text-[#60726b] mt-1">দাতা এন্ট্রি: ${db.donors.length.toLocaleString('bn-BD')} টি</div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+          <div class="text-xs font-semibold text-[#60726b]">অবশিষ্ট প্রয়োজন</div>
+          <div class="text-xl sm:text-2xl font-bold text-[#c9932c] mt-1">${fmtTaka(remaining)}</div>
+          <div class="text-[11px] text-[#60726b] mt-1">আপনার দানে এগিয়ে নিন</div>
+        </div>
+      `;
+
+      // Ongoing projects on Dashboard WITH Cover Photos
+      const ongoing = db.projects.filter(p => p.status === 'চলমান');
+      const dashProjects = ongoing.length ? ongoing : db.projects.slice(0, 3);
+      document.getElementById('homeProjectsPreview').innerHTML = dashProjects.map(p => projectCardHtml(p, true)).join('');
+
+      const curTerm = db.committeeTerms.find(t => t.isCurrent) || db.committeeTerms[0];
+      document.getElementById('homeCommitteePreview').innerHTML = (curTerm?.members || []).slice(0, 3).map(memberCardHtml).join('');
+      renderHomeCharts();
+    }
+
+    function projectCardHtml(p, compact = false) {
+      const rem = Math.max(0, p.budget - p.collected);
+      const fundPct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
+      const cover = getProjectCover(p);
+      const cCount = getProjectCommentCount(p.id);
+      return `
+        <div class="bg-white rounded-2xl border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)] overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <div class="relative h-44 bg-[#eef3f0] overflow-hidden">
+              <img src="${cover}" alt="${escapeHtml(p.name)}" onerror="this.src='https://placehold.co/720x420/0b5d46/ffffff?text=প্রকল্প'" class="w-full h-full object-cover" />
+              <div class="absolute top-3 left-3">${statusBadgeHtml(p.status)}</div>
+              <button onclick="openCommentsModal('${p.id}')" class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/90 hover:bg-white text-[#182722] text-[11px] font-bold shadow-sm transition">
+                💬 মন্তব্য (${cCount.toLocaleString('bn-BD')})
+              </button>
+            </div>
+            <div class="p-4 space-y-3">
+              <div>
+                <h4 class="font-bold text-[#182722] text-base leading-snug">${escapeHtml(p.name)}</h4>
+                ${compact ? '' : `<p class="text-xs text-[#60726b] mt-1 leading-relaxed">${escapeHtml(p.desc || '')}</p>`}
+              </div>
+              <div class="space-y-2 text-xs">
+                <div>
+                  <div class="flex justify-between font-medium text-[#60726b] mb-1"><span>কাজের অগ্রগতি</span><span class="font-bold text-[#0b5d46]">${p.progress}%</span></div>
+                  <div class="h-1.5 bg-[#e9f0ed] rounded-full overflow-hidden"><div class="h-full bg-[#0b5d46] rounded-full" style="width:${p.progress}%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between font-medium text-[#60726b] mb-1"><span>ফান্ড (${fmtTaka(p.collected)} / ${fmtTaka(p.budget)})</span><span class="font-bold text-[#c9932c]">${fundPct}%</span></div>
+                  <div class="h-1.5 bg-[#e9f0ed] rounded-full overflow-hidden"><div class="h-full bg-[#c9932c] rounded-full" style="width:${fundPct}%"></div></div>
+                </div>
+              </div>
+              ${compact ? '' : `<div class="text-xs text-[#60726b]">অবশিষ্ট প্রয়োজন: <strong class="text-[#c62828]">${fmtTaka(rem)}</strong></div>`}
+            </div>
+          </div>
+          <div class="px-4 pb-4 pt-1 flex items-center gap-2">
+            <button onclick="goDonateForProject('${p.id}')" class="flex-1 py-2.5 rounded-xl bg-[#0b5d46] hover:bg-[#074231] text-white font-semibold text-xs transition">
+              🤲 দান করুন
+            </button>
+            <button onclick="openCommentsModal('${p.id}')" class="px-3.5 py-2.5 rounded-xl border border-[#dce6e1] hover:border-[#0b5d46] text-[#182722] font-semibold text-xs transition">
+              💬 মন্তব্য
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderHomeCharts() {
+      const labels = db.projects.map(p => p.name.length > 16 ? p.name.slice(0, 16) + '…' : p.name);
+      const barEl = document.getElementById('homeBarChart');
+      if (barEl) {
+        if (charts.homeBar) charts.homeBar.destroy();
+        charts.homeBar = new Chart(barEl, {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [
+              { label: 'সম্ভাব্য ব্যয় (৳)', data: db.projects.map(p => p.budget), backgroundColor: '#d7e6e0', borderRadius: 6 },
+              { label: 'সংগৃহীত ফান্ড (৳)', data: db.projects.map(p => p.collected), backgroundColor: '#0b5d46', borderRadius: 6 }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+        });
+      }
+
+      const donutEl = document.getElementById('homeDonutChart');
+      if (donutEl) {
+        if (charts.homeDonut) charts.homeDonut.destroy();
+        charts.homeDonut = new Chart(donutEl, {
+          type: 'doughnut',
+          data: {
+            labels,
+            datasets: [{ data: db.projects.map(p => p.collected), backgroundColor: ['#0b5d46', '#c9932c', '#2e7d63', '#5c8a7a', '#8e6b2a'], borderWidth: 0 }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, cutout: '64%', plugins: { legend: { position: 'bottom' } } }
+        });
+      }
+    }
+
+    function renderDonateDashboard() {
+      const totalBudget = db.projects.reduce((s, p) => s + Number(p.budget), 0);
+      const totalExpected = db.projects.reduce((s, p) => s + Number(p.expected), 0);
+      const totalCollected = db.projects.reduce((s, p) => s + Number(p.collected), 0);
+      const totalRem = Math.max(0, totalBudget - totalCollected);
+
+      document.getElementById('donateKpis').innerHTML = `
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#e6ece9]"><div class="text-xs font-semibold text-[#60726b]">মোট সম্ভাব্য ব্যয়</div><div class="text-xl sm:text-2xl font-bold text-[#182722] mt-1">${fmtTaka(totalBudget)}</div></div>
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#e6ece9]"><div class="text-xs font-semibold text-[#60726b]">প্রত্যাশিত দান প্রাপ্তি</div><div class="text-xl sm:text-2xl font-bold text-[#0b5d46] mt-1">${fmtTaka(totalExpected)}</div></div>
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#e6ece9]"><div class="text-xs font-semibold text-[#60726b]">এখন পর্যন্ত কালেকশন</div><div class="text-xl sm:text-2xl font-bold text-[#15803d] mt-1">${fmtTaka(totalCollected)}</div></div>
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#e6ece9]"><div class="text-xs font-semibold text-[#60726b]">অবশিষ্ট কালেকশন</div><div class="text-xl sm:text-2xl font-bold text-[#c9932c] mt-1">${fmtTaka(totalRem)}</div></div>
+      `;
+
+      document.getElementById('donateProjectCards').innerHTML = db.projects.map(p => {
+        const rem = Math.max(0, p.budget - p.collected);
+        const pct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
+        return `
+          <div class="bg-white rounded-2xl p-4 sm:p-5 border border-[#e6ece9] flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-3">
+                <h4 class="font-bold text-[#182722] text-sm sm:text-base leading-snug">${escapeHtml(p.name)}</h4>
+                ${statusBadgeHtml(p.status)}
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs mb-3">
+                <div class="bg-[#f7f9f8] p-2.5 rounded-xl"><span class="text-[#60726b] block">সম্ভাব্য ব্যয়</span><strong>${fmtTaka(p.budget)}</strong></div>
+                <div class="bg-[#fdf6e7] p-2.5 rounded-xl"><span class="text-[#946716] block">প্রত্যাশিত দান</span><strong>${fmtTaka(p.expected)}</strong></div>
+                <div class="bg-[#e9f4f0] p-2.5 rounded-xl"><span class="text-[#0b5d46] block">কালেকশন</span><strong class="text-[#0b5d46]">${fmtTaka(p.collected)}</strong></div>
+                <div class="bg-red-50/70 p-2.5 rounded-xl"><span class="text-[#b91c1c] block">অবশিষ্ট</span><strong class="text-[#b91c1c]">${fmtTaka(rem)}</strong></div>
+              </div>
+              <div class="text-xs">
+                <div class="flex justify-between font-medium text-[#60726b] mb-1"><span>ফান্ড সংগ্রহ</span><span class="font-bold text-[#0b5d46]">${pct}%</span></div>
+                <div class="h-1.5 bg-[#e9f0ed] rounded-full overflow-hidden"><div class="h-full bg-[#c9932c] rounded-full" style="width:${pct}%"></div></div>
+              </div>
+            </div>
+            <button onclick="goDonateForProject('${p.id}')" class="w-full py-2.5 rounded-xl bg-[#0b5d46] hover:bg-[#074231] text-white font-semibold text-xs transition">
+              এই প্রজেক্টে দান করুন
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('donateSummaryTable').innerHTML = db.projects.map(p => {
+        const rem = Math.max(0, p.budget - p.collected);
+        const pct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
+        return `
+          <tr class="hover:bg-[#f7f9f8]">
+            <td class="py-3 px-4 font-semibold text-[#182722]">${escapeHtml(p.name)}</td>
+            <td class="py-3 px-3 whitespace-nowrap">${fmtTaka(p.budget)}</td>
+            <td class="py-3 px-3 whitespace-nowrap">${fmtTaka(p.expected)}</td>
+            <td class="py-3 px-3 font-bold text-[#0b5d46] whitespace-nowrap">${fmtTaka(p.collected)}</td>
+            <td class="py-3 px-3 font-bold text-[#b91c1c] whitespace-nowrap">${fmtTaka(rem)}</td>
+            <td class="py-3 px-4 text-right font-bold">${pct}%</td>
+          </tr>
+        `;
+      }).join('');
+
+      // PAYMENT METHODS WITH CRISP INLINE SVG LOGOS
+      const s = db.settings;
+      document.getElementById('pay-mobile').innerHTML = `
+        <!-- bKash -->
+        <div class="flex items-center justify-between gap-3 p-3.5 rounded-xl border border-[#f8d7e6] bg-[#fff5fa] flex-wrap">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-11 h-11 rounded-xl bg-[#E2136E] flex items-center justify-center shrink-0 shadow-sm">
+              <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none">
+                <path d="M6 10l12 3 5 11-11-3L6 10z" fill="#fff"/>
+                <path d="M18 13l11-4-6 15-5-11z" fill="#ffd1e6"/>
+                <path d="M12 21l11 3-8 6-3-9z" fill="#fff" opacity="0.85"/>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-xs font-bold text-[#E2136E]">বিকাশ (bKash)</div>
+              <div class="text-sm sm:text-base font-bold text-[#182722] truncate">${escapeHtml(s.bkash)}</div>
+            </div>
+          </div>
+          <button onclick="copyText('${escapeHtml(s.bkash)}','বিকাশ নম্বর')" class="px-3.5 py-1.5 rounded-lg bg-[#E2136E] hover:opacity-90 text-white text-xs font-bold shrink-0">কপি করুন</button>
+        </div>
+
+        <!-- Nagad -->
+        <div class="flex items-center justify-between gap-3 p-3.5 rounded-xl border border-[#fde2cc] bg-[#fff8f3] flex-wrap">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#F7941D] to-[#ED1C24] flex items-center justify-center shrink-0 shadow-sm">
+              <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="18" r="11" stroke="#fff" stroke-width="2.5"/>
+                <path d="M14 23V13l8 10V13" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-xs font-bold text-[#ED1C24]">নগদ (Nagad)</div>
+              <div class="text-sm sm:text-base font-bold text-[#182722] truncate">${escapeHtml(s.nagad)}</div>
+            </div>
+          </div>
+          <button onclick="copyText('${escapeHtml(s.nagad)}','নগদ নম্বর')" class="px-3.5 py-1.5 rounded-lg bg-[#ED1C24] hover:opacity-90 text-white text-xs font-bold shrink-0">কপি করুন</button>
+        </div>
+
+        <!-- Rocket -->
+        <div class="flex items-center justify-between gap-3 p-3.5 rounded-xl border border-[#ebd6ef] bg-[#fbf5fc] flex-wrap">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-11 h-11 rounded-xl bg-[#8C3494] flex items-center justify-center shrink-0 shadow-sm">
+              <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none">
+                <path d="M24 10c-5 1-10 5-12 10l4 4c5-2 9-7 10-12l-2-2z" fill="#fff"/>
+                <circle cx="19.5" cy="16.5" r="2" fill="#8C3494"/>
+                <path d="M10 24l-2 4 4-2" stroke="#f0c8f5" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-xs font-bold text-[#8C3494]">রকেট (Rocket)</div>
+              <div class="text-sm sm:text-base font-bold text-[#182722] truncate">${escapeHtml(s.rocket)}</div>
+            </div>
+          </div>
+          <button onclick="copyText('${escapeHtml(s.rocket)}','রকেট নম্বর')" class="px-3.5 py-1.5 rounded-lg bg-[#8C3494] hover:opacity-90 text-white text-xs font-bold shrink-0">কপি করুন</button>
+        </div>
+      `;
+
+      // Bank Transfer with Crisp Bank SVG Logo
+      document.getElementById('pay-bank').innerHTML = `
+        <div class="rounded-xl border border-[#dce6e1] bg-[#f7f9f8] p-4 space-y-3 text-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-xl bg-[#0b5d46] text-white flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 10h18M5 10v8M9 10v8M15 10v8M19 10v8M2 18h20M12 3L2 8h20L12 3z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="font-bold text-[#182722]">${escapeHtml(s.bankName)}</div>
+              <div class="text-xs text-[#60726b]">শাখা: ${escapeHtml(s.bankBranch)}</div>
+            </div>
+          </div>
+          <div class="pt-1 border-t border-[#e6ece9] text-xs sm:text-sm">
+            হিসাবের নাম: <strong class="text-[#182722]">${escapeHtml(s.bankAccName)}</strong>
+          </div>
+          <div class="flex items-center justify-between gap-2 flex-wrap bg-white p-3 rounded-lg border border-[#e6ece9]">
+            <div><span class="text-xs text-[#60726b] block">হিসাব নম্বর</span><strong class="text-base text-[#0b5d46]">${escapeHtml(s.bankAccNo)}</strong></div>
+            <button onclick="copyText('${escapeHtml(s.bankAccNo)}','হিসাব নম্বর')" class="px-3 py-1.5 rounded-lg bg-[#0b5d46] text-white text-xs font-bold">হিসাব কপি</button>
+          </div>
+          <div class="flex items-center justify-between gap-2 flex-wrap bg-white p-3 rounded-lg border border-[#e6ece9]">
+            <div><span class="text-xs text-[#60726b] block">রাউটিং নম্বর</span><strong class="text-sm text-[#182722]">${escapeHtml(s.bankRouting)}</strong></div>
+            <button onclick="copyText('${escapeHtml(s.bankRouting)}','রাউটিং নম্বর')" class="px-3 py-1.5 rounded-lg border border-[#0b5d46] text-[#0b5d46] text-xs font-bold">রাউটিং কপি</button>
+          </div>
+        </div>
+      `;
+
+      // Direct Cash with Crisp Cash SVG Logo
+      const cleanPhone = String(s.cashPhone || '').replace(/[^0-9+]/g, '');
+      document.getElementById('pay-cash').innerHTML = `
+        <div class="rounded-xl border border-[#dce6e1] bg-[#f7f9f8] p-4 space-y-3 text-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-xl bg-[#c9932c] text-white flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="2"/>
+                <circle cx="12" cy="12" r="2.5"/>
+                <path d="M6 12h.01M18 12h.01"/>
+              </svg>
+            </div>
+            <div>
+              <div class="font-bold text-[#182722]">সরাসরি নগদ অনুদান (ক্যাশ)</div>
+              <div class="text-xs text-[#60726b]">কোষাধ্যক্ষের নিকট সরাসরি প্রদান ও রসিদ সংগ্রহ</div>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-[#60726b] leading-relaxed">
+            মসজিদের কোষাধ্যক্ষের নিকট সরাসরি নগদ দান প্রদান করে রসিদ সংগ্রহ করুন অথবা মসজিদের নির্ধারিত দানবাক্সে দান করুন।
+          </p>
+          <div class="flex items-center justify-between gap-2 flex-wrap bg-white p-3 rounded-lg border border-[#e6ece9]">
+            <div>
+              <strong class="block text-sm text-[#182722]">${escapeHtml(s.cashName)}</strong>
+              <span class="text-sm font-bold text-[#0b5d46]">${escapeHtml(s.cashPhone)}</span>
+            </div>
+            <a href="tel:${cleanPhone}" class="px-4 py-2 rounded-xl bg-[#0b5d46] hover:bg-[#074231] text-white text-xs font-bold">📞 কল করুন</a>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('pubDonProject').innerHTML = db.projects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+      renderDonateChart();
+    }
+
+    function renderDonateChart() {
+      const el = document.getElementById('donateCompareChart');
+      if (!el) return;
+      const labels = db.projects.map(p => p.name.length > 16 ? p.name.slice(0, 16) + '…' : p.name);
+      if (charts.donateCmp) charts.donateCmp.destroy();
+      charts.donateCmp = new Chart(el, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: 'সম্ভাব্য ব্যয়', data: db.projects.map(p => p.budget), backgroundColor: '#cbd5e1', borderRadius: 5 },
+            { label: 'প্রত্যাশিত দান', data: db.projects.map(p => p.expected), backgroundColor: '#c9932c', borderRadius: 5 },
+            { label: 'কালেকশন', data: db.projects.map(p => p.collected), backgroundColor: '#0b5d46', borderRadius: 5 }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+      });
+    }
+
+    function renderProjects() {
+      const status = document.getElementById('projStatusFilter').value;
+      const list = status === 'all' ? db.projects : db.projects.filter(p => p.status === status);
+      document.getElementById('projectsList').innerHTML = list.map(p => projectCardHtml(p, false)).join('') ||
+        '<p class="text-sm text-[#60726b] col-span-full text-center py-8">কোনো প্রকল্প পাওয়া যায়নি।</p>';
+    }
+
+    function renderGalleryFilters() {
+      const sel = document.getElementById('galleryProjFilter');
+      const cur = sel.value || 'all';
+      sel.innerHTML = '<option value="all">সকল প্রকল্পের ছবি</option>' + db.projects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+      sel.value = cur;
+    }
+
+    function renderGallery() {
+      const pf = document.getElementById('galleryProjFilter').value || 'all';
+      const items = pf === 'all' ? db.gallery : db.gallery.filter(g => g.projectId === pf);
+      document.getElementById('galleryGrid').innerHTML = items.map(g => {
+        const pName = db.projects.find(p => p.id === g.projectId)?.name || 'সাধারণ';
+        return `
+          <div onclick="openLightbox('${g.id}')" class="bg-white rounded-2xl overflow-hidden border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-md transition cursor-pointer">
+            <img src="${g.img}" alt="${escapeHtml(g.title)}" onerror="this.src='https://placehold.co/720x440/0b5d46/ffffff?text=ছবি'" class="w-full h-48 object-cover bg-[#eef3f0]" />
+            <div class="p-4 space-y-1.5">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#e9f4f0] text-[#0b5d46]">${escapeHtml(pName)}</span>
+              <h4 class="font-bold text-sm text-[#182722]">${escapeHtml(g.title)}</h4>
+              <p class="text-xs text-[#60726b]">${escapeHtml(g.desc || '')}</p>
+              <div class="text-[11px] text-[#7c8e87] pt-1">${escapeHtml(g.date)}</div>
+            </div>
+          </div>
+        `;
+      }).join('') || '<p class="text-sm text-[#60726b] col-span-full text-center py-8">এখনো কোনো ছবি যোগ করা হয়নি।</p>';
+    }
+
+    function openLightbox(id) {
+      const g = db.gallery.find(x => x.id === id);
+      if (!g) return;
+      document.getElementById('lbTitle').textContent = g.title;
+      document.getElementById('lbImg').src = g.img;
+      document.getElementById('lbDesc').textContent = `${g.desc || ''} (তারিখ: ${g.date})`;
+      const modal = document.getElementById('lightboxModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function renderDonorFilters() {
+      const sel = document.getElementById('donorProjFilter');
+      const cur = sel.value || 'all';
+      sel.innerHTML = '<option value="all">সকল প্রকল্প</option>' + db.projects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+      sel.value = cur;
+    }
+
+    function renderDonors() {
+      const q = (document.getElementById('donorSearch').value || '').trim().toLowerCase();
+      const pf = document.getElementById('donorProjFilter').value || 'all';
+      const mf = document.getElementById('donorMethodFilter').value || 'all';
+
+      const list = db.donors.filter(d =>
+        (!q || d.name.toLowerCase().includes(q)) &&
+        (pf === 'all' || d.projectId === pf) &&
+        (mf === 'all' || d.method.includes(mf))
+      );
+
+      const sum = list.reduce((s, d) => s + Number(d.amount), 0);
+      document.getElementById('donorTotalBadge').textContent = `মোট: ${fmtTaka(sum)} (${list.length.toLocaleString('bn-BD')} জন)`;
+
+      document.getElementById('donorsTableBody').innerHTML = list.map(d => {
+        const pName = db.projects.find(p => p.id === d.projectId)?.name || 'সাধারণ ফান্ড';
+        return `
+          <tr class="hover:bg-[#f7f9f8]">
+            <td class="py-3 px-4 whitespace-nowrap text-[#60726b]">${escapeHtml(d.date)}</td>
+            <td class="py-3 px-4 font-semibold text-[#182722]">${escapeHtml(d.name)}</td>
+            <td class="py-3 px-4">${escapeHtml(pName)}</td>
+            <td class="py-3 px-4 whitespace-nowrap"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#fdf6e7] text-[#946716]">${escapeHtml(d.method)}</span></td>
+            <td class="py-3 px-4 text-right font-bold text-[#0b5d46] whitespace-nowrap">${fmtTaka(d.amount)}</td>
+          </tr>
+        `;
+      }).join('') || '<tr><td colspan="5" class="py-8 text-center text-[#60726b]">কোনো তথ্য পাওয়া যায়নি।</td></tr>';
+    }
+
+    // Committee Member Card WITH Circular Photo Support
+    function memberCardHtml(m) {
+      const initial = (m.name || 'ম').trim().charAt(0);
+      const cleanTel = String(m.phone || '').replace(/[^0-9+]/g, '');
+      const avatarHtml = m.photo
+        ? `<img src="${m.photo}" alt="${escapeHtml(m.name)}" class="w-14 h-14 rounded-full object-cover border-2 border-[#0b5d46]/25 shrink-0" />`
+        : `<div class="w-14 h-14 rounded-full bg-[#e9f4f0] border border-[#cde5dc] text-[#0b5d46] font-bold text-xl flex items-center justify-center shrink-0">${escapeHtml(initial)}</div>`;
+      const telBtn = cleanTel
+        ? `<a href="tel:${cleanTel}" class="inline-flex items-center gap-1 mt-2 px-3 py-1 rounded-full border border-[#dce6e1] hover:border-[#0b5d46] text-[#0b5d46] text-xs font-semibold transition">📞 ${escapeHtml(m.phone)}</a>`
+        : '';
+      return `
+        <div class="bg-white rounded-2xl p-4 border border-[#e6ece9] shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex items-center gap-3.5">
+          ${avatarHtml}
+          <div class="min-w-0 flex-1">
+            <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#fdf6e7] text-[#946716]">${escapeHtml(m.role)}</span>
+            <div class="font-bold text-sm sm:text-base text-[#182722] mt-1 truncate">${escapeHtml(m.name)}</div>
+            <div class="text-xs text-[#60726b] mt-0.5">${escapeHtml(m.note || '')}</div>
+            ${telBtn}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCommittee() {
+      if (!db.committeeTerms.some(t => t.id === selectedCommitteeTerm)) {
+        selectedCommitteeTerm = db.committeeTerms[0]?.id || '';
+      }
+      document.getElementById('committeeTermPills').innerHTML = db.committeeTerms.map(t => {
+        const active = t.id === selectedCommitteeTerm;
+        const cls = active
+          ? 'px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-[#0b5d46] text-white transition'
+          : 'px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-[#dce6e1] text-[#182722] hover:border-[#0b5d46] transition';
+        return `<button onclick="selectedCommitteeTerm='${t.id}';renderCommittee()" class="${cls}">${t.isCurrent ? '● ' : ''}${escapeHtml(t.label)}</button>`;
+      }).join('');
+
+      const q = (document.getElementById('committeeSearch').value || '').trim().toLowerCase();
+      const term = db.committeeTerms.find(t => t.id === selectedCommitteeTerm);
+      const members = (term?.members || []).filter(m => !q || m.name.toLowerCase().includes(q) || m.role.toLowerCase().includes(q));
+      document.getElementById('committeeMembersGrid').innerHTML = members.map(memberCardHtml).join('') ||
+        '<p class="text-sm text-[#60726b] col-span-full text-center py-8">কোনো সদস্য পাওয়া যায়নি।</p>';
+    }
+
+    // =========================================================================
+    // 7. PROJECT-BASED VISITOR COMMENTS
+    // =========================================================================
+    function openCommentsModal(projId) {
+      const proj = db.projects.find(p => p.id === projId);
+      if (!proj) return;
+      document.getElementById('commentModalProjId').value = projId;
+      document.getElementById('commentModalProjName').textContent = proj.name;
+      renderCommentsForProject(projId);
+      const modal = document.getElementById('commentsModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function renderCommentsForProject(projId) {
+      const list = (db.comments || []).filter(c => c.projectId === projId);
+      const container = document.getElementById('commentListContainer');
+      if (!list.length) {
+        container.innerHTML = '<div class="text-center py-8 text-xs sm:text-sm text-[#60726b]">এই প্রকল্পে এখনো কোনো মন্তব্য নেই। প্রথম মন্তব্যটি আপনিই করুন!</div>';
+        return;
+      }
+      container.innerHTML = list.map(c => `
+        <div class="bg-white rounded-xl p-3.5 border border-[#e6ece9] space-y-1">
+          <div class="flex items-center justify-between gap-2">
+            <strong class="text-xs sm:text-sm text-[#0b5d46]">${escapeHtml(c.author)}</strong>
+            <span class="text-[11px] text-[#7c8e87]">${escapeHtml(c.date)}</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[#182722] leading-relaxed">${escapeHtml(c.text)}</p>
+        </div>
+      `).join('');
+    }
+
+    function submitProjectComment(e) {
+      e.preventDefault();
+      const projectId = document.getElementById('commentModalProjId').value;
+      const author = document.getElementById('visitorCommentName').value.trim();
+      const text = document.getElementById('visitorCommentText').value.trim();
+      if (!author || !text) return;
+
+      if (!Array.isArray(db.comments)) db.comments = [];
+      db.comments.unshift({
+        id: 'c_' + Date.now(),
+        projectId,
+        author,
+        text,
+        date: new Date().toLocaleDateString('bn-BD')
+      });
+
+      saveData(true);
+      renderCommentsForProject(projectId);
+      renderHome();
+      renderProjects();
+      if (adminLoggedIn) renderAdminLists();
+      document.getElementById('visitorCommentText').value = '';
+      showToast('আপনার মন্তব্য যুক্ত হয়েছে!');
+    }
+
+    // =========================================================================
+    // 8. PUBLIC DONATION FORM & WHATSAPP RECEIPT
+    // =========================================================================
+    function submitPublicDonation(e) {
+      e.preventDefault();
+      const projectId = document.getElementById('pubDonProject').value;
+      const isAnon = document.getElementById('pubDonAnon').checked;
+      const name = isAnon ? 'নাম প্রকাশে অনিচ্ছুক' : document.getElementById('pubDonName').value.trim();
+      const donorPhone = document.getElementById('pubDonPhone').value.trim();
+      const amount = Number(document.getElementById('pubDonAmount').value);
+      const method = document.getElementById('pubDonMethod').value;
+      const trx = document.getElementById('pubDonTrx').value.trim();
+      const date = new Date().toISOString().slice(0, 10);
+      const receiptId = String(Date.now()).slice(-6);
+      const pName = db.projects.find(p => p.id === projectId)?.name || '';
+
+      document.getElementById('receiptBody').innerHTML = `
+        <div><strong>রসিদ নং:</strong> #${receiptId}</div>
+        <div><strong>দাতার নাম:</strong> ${escapeHtml(name)}</div>
+        ${donorPhone ? `<div><strong>ফোন / WhatsApp:</strong> ${escapeHtml(donorPhone)}</div>` : ''}
+        <div><strong>প্রকল্প:</strong> ${escapeHtml(pName)}</div>
+        <div><strong>পরিমাণ:</strong> ${fmtTaka(amount)}</div>
+        <div><strong>মাধ্যম:</strong> ${escapeHtml(method)} ${trx ? '(' + escapeHtml(trx) + ')' : ''}</div>
+        <div><strong>তারিখ:</strong> ${date}</div>
+      `;
+
+      // Use Admin-configured Donation WhatsApp Number (fallback to cashPhone)
+      const targetWa = db.settings.donationWhatsapp || db.settings.cashPhone || '';
+      const digits = targetWa.replace(/[^0-9]/g, '');
+      const waNum = digits.startsWith('88') ? digits : (digits.startsWith('0') ? '88' + digits : digits);
+      const waMsg = encodeURIComponent(
+        `আসসালামু আলাইকুম,\n${db.settings.name}-এর জন্য অনুদান পাঠিয়েছি:\n` +
+        `রসিদ: #${receiptId}\nনাম: ${name}` +
+        `${donorPhone ? '\nফোন/WhatsApp: ' + donorPhone : ''}` +
+        `\nপ্রকল্প: ${pName}\nপরিমাণ: ${amount} টাকা\nমাধ্যম: ${method}` +
+        `${trx ? '\nTrxID: ' + trx : ''}\nতারিখ: ${date}`
+      );
+      document.getElementById('waReceiptLink').href = `https://wa.me/${waNum}?text=${waMsg}`;
+
+      const modal = document.getElementById('receiptModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      e.target.reset();
+    }
+
+    // =========================================================================
+    // 9. ADMIN PANEL & CRUD
+    // =========================================================================
+    function openAdminModal() {
+      const modal = document.getElementById('adminModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.getElementById('adminLoginView').classList.toggle('hidden', adminLoggedIn);
+      document.getElementById('adminDashView').classList.toggle('hidden', !adminLoggedIn);
+      if (adminLoggedIn) {
+        renderAdminLists();
+        updateSyncUI();
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function verifyAdmin() {
+      if (document.getElementById('adminPassInput').value.trim() === db.settings.passcode) {
+        adminLoggedIn = true;
+        document.getElementById('adminPassInput').value = '';
+        openAdminModal();
+        showToast('এডমিন প্যানেলে স্বাগতম!');
+      } else {
+        showToast('ভুল পাসকোড! আবার চেষ্টা করুন।');
+      }
+    }
+
+    function switchAdminPane(paneId, btn) {
+      document.querySelectorAll('.admin-tab-btn').forEach(b => {
+        b.className = 'admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#f7f9f8] text-[#182722] hover:bg-[#e9f4f0]';
+      });
+      btn.className = 'admin-tab-btn px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-[#0b5d46] text-white';
+
+      document.querySelectorAll('.admin-pane').forEach(p => p.classList.add('hidden'));
+      document.getElementById(paneId).classList.remove('hidden');
+    }
+
+    function switchAdminPaneById(paneId) {
+      const btn = document.querySelector(`.admin-tab-btn[data-pane="${paneId}"]`);
+      if (btn) switchAdminPane(paneId, btn);
+    }
+
+    function renderAdminLists() {
+      // Projects
+      document.getElementById('adminProjectsList').innerHTML = db.projects.map(p => `
+        <div class="flex items-center justify-between gap-2 p-3 border border-[#e6ece9] rounded-xl text-xs sm:text-sm flex-wrap">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <img src="${getProjectCover(p)}" class="w-12 h-9 object-cover rounded-lg shrink-0" />
+            <div class="min-w-0"><strong>${escapeHtml(p.name)}</strong> (${escapeHtml(p.status)}) — ${p.progress}% | ${fmtTaka(p.collected)}</div>
+          </div>
+          <div class="flex gap-1.5">
+            <button onclick="editProject('${p.id}')" class="px-2.5 py-1 rounded-lg border border-[#0b5d46] text-[#0b5d46] text-xs font-bold">✏️ এডিট</button>
+            <button onclick="deleteProject('${p.id}')" class="px-2.5 py-1 rounded-lg bg-[#c62828] text-white text-xs font-bold">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+
+      const pOpts = db.projects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+      document.getElementById('adProject').innerHTML = pOpts;
+      document.getElementById('gProject').innerHTML = pOpts;
+      document.getElementById('adDate').value = new Date().toISOString().slice(0, 10);
+
+      // Donors
+      document.getElementById('adminDonorsList').innerHTML = db.donors.slice(0, 30).map(d => `
+        <div class="flex items-center justify-between gap-2 p-2.5 border border-[#e6ece9] rounded-lg text-xs sm:text-sm">
+          <div><strong>${escapeHtml(d.name)}</strong> — ${fmtTaka(d.amount)} (${escapeHtml(d.method)}, ${escapeHtml(d.date)})</div>
+          <button onclick="deleteDonor('${d.id}')" class="px-2.5 py-1 rounded-lg bg-[#c62828] text-white text-xs font-bold">🗑️</button>
+        </div>
+      `).join('');
+
+      // Gallery
+      document.getElementById('adminGalleryList').innerHTML = db.gallery.map(g => `
+        <div class="flex items-center justify-between gap-2 p-2.5 border border-[#e6ece9] rounded-lg">
+          <div class="flex items-center gap-2.5">
+            <img src="${g.img}" class="w-12 h-9 object-cover rounded-md" />
+            <div class="text-xs sm:text-sm"><strong>${escapeHtml(g.title)}</strong> (${escapeHtml(g.date)})</div>
+          </div>
+          <button onclick="deleteGallery('${g.id}')" class="px-2.5 py-1 rounded-lg bg-[#c62828] text-white text-xs font-bold">🗑️</button>
+        </div>
+      `).join('');
+
+      // Comments Moderation
+      document.getElementById('adminCommentsList').innerHTML = (db.comments || []).map(c => {
+        const pName = db.projects.find(p => p.id === c.projectId)?.name || 'প্রকল্প';
+        return `
+          <div class="flex items-start justify-between gap-2 p-3 border border-[#e6ece9] rounded-xl text-xs sm:text-sm">
+            <div>
+              <div class="font-bold text-[#0b5d46]">${escapeHtml(c.author)} <span class="font-normal text-[#60726b]">• ${escapeHtml(pName)} • ${escapeHtml(c.date)}</span></div>
+              <p class="text-[#182722] mt-1">${escapeHtml(c.text)}</p>
+            </div>
+            <button onclick="deleteComment('${c.id}')" class="px-2.5 py-1 rounded-lg bg-[#c62828] text-white text-xs font-bold shrink-0">🗑️</button>
+          </div>
+        `;
+      }).join('') || '<p class="text-xs text-[#60726b]">কোনো মন্তব্য নেই।</p>';
+
+      // Ticker
+      document.getElementById('adminTickerList').innerHTML = db.tickers.map((t, i) => `
+        <div class="flex items-center justify-between gap-2 p-2.5 border border-[#e6ece9] rounded-lg text-xs sm:text-sm">
+          <div>${escapeHtml(t)}</div>
+          <button onclick="deleteTicker(${i})" class="px-2.5 py-1 rounded-lg bg-[#c62828] text-white text-xs font-bold shrink-0">🗑️</button>
+        </div>
+      `).join('');
+
+      // Committee
+      document.getElementById('cmTerm').innerHTML = db.committeeTerms.map(t => `<option value="${t.id}">${escapeHtml(t.label)}</option>`).join('');
+      document.getElementById('adminCommitteeList').innerHTML = db.committeeTerms.map(t => `
+        <div class="border border-[#e6ece9] rounded-xl p-3 space-y-2">
+          <div class="flex items-center justify-between">
+            <strong class="text-sm text-[#0b5d46]">${escapeHtml(t.label)} ${t.isCurrent ? '(বর্তমান)' : ''}</strong>
+            <button onclick="deleteTerm('${t.id}')" class="px-2.5 py-1 rounded-lg bg-[#c62828] text-white text-xs font-bold">সময়কাল মুছুন</button>
+          </div>
+          ${t.members.map(m => `
+            <div class="flex items-center justify-between gap-2 pt-2 border-t border-dashed border-[#e6ece9] text-xs sm:text-sm">
+              <div class="flex items-center gap-2 min-w-0">
+                ${m.photo ? `<img src="${m.photo}" class="w-8 h-8 rounded-full object-cover shrink-0" />` : `<div class="w-8 h-8 rounded-full bg-[#e9f4f0] text-[#0b5d46] font-bold flex items-center justify-center shrink-0">${escapeHtml((m.name||'ম')[0])}</div>`}
+                <div class="truncate"><strong>${escapeHtml(m.name)}</strong> — ${escapeHtml(m.role)}</div>
+              </div>
+              <div class="flex gap-1 shrink-0">
+                <button onclick="editCommitteeMember('${t.id}','${m.id}')" class="px-2 py-0.5 rounded border border-[#0b5d46] text-[#0b5d46] text-xs font-bold">✏️</button>
+                <button onclick="deleteMember('${t.id}','${m.id}')" class="px-2 py-0.5 rounded bg-[#c62828] text-white text-xs font-bold">×</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+
+      // Settings
+      const s = db.settings;
+      document.getElementById('sName').value = s.name || '';
+      document.getElementById('sAddress').value = s.address || '';
+      document.getElementById('sBkash').value = s.bkash || '';
+      document.getElementById('sNagad').value = s.nagad || '';
+      document.getElementById('sRocket').value = s.rocket || '';
+      document.getElementById('sBankName').value = s.bankName || '';
+      document.getElementById('sBankBranch').value = s.bankBranch || '';
+      document.getElementById('sBankAccName').value = s.bankAccName || '';
+      document.getElementById('sBankAccNo').value = s.bankAccNo || '';
+      document.getElementById('sBankRouting').value = s.bankRouting || '';
+      document.getElementById('sCashName').value = s.cashName || '';
+      document.getElementById('sCashPhone').value = s.cashPhone || '';
+      document.getElementById('sDonationWa').value = s.donationWhatsapp || '';
+      document.getElementById('sMessengerUrl').value = s.messengerUrl || '';
+      document.getElementById('sWhatsappUrl').value = s.whatsappUrl || '';
+
+      // GitHub config
+      document.getElementById('ghOwner').value = ghCfg.owner || '';
+      document.getElementById('ghRepo').value = ghCfg.repo || '';
+      document.getElementById('ghBranch').value = ghCfg.branch || 'main';
+      document.getElementById('ghToken').value = ghCfg.token || '';
+      document.getElementById('ghAutoSync').checked = Boolean(ghCfg.autoSync);
+    }
+
+    async function saveProject(e) {
+      e.preventDefault();
+      const id = document.getElementById('editProjId').value;
+      const existing = id ? db.projects.find(p => p.id === id) : null;
+      let coverImg = existing?.coverImg || '';
+      const file = document.getElementById('pCoverFile').files[0];
+      if (file) {
+        try { coverImg = await compressImageFile(file, 720, 0.72); } catch {}
+      }
+
+      const obj = {
+        id: id || 'p_' + Date.now(),
+        name: document.getElementById('pName').value.trim(),
+        status: document.getElementById('pStatus').value,
+        budget: Number(document.getElementById('pBudget').value),
+        expected: Number(document.getElementById('pExpected').value),
+        collected: Number(document.getElementById('pCollected').value),
+        progress: Number(document.getElementById('pProgress').value),
+        desc: document.getElementById('pDesc').value.trim(),
+        coverImg
+      };
+
+      if (id) {
+        const idx = db.projects.findIndex(p => p.id === id);
+        if (idx > -1) db.projects[idx] = obj;
+      } else {
+        db.projects.push(obj);
+      }
+      saveData(true); resetProjForm(); renderAll(); showToast('প্রকল্প সংরক্ষিত হয়েছে!');
+    }
+
+    function editProject(id) {
+      const p = db.projects.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById('editProjId').value = p.id;
+      document.getElementById('pName').value = p.name;
+      document.getElementById('pStatus').value = p.status;
+      document.getElementById('pBudget').value = p.budget;
+      document.getElementById('pExpected').value = p.expected;
+      document.getElementById('pCollected').value = p.collected;
+      document.getElementById('pProgress').value = p.progress;
+      document.getElementById('pDesc').value = p.desc || '';
+      document.getElementById('pCoverFile').value = '';
+    }
+
+    function resetProjForm() {
+      ['editProjId', 'pName', 'pBudget', 'pExpected', 'pCollected', 'pProgress', 'pDesc', 'pCoverFile'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    }
+
+    async function deleteProject(id) {
+      if (!(await showConfirm('প্রকল্পটি মুছে ফেলবেন?'))) return;
+      db.projects = db.projects.filter(p => p.id !== id);
+      saveData(true); renderAll(); showToast('প্রকল্প মুছে ফেলা হয়েছে।');
+    }
+
+    function addAdminDonor(e) {
+      e.preventDefault();
+      const projectId = document.getElementById('adProject').value;
+      const amount = Number(document.getElementById('adAmount').value);
+      db.donors.unshift({
+        id: 'd_' + Date.now(),
+        date: document.getElementById('adDate').value,
+        name: document.getElementById('adName').value.trim(),
+        projectId,
+        method: document.getElementById('adMethod').value,
+        amount
+      });
+      const proj = db.projects.find(p => p.id === projectId);
+      if (proj) proj.collected = Number(proj.collected) + amount;
+      saveData(true); e.target.reset(); renderAll(); showToast('দাতা যুক্ত হয়েছে!');
+    }
+
+    async function deleteDonor(id) {
+      if (!(await showConfirm('এই দাতার রেকর্ডটি মুছে ফেলবেন?'))) return;
+      db.donors = db.donors.filter(d => d.id !== id);
+      saveData(true); renderAll();
+    }
+
+    async function addGalleryPhoto(e) {
+      e.preventDefault();
+      const file = document.getElementById('gFile').files[0];
+      if (!file) return;
+      try {
+        const img = await compressImageFile(file, 720, 0.7);
+        db.gallery.unshift({
+          id: 'g_' + Date.now(),
+          projectId: document.getElementById('gProject').value,
+          title: document.getElementById('gTitle').value.trim(),
+          desc: document.getElementById('gDesc').value.trim(),
+          date: new Date().toISOString().slice(0, 10),
+          img
+        });
+        saveData(true); e.target.reset(); renderAll(); showToast('ছবি পোস্ট হয়েছে!');
+      } catch {
+        showToast('ছবি প্রসেস করতে সমস্যা হয়েছে।');
+      }
+    }
+
+    async function deleteGallery(id) {
+      if (!(await showConfirm('ছবিটি মুছে ফেলবেন?'))) return;
+      db.gallery = db.gallery.filter(g => g.id !== id);
+      saveData(true); renderAll();
+    }
+
+    async function deleteComment(id) {
+      if (!(await showConfirm('মন্তব্যটি মুছে ফেলবেন?'))) return;
+      db.comments = (db.comments || []).filter(c => c.id !== id);
+      saveData(true); renderAll(); showToast('মন্তব্য মুছে ফেলা হয়েছে।');
+    }
+
+    function addTickerItem(e) {
+      e.preventDefault();
+      db.tickers.push(document.getElementById('tText').value.trim());
+      saveData(true); e.target.reset(); renderAll(); showToast('দৈনিক বাণী যোগ হয়েছে!');
+    }
+
+    function deleteTicker(idx) {
+      db.tickers.splice(idx, 1);
+      saveData(true); renderAll();
+    }
+
+    function addCommitteeTerm(e) {
+      e.preventDefault();
+      const isCurrent = document.getElementById('ctCurrent').value === 'true';
+      if (isCurrent) db.committeeTerms.forEach(t => t.isCurrent = false);
+      const id = 't_' + Date.now();
+      db.committeeTerms.unshift({ id, label: document.getElementById('ctLabel').value.trim(), isCurrent, members: [] });
+      selectedCommitteeTerm = id;
+      saveData(true); e.target.reset(); renderAll(); showToast('নতুন সময়কাল যোগ হয়েছে!');
+    }
+
+    async function deleteTerm(id) {
+      if (!(await showConfirm('এই সময়কাল ও এর সকল সদস্য মুছে ফেলবেন?'))) return;
+      db.committeeTerms = db.committeeTerms.filter(t => t.id !== id);
+      saveData(true); renderAll();
+    }
+
+    async function saveCommitteeMember(e) {
+      e.preventDefault();
+      const termId = document.getElementById('cmTerm').value;
+      const editId = document.getElementById('editMemberId').value;
+      const oldTermId = document.getElementById('editMemberOldTerm').value;
+      const targetTerm = db.committeeTerms.find(t => t.id === termId);
+      if (!targetTerm) return;
+
+      let existingPhoto = '';
+      if (editId && oldTermId) {
+        const oldTerm = db.committeeTerms.find(t => t.id === oldTermId);
+        const existingMem = oldTerm?.members.find(m => m.id === editId);
+        existingPhoto = existingMem?.photo || '';
+      }
+
+      let photo = existingPhoto;
+      const file = document.getElementById('cmPhotoFile').files[0];
+      if (file) {
+        try { photo = await compressImageFile(file, 320, 0.75); } catch {}
+      }
+
+      const memObj = {
+        id: editId || 'm_' + Date.now(),
+        name: document.getElementById('cmName').value.trim(),
+        role: document.getElementById('cmRole').value.trim(),
+        phone: document.getElementById('cmPhone').value.trim(),
+        note: document.getElementById('cmNote').value.trim(),
+        photo
+      };
+
+      if (editId && oldTermId) {
+        const oldTerm = db.committeeTerms.find(t => t.id === oldTermId);
+        if (oldTermId === termId && oldTerm) {
+          const idx = oldTerm.members.findIndex(m => m.id === editId);
+          if (idx > -1) oldTerm.members[idx] = memObj;
+        } else {
+          if (oldTerm) oldTerm.members = oldTerm.members.filter(m => m.id !== editId);
+          targetTerm.members.push(memObj);
+        }
+      } else {
+        targetTerm.members.push(memObj);
+      }
+
+      saveData(true); resetMemberForm(); renderAll(); showToast('কমিটির সদস্য সংরক্ষিত হয়েছে!');
+    }
+
+    function editCommitteeMember(termId, memId) {
+      const term = db.committeeTerms.find(t => t.id === termId);
+      const m = term?.members.find(x => x.id === memId);
+      if (!m) return;
+      document.getElementById('editMemberId').value = m.id;
+      document.getElementById('editMemberOldTerm').value = termId;
+      document.getElementById('cmTerm').value = termId;
+      document.getElementById('cmName').value = m.name;
+      document.getElementById('cmRole').value = m.role;
+      document.getElementById('cmPhone').value = m.phone || '';
+      document.getElementById('cmNote').value = m.note || '';
+      document.getElementById('cmPhotoFile').value = '';
+    }
+
+    function resetMemberForm() {
+      ['editMemberId', 'editMemberOldTerm', 'cmName', 'cmRole', 'cmPhone', 'cmNote', 'cmPhotoFile'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    }
+
+    function deleteMember(termId, memId) {
+      const term = db.committeeTerms.find(t => t.id === termId);
+      if (!term) return;
+      term.members = term.members.filter(m => m.id !== memId);
+      saveData(true); renderAll();
+    }
+
+    function saveSettings(e) {
+      e.preventDefault();
+      const s = db.settings;
+      s.name = document.getElementById('sName').value.trim();
+      s.address = document.getElementById('sAddress').value.trim();
+      s.bkash = document.getElementById('sBkash').value.trim();
+      s.nagad = document.getElementById('sNagad').value.trim();
+      s.rocket = document.getElementById('sRocket').value.trim();
+      s.bankName = document.getElementById('sBankName').value.trim();
+      s.bankBranch = document.getElementById('sBankBranch').value.trim();
+      s.bankAccName = document.getElementById('sBankAccName').value.trim();
+      s.bankAccNo = document.getElementById('sBankAccNo').value.trim();
+      s.bankRouting = document.getElementById('sBankRouting').value.trim();
+      s.cashName = document.getElementById('sCashName').value.trim();
+      s.cashPhone = document.getElementById('sCashPhone').value.trim();
+      s.donationWhatsapp = document.getElementById('sDonationWa').value.trim();
+      s.messengerUrl = document.getElementById('sMessengerUrl').value.trim();
+      s.whatsappUrl = document.getElementById('sWhatsappUrl').value.trim();
+      const newPass = document.getElementById('sPass').value.trim();
+      if (newPass) s.passcode = newPass;
+      document.getElementById('sPass').value = '';
+      saveData(true); renderAll(); showToast('সব সেটিংস সংরক্ষিত হয়েছে!');
+    }
+
+    function exportBackup() {
+      const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'masjid-backup.json';
+      a.click();
+    }
+
+    async function resetAllData() {
+      if (!(await showConfirm('সকল তথ্য প্রাথমিক অবস্থায় ফিরিয়ে আনবেন?'))) return;
+      db = structuredClone(defaultData);
+      saveData(true); renderAll(); showToast('ডিফল্ট ডেটা রিসেট হয়েছে।');
+    }
+
+    // Tap to pause ticker on mobile
+    document.getElementById('tickerWrap').addEventListener('click', function () {
+      this.classList.toggle('paused');
+    });
+
+    // Boot
+    renderAll();
+    pullFromGitHub(false);
+  </script>
+</body>
+</html>
