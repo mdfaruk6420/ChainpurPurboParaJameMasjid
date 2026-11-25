@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet" />
-  <!-- Chart.js for Interactive Financial Visualizations -->
+  <!-- Chart.js 4.4.1 CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     /* ============================================================
@@ -39,7 +39,7 @@
       --radius-sm: 11px;
     }
 
-    /* Midnight Emerald Dark Mode Tokens */
+    /* Midnight Emerald Dark Mode */
     [data-theme="dark"] {
       --primary: #22a085;
       --primary-dark: #f2cb6e;
@@ -206,7 +206,6 @@
       justify-content: space-between; gap: 10px; flex-wrap: wrap;
     }
 
-    /* Compact Minimal Home Hero Strip */
     .welcome-hero {
       background:
         radial-gradient(circle at 90% 15%, rgba(242, 203, 110, 0.24) 0%, transparent 40%),
@@ -341,7 +340,7 @@
     .led-board-outer.compact .led-footer-khutba { font-size: 0.66rem; }
 
     /* ============================================================
-       PROJECT SELECTOR PILLS & DUAL PROGRESS TRACK (PAID + PLEDGED)
+       PROJECT SELECTOR PILLS & DUAL PROGRESS TRACK
        ============================================================ */
     .proj-selector-bar {
       display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px;
@@ -478,6 +477,7 @@
     input:focus, select:focus, textarea:focus {
       outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(13, 107, 88, 0.14);
     }
+    input[readonly] { opacity: 0.72; cursor: not-allowed; }
 
     .table-wrap { overflow-x: auto; border-radius: 10px; }
     table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
@@ -586,6 +586,12 @@
     .admin-tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
     .admin-pane { display: none; }
     .admin-pane.active { display: block; }
+
+    /* Highlighted Editing State for Donor Form */
+    .donor-form-editing {
+      border: 2px solid var(--gold) !important;
+      box-shadow: 0 0 0 3px rgba(212, 161, 53, 0.18);
+    }
 
     footer {
       text-align: center; padding: 28px 16px; color: var(--muted);
@@ -976,7 +982,7 @@
   </div>
 </div>
 
-<!-- CUSTOM CONFIRMATION MODAL (No browser confirm()) -->
+<!-- CUSTOM CONFIRMATION MODAL (Replaces browser confirm()) -->
 <div class="modal-backdrop" id="confirmModal" onclick="if(event.target===this) resolveCustomConfirm(false)">
   <div class="modal" style="max-width:400px;text-align:center;">
     <div style="font-size:36px;margin-bottom:6px;">⚠️</div>
@@ -989,7 +995,7 @@
   </div>
 </div>
 
-<!-- CUSTOM COLLECT DUE MODAL (No browser prompt()) -->
+<!-- CUSTOM COLLECT DUE MODAL (Replaces browser prompt()) -->
 <div class="modal-backdrop" id="collectDueModal" onclick="if(event.target===this) closeModal('collectDueModal')">
   <div class="modal" style="max-width:420px;">
     <div class="modal-header">
@@ -1009,6 +1015,7 @@
           <option value="নগদ (ক্যাশ)">নগদ (ক্যাশ)</option>
           <option value="মোবাইল ব্যাংকিং (বিকাশ)">মোবাইল ব্যাংকিং (বিকাশ)</option>
           <option value="মোবাইল ব্যাংকিং (নগদ)">মোবাইল ব্যাংকিং (নগদ)</option>
+          <option value="মোবাইল ব্যাংকিং (রকেট)">মোবাইল ব্যাংকিং (রকেট)</option>
           <option value="ব্যাংক ট্রান্সফার">ব্যাংক ট্রান্সফার</option>
         </select>
       </div>
@@ -1144,23 +1151,37 @@
         <div id="adminProjectsList"></div>
       </div>
 
-      <!-- Pane: Donors & Pledges -->
+      <!-- Pane: Donors & Pledges (WITH FULL ADD + EDIT + COLLECT DUE + DELETE) -->
       <div id="ap-donors" class="admin-pane">
-        <form onsubmit="addAdminDonor(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
-          <h4 style="margin-bottom:10px;">➕ নতুন দান বা ওয়াদা যোগ করুন (প্রকল্পের ফান্ড অটো আপডেট হবে)</h4>
+        <form id="donorAdminForm" onsubmit="saveAdminDonor(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;border:1px solid var(--border);transition:all 0.2s;">
+          <input type="hidden" id="editDonorId" />
+          <h4 id="donorFormHeading" style="margin-bottom:10px;color:var(--primary-dark);">➕ নতুন দান বা ওয়াদা যোগ করুন (প্রকল্পের ফান্ড অটো আপডেট হবে)</h4>
           <div class="form-grid">
-            <div class="form-group"><label>দাতার নাম</label><input type="text" id="adName" required /></div>
+            <div class="form-group"><label>দাতার নাম</label><input type="text" id="adName" placeholder="দাতার নাম লিখুন" required /></div>
             <div class="form-group"><label>প্রকল্প</label><select id="adProject" required></select></div>
             <div class="form-group"><label>মোট ওয়াদাকৃত / দানের পরিমাণ (৳)</label><input type="number" id="adPledged" min="1" required oninput="syncAdPaidField()" /></div>
             <div class="form-group"><label>ইতিমধ্যে আদায়কৃত (৳) (বাকি থাকলে 0 দিন)</label><input type="number" id="adPaid" min="0" placeholder="0" readonly /></div>
-            <div class="form-group"><label>মাধ্যম</label><select id="adMethod"><option value="নগদ (ক্যাশ)">নগদ (ক্যাশ)</option><option value="ওয়াদা (পরে পরিশোধ)">ওয়াদা (পরে পরিশোধ)</option><option value="মোবাইল ব্যাংকিং (বিকাশ)">মোবাইল ব্যাংকিং (বিকাশ)</option><option value="মোবাইল ব্যাংকিং (নগদ)">মোবাইল ব্যাংকিং (নগদ)</option><option value="মোবাইল ব্যাংকিং (রকেট)">মোবাইল ব্যাংকিং (রকেট)</option><option value="ব্যাংক ট্রান্সফার">ব্যাংক ট্রান্সফার</option></select></div>
+            <div class="form-group">
+              <label>মাধ্যম</label>
+              <select id="adMethod">
+                <option value="নগদ (ক্যাশ)">নগদ (ক্যাশ)</option>
+                <option value="ওয়াদা (পরে পরিশোধ)">ওয়াদা (পরে পরিশোধ)</option>
+                <option value="মোবাইল ব্যাংকিং (বিকাশ)">মোবাইল ব্যাংকিং (বিকাশ)</option>
+                <option value="মোবাইল ব্যাংকিং (নগদ)">মোবাইল ব্যাংকিং (নগদ)</option>
+                <option value="মোবাইল ব্যাংকিং (রকেট)">মোবাইল ব্যাংকিং (রকেট)</option>
+                <option value="ব্যাংক ট্রান্সফার">ব্যাংক ট্রান্সফার</option>
+              </select>
+            </div>
             <div class="form-group"><label>তারিখ</label><input type="date" id="adDate" required /></div>
           </div>
           <div class="form-group" style="display:flex;align-items:center;gap:8px;">
             <input type="checkbox" id="adFullPaid" checked style="width:auto;" onchange="syncAdPaidField()" />
             <label for="adFullPaid" style="margin:0;cursor:pointer;"><strong>সম্পূর্ণ টাকা ইতিমধ্যে আদায় হয়েছে</strong> (শুধু ওয়াদা বা আংশিক আদায় হলে টিক তুলে দিন)</label>
           </div>
-          <button type="submit" class="btn btn-primary btn-sm">➕ দাতা / ওয়াদা যুক্ত করুন</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="submit" id="donorFormSubmitBtn" class="btn btn-primary btn-sm">➕ দাতা / ওয়াদা যুক্ত করুন</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="resetDonorForm()">রিসেট / বাতিল</button>
+          </div>
         </form>
         <div id="adminDonorsList"></div>
       </div>
@@ -1448,8 +1469,7 @@ const defaultData = {
 };
 
 /**
- * Safely merges incoming JSON (localStorage or GitHub data.json) with default schema
- * ensuring 100% backwards compatibility with existing records.
+ * Safely merges incoming JSON (localStorage or GitHub data.json) with default schema.
  */
 function mergeDb(incoming) {
   const base = structuredClone(defaultData);
@@ -1594,9 +1614,8 @@ function saveData(triggerAutoSync = true) {
 }
 
 /**
- * Fetches live data.json from relative path first (GitHub Pages),
- * and automatically falls back to the live GitHub Pages URL so real data
- * loads even inside the Preview sandbox.
+ * Fetches live data.json from relative path first, then falls back to the
+ * live GitHub Pages URL so real data loads even in sandboxed previews.
  */
 async function pullFromGitHub(manual = false) {
   const badge = document.getElementById('liveSyncBadge');
@@ -1614,16 +1633,14 @@ async function pullFromGitHub(manual = false) {
           break;
         }
       }
-    } catch {
-      // Try next URL in fallback chain
-    }
+    } catch { /* fallback to next URL */ }
   }
 
   if (remote) {
     const hasLocal = Boolean(localStorage.getItem(STORAGE_KEY));
     const localTime = db.updatedAt ? new Date(db.updatedAt).getTime() : 0;
     const remoteTime = remote.updatedAt ? new Date(remote.updatedAt).getTime() : 0;
-    if (manual || !hasLocal || remoteTime >= localTime) {
+    if (manual || !hasLocal || remoteTime > localTime) {
       db = mergeDb(remote);
       safeLocalSave();
       hasUnpublishedChanges = false;
@@ -1730,7 +1747,7 @@ initTheme();
  */
 function normalizeDonor(d) {
   const pledged = Number(d.pledged !== undefined ? d.pledged : (d.amount || 0));
-  const paid = Number(d.paid !== undefined ? d.paid : (d.amount || 0));
+  const paid = Math.min(pledged, Math.max(0, Number(d.paid !== undefined ? d.paid : (d.amount || 0))));
   const due = Math.max(0, pledged - paid);
   const statusKey = due === 0 ? 'paid' : (paid > 0 ? 'partial' : 'unpaid');
   const statusLabel = due === 0 ? 'আদায়কৃত' : (paid > 0 ? 'আংশিক আদায়' : 'ওয়াদা (অনাদায়ী)');
@@ -2207,7 +2224,7 @@ function renderDonateDashboard() {
       </div>
     </div>`;
 
-  // Default to 1st ongoing project (NOT all projects)
+  // Default to 1st ongoing project (NOT All Projects)
   const validIds = db.projects.map(p => p.id);
   if (!selectedDonateProjId || (selectedDonateProjId !== 'all' && !validIds.includes(selectedDonateProjId))) {
     const firstOngoing = db.projects.find(p => p.status === 'চলমান') || db.projects[0];
@@ -2552,26 +2569,33 @@ function renderAdminLists() {
   document.getElementById('adminProjectsList').innerHTML = db.projects.map(p => `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;flex-wrap:wrap;font-size:0.85rem;"><div><strong>${p.name}</strong> (${p.status}) — আদায়: ${fmtTaka(p.collected)} | ওয়াদা বাকি: ${fmtTaka(p.unpaidPledge || 0)}</div><div style="display:flex;gap:6px;"><button class="btn btn-outline btn-sm" onclick="editProject('${p.id}')">✏️ এডিট</button><button class="btn btn-danger btn-sm" onclick="deleteProject('${p.id}')">🗑️</button></div></div>`).join('');
 
   const pOpts = db.projects.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-  document.getElementById('adProject').innerHTML = pOpts; document.getElementById('gProject').innerHTML = pOpts;
-  document.getElementById('adDate').value = new Date().toISOString().slice(0, 10);
+  const prevAdProj = document.getElementById('adProject').value;
+  document.getElementById('adProject').innerHTML = pOpts;
+  if (prevAdProj) document.getElementById('adProject').value = prevAdProj;
+  document.getElementById('gProject').innerHTML = pOpts;
+  if (!document.getElementById('editDonorId').value) {
+    document.getElementById('adDate').value = new Date().toISOString().slice(0, 10);
+  }
 
-  document.getElementById('adminDonorsList').innerHTML = db.donors.slice(0, 40).map(d => {
+  // Render Admin Donors List with Collect Due, Edit, and Delete buttons
+  document.getElementById('adminDonorsList').innerHTML = db.donors.slice(0, 50).map(d => {
     const pName = db.projects.find(p => p.id === d.projectId)?.name || 'সাধারণ';
     const bCls = d.statusKey === 'paid' ? 'badge-completed' : (d.statusKey === 'partial' ? 'badge-gold' : 'badge-danger');
     return `
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 11px;border:1px solid var(--border);border-radius:10px;margin-bottom:7px;font-size:0.84rem;flex-wrap:wrap;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;font-size:0.84rem;flex-wrap:wrap;background:var(--surface);">
         <div>
           <strong>${d.name}</strong> <span class="badge ${bCls}">${d.statusLabel}</span>
           <div style="color:var(--muted);font-size:0.77rem;margin-top:2px;">
-            ${pName} | ওয়াদা: <strong>${fmtTaka(d.pledged)}</strong> | আদায়: <strong style="color:var(--success);">${fmtTaka(d.paid)}</strong>${d.due > 0 ? ` | বাকি: <strong style="color:var(--danger);">${fmtTaka(d.due)}</strong>` : ''} (${d.date})
+            ${pName} | ওয়াদা: <strong>${fmtTaka(d.pledged)}</strong> | আদায়: <strong style="color:var(--success);">${fmtTaka(d.paid)}</strong>${d.due > 0 ? ` | বাকি: <strong style="color:var(--danger);">${fmtTaka(d.due)}</strong>` : ''} | ${d.method || ''} (${d.date})
           </div>
         </div>
-        <div style="display:flex;gap:6px;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
           ${d.due > 0 ? `<button class="btn btn-primary btn-sm" onclick="openCollectDueModal('${d.id}')">💰 আদায় নিন</button>` : ''}
+          <button class="btn btn-outline btn-sm" onclick="editDonor('${d.id}')">✏️ এডিট</button>
           <button class="btn btn-danger btn-sm" onclick="deleteDonor('${d.id}')">🗑️</button>
         </div>
       </div>`;
-  }).join('');
+  }).join('') || '<p style="color:var(--muted);font-size:0.86rem;">এখনো কোনো দাতা যুক্ত করা হয়নি।</p>';
 
   document.getElementById('adminGalleryList').innerHTML = db.gallery.map(g => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.84rem;"><div><strong>${g.title}</strong> (${g.date})</div><button class="btn btn-danger btn-sm" onclick="deleteGallery('${g.id}')">🗑️</button></div>`).join('');
   document.getElementById('adminTickerList').innerHTML = db.tickers.map((t, i) => `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.84rem;"><div>${t}</div><button class="btn btn-danger btn-sm" onclick="deleteTicker(${i})">🗑️</button></div>`).join('');
@@ -2673,28 +2697,114 @@ async function deleteProject(id) {
   db.projects = db.projects.filter(p => p.id !== id); saveData(true); renderAll();
 }
 
+/* ============================================================
+   DONOR & PLEDGE CRUD (ADD + EDIT + COLLECT DUE + DELETE)
+   ============================================================ */
 function syncAdPaidField() {
   const full = document.getElementById('adFullPaid')?.checked;
   const pledgedVal = document.getElementById('adPledged')?.value || '';
   const paidEl = document.getElementById('adPaid');
   if (!paidEl) return;
-  if (full) { paidEl.value = pledgedVal; paidEl.readOnly = true; }
-  else { paidEl.readOnly = false; if (paidEl.value === pledgedVal) paidEl.value = '0'; }
+  if (full) {
+    paidEl.value = pledgedVal;
+    paidEl.readOnly = true;
+  } else {
+    paidEl.readOnly = false;
+    if (paidEl.value === pledgedVal && !document.getElementById('editDonorId').value) {
+      paidEl.value = '0';
+    }
+  }
 }
 
-function addAdminDonor(e) {
+/**
+ * Populates the Admin Donor form for editing an existing donor/pledge entry.
+ */
+function editDonor(id) {
+  const d = db.donors.find(x => x.id === id);
+  if (!d) return;
+  document.getElementById('editDonorId').value = d.id;
+  document.getElementById('adName').value = d.name || '';
+  document.getElementById('adProject').value = d.projectId || '';
+  document.getElementById('adPledged').value = d.pledged;
+  document.getElementById('adPaid').value = d.paid;
+  document.getElementById('adDate').value = d.date || new Date().toISOString().slice(0, 10);
+
+  // Set method (add option dynamically if custom legacy value exists)
+  const methodSel = document.getElementById('adMethod');
+  if (d.method && ![...methodSel.options].some(o => o.value === d.method)) {
+    const opt = document.createElement('option');
+    opt.value = d.method; opt.textContent = d.method;
+    methodSel.appendChild(opt);
+  }
+  if (d.method) methodSel.value = d.method;
+
+  const isFullyPaid = Number(d.paid) >= Number(d.pledged);
+  document.getElementById('adFullPaid').checked = isFullyPaid;
+  document.getElementById('adPaid').readOnly = isFullyPaid;
+
+  // Update form UI to Edit mode
+  document.getElementById('donorFormHeading').textContent = '✏️ দাতার তথ্য এডিট করুন';
+  document.getElementById('donorFormSubmitBtn').textContent = '💾 পরিবর্তন সংরক্ষণ করুন';
+  const formEl = document.getElementById('donorAdminForm');
+  formEl.classList.add('donor-form-editing');
+  formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  showToast(`✏️ "${d.name}"-এর তথ্য এডিট মোডে লোড হয়েছে।`);
+}
+
+/**
+ * Resets the Admin Donor form back to Add mode.
+ */
+function resetDonorForm() {
+  const formEl = document.getElementById('donorAdminForm');
+  if (formEl) {
+    formEl.reset();
+    formEl.classList.remove('donor-form-editing');
+  }
+  document.getElementById('editDonorId').value = '';
+  document.getElementById('adFullPaid').checked = true;
+  document.getElementById('adPaid').readOnly = true;
+  document.getElementById('adDate').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('donorFormHeading').textContent = '➕ নতুন দান বা ওয়াদা যোগ করুন (প্রকল্পের ফান্ড অটো আপডেট হবে)';
+  document.getElementById('donorFormSubmitBtn').textContent = '➕ দাতা / ওয়াদা যুক্ত করুন';
+}
+
+/**
+ * Handles both Adding a new donor/pledge AND Updating an existing entry in-place.
+ */
+function saveAdminDonor(e) {
   e.preventDefault();
+  const editId = document.getElementById('editDonorId').value.trim();
   const pledged = Number(document.getElementById('adPledged').value || 0);
   const full = document.getElementById('adFullPaid').checked;
   const paid = full ? pledged : Math.min(pledged, Math.max(0, Number(document.getElementById('adPaid').value || 0)));
-  db.donors.unshift(normalizeDonor({
-    id: 'd_' + Date.now(), date: document.getElementById('adDate').value,
-    name: document.getElementById('adName').value.trim(), projectId: document.getElementById('adProject').value,
-    method: document.getElementById('adMethod').value, pledged, paid, amount: paid
-  }));
-  syncAllProjectCollections(); saveData(true); e.target.reset();
-  document.getElementById('adFullPaid').checked = true; syncAdPaidField(); renderAll();
-  showToast(paid < pledged ? 'ওয়াদা যুক্ত হয়েছে ও প্রকল্পের হিসাবে আপডেট হয়েছে!' : 'দাতা যুক্ত হয়েছে ও প্রকল্পের ফান্ড অটো আপডেট হয়েছে!');
+
+  const record = normalizeDonor({
+    id: editId || ('d_' + Date.now()),
+    date: document.getElementById('adDate').value,
+    name: document.getElementById('adName').value.trim(),
+    projectId: document.getElementById('adProject').value,
+    method: document.getElementById('adMethod').value,
+    pledged,
+    paid,
+    amount: paid
+  });
+
+  if (editId) {
+    const idx = db.donors.findIndex(x => x.id === editId);
+    if (idx > -1) db.donors[idx] = record;
+    else db.donors.unshift(record);
+  } else {
+    db.donors.unshift(record);
+  }
+
+  syncAllProjectCollections();
+  saveData(true);
+  resetDonorForm();
+  renderAll();
+  showToast(editId
+    ? '✅ দাতার তথ্য সফলভাবে আপডেট হয়েছে ও প্রকল্পের ফান্ড সমন্বয় হয়েছে!'
+    : (paid < pledged ? '✅ ওয়াদা যুক্ত হয়েছে ও প্রকল্পের হিসাবে আপডেট হয়েছে!' : '✅ দাতা যুক্ত হয়েছে ও প্রকল্পের ফান্ড অটো আপডেট হয়েছে!')
+  );
 }
 
 function openCollectDueModal(id) {
@@ -2723,7 +2833,14 @@ function submitCollectDonorDue(e) {
   showToast(`✅ ${fmtTaka(addAmt)} আদায় হয়েছে! প্রজেক্টের ফান্ড আপডেট হয়েছে।`);
 }
 
-function deleteDonor(id) { db.donors = db.donors.filter(d => d.id !== id); syncAllProjectCollections(); saveData(true); renderAll(); }
+async function deleteDonor(id) {
+  const d = db.donors.find(x => x.id === id);
+  if (!(await customConfirm(`"${d?.name || 'এই দাতা'}"-এর এন্ট্রিটি মুছে ফেলবেন?`))) return;
+  db.donors = db.donors.filter(x => x.id !== id);
+  if (document.getElementById('editDonorId').value === id) resetDonorForm();
+  syncAllProjectCollections(); saveData(true); renderAll();
+  showToast('দাতার এন্ট্রি মুছে ফেলা হয়েছে।');
+}
 
 async function addGalleryPhoto(e) {
   e.preventDefault();
