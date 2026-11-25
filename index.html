@@ -8,12 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet" />
-  <!-- Chart.js CDN -->
+  <!-- Chart.js for Interactive Financial Visualizations -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
-    /* =========================================
-       THEME TOKENS: ROYAL EMERALD, PEARL WHITE & CHAMPAGNE GOLD
-       ========================================= */
+    /* ============================================================
+       DESIGN TOKENS: ROYAL EMERALD, PEARL WHITE & CHAMPAGNE GOLD
+       ============================================================ */
     :root {
       --primary: #0d6b58;
       --primary-dark: #064639;
@@ -39,7 +39,7 @@
       --radius-sm: 11px;
     }
 
-    /* Midnight Emerald Dark Mode */
+    /* Midnight Emerald Dark Mode Tokens */
     [data-theme="dark"] {
       --primary: #22a085;
       --primary-dark: #f2cb6e;
@@ -66,18 +66,18 @@
       font-family: 'Hind Siliguri', sans-serif;
       background-color: var(--bg);
       background-image:
-        radial-gradient(circle at 10% 8%, rgba(13, 107, 88, 0.06) 0%, transparent 32%),
-        radial-gradient(circle at 90% 18%, rgba(212, 161, 53, 0.07) 0%, transparent 30%);
+        radial-gradient(circle at 12% 8%, rgba(13, 107, 88, 0.06) 0%, transparent 32%),
+        radial-gradient(circle at 88% 18%, rgba(212, 161, 53, 0.07) 0%, transparent 30%);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.58;
       min-height: 100vh;
       overflow-x: hidden;
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    /* =========================================
-       HEADER & PILL NAVIGATION
-       ========================================= */
+    /* ============================================================
+       STICKY HEADER & PILL NAVIGATION
+       ============================================================ */
     header {
       background: linear-gradient(125deg, #053b31 0%, #0a5c4c 52%, #0f766e 100%);
       color: #fff;
@@ -93,23 +93,23 @@
     .header-top {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 12px 16px;
+      padding: 11px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
     .brand { display: flex; align-items: center; gap: 11px; cursor: pointer; }
     .brand-icon {
-      width: 46px; height: 46px; border-radius: 14px;
+      width: 44px; height: 44px; border-radius: 13px;
       background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06));
       border: 1.5px solid rgba(242, 203, 110, 0.72);
-      display: grid; place-items: center; font-size: 24px; flex-shrink: 0;
+      display: grid; place-items: center; font-size: 23px; flex-shrink: 0;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
     }
-    .brand h1 { font-size: 1.15rem; line-height: 1.25; font-weight: 700; letter-spacing: 0.2px; }
-    .brand p { font-size: 0.77rem; color: rgba(255, 255, 255, 0.88); }
+    .brand h1 { font-size: 1.14rem; line-height: 1.25; font-weight: 700; }
+    .brand p { font-size: 0.76rem; color: rgba(255, 255, 255, 0.88); }
     .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .btn-theme-top {
@@ -124,7 +124,7 @@
 
     .btn-admin-top {
       background: rgba(255, 255, 255, 0.13); color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.28); padding: 8px 14px; border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.28); padding: 8px 13px; border-radius: 12px;
       font-family: inherit; font-weight: 600; font-size: 0.84rem; cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -132,19 +132,18 @@
 
     .btn-donate-top {
       background: linear-gradient(135deg, #f6cf6b 0%, #d49b27 100%);
-      color: #1f1500; border: none; padding: 9px 18px; border-radius: 12px;
-      font-family: inherit; font-weight: 700; font-size: 0.9rem; cursor: pointer;
-      box-shadow: 0 6px 18px rgba(212, 155, 39, 0.42);
+      color: #1f1500; border: none; padding: 9px 16px; border-radius: 12px;
+      font-family: inherit; font-weight: 700; font-size: 0.88rem; cursor: pointer;
+      box-shadow: 0 6px 18px rgba(212, 155, 39, 0.4);
       transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
     }
-    .btn-donate-top:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(212, 155, 39, 0.56); }
+    .btn-donate-top:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(212, 155, 39, 0.55); }
 
     .live-pill {
-      display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem;
-      background: rgba(255,255,255,0.16); padding: 2px 9px; border-radius: 999px; margin-left: 6px;
+      display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem;
+      background: rgba(255,255,255,0.16); padding: 2px 8px; border-radius: 999px; margin-left: 5px;
     }
 
-    /* Pill Navigation Bar */
     .nav-bar {
       background: rgba(0, 0, 0, 0.18);
       backdrop-filter: blur(8px);
@@ -158,7 +157,7 @@
     .nav-btn {
       background: transparent; color: rgba(255, 255, 255, 0.88);
       border: 1px solid transparent; border-radius: 999px; padding: 7px 14px;
-      font-family: inherit; font-size: 0.86rem; font-weight: 600; cursor: pointer;
+      font-family: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer;
       white-space: nowrap; transition: all 0.2s ease;
     }
     .nav-btn:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
@@ -169,9 +168,9 @@
     }
     [data-theme="dark"] .nav-btn.active { background: var(--gold); color: #161102; }
 
-    /* =========================================
-       RUNNING HADITH & QURAN TICKER
-       ========================================= */
+    /* ============================================================
+       DAILY HADITH & QURAN TICKER
+       ============================================================ */
     .ticker-wrap {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -180,80 +179,81 @@
     }
     .ticker-label {
       background: linear-gradient(135deg, #0d6b58, #0f766e);
-      color: #fde68a; font-weight: 700; font-size: 0.8rem;
-      padding: 9px 15px; white-space: nowrap; z-index: 2; flex-shrink: 0;
+      color: #fde68a; font-weight: 700; font-size: 0.78rem;
+      padding: 8px 14px; white-space: nowrap; z-index: 2; flex-shrink: 0;
     }
-    .ticker-track { overflow: hidden; flex: 1; white-space: nowrap; padding: 8px 0; }
+    .ticker-track { overflow: hidden; flex: 1; white-space: nowrap; padding: 7px 0; }
     .ticker-content {
       display: inline-block; padding-left: 100%;
       animation: ticker-scroll 34s linear infinite;
-      font-size: 0.91rem; font-weight: 600; color: var(--primary-dark);
+      font-size: 0.9rem; font-weight: 600; color: var(--primary-dark);
     }
     .ticker-wrap:hover .ticker-content,
     .ticker-wrap:active .ticker-content { animation-play-state: paused; }
     @keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-    /* =========================================
-       MAIN LAYOUT & HERO BANNERS
-       ========================================= */
-    main { max-width: 1200px; margin: 0 auto; padding: 22px 16px 64px; }
-    .section { display: none; animation: fadeIn 0.28s ease; }
+    /* ============================================================
+       MAIN CONTAINER & HERO BANNERS
+       ============================================================ */
+    main { max-width: 1200px; margin: 0 auto; padding: 20px 16px 64px; }
+    .section { display: none; animation: fadeIn 0.25s ease; }
     .section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     .section-title {
-      font-size: 1.3rem; font-weight: 700; color: var(--primary-dark);
-      margin-bottom: 16px; display: flex; align-items: center;
+      font-size: 1.28rem; font-weight: 700; color: var(--primary-dark);
+      margin-bottom: 15px; display: flex; align-items: center;
       justify-content: space-between; gap: 10px; flex-wrap: wrap;
     }
 
+    /* Compact Minimal Home Hero Strip */
     .welcome-hero {
       background:
-        radial-gradient(circle at 90% 15%, rgba(242, 203, 110, 0.26) 0%, transparent 40%),
+        radial-gradient(circle at 90% 15%, rgba(242, 203, 110, 0.24) 0%, transparent 40%),
         linear-gradient(135deg, #064639 0%, #0d6b58 55%, #115e59 100%);
-      border-radius: 20px;
-      padding: 22px 24px;
-      margin-bottom: 22px;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
-      box-shadow: 0 14px 34px rgba(6, 70, 57, 0.2);
+      box-shadow: 0 10px 26px rgba(6, 70, 57, 0.18);
       border: 1px solid rgba(242, 203, 110, 0.45);
     }
-    .welcome-hero h2 { font-size: 1.26rem; color: #fef08a; margin-bottom: 4px; font-weight: 700; }
-    .welcome-hero p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.9); }
+    .welcome-hero h2 { font-size: 1.12rem; color: #fef08a; margin-bottom: 2px; font-weight: 700; }
+    .welcome-hero p { font-size: 0.82rem; color: rgba(255, 255, 255, 0.9); }
 
     .eid-banner {
       background: linear-gradient(135deg, #064639 0%, #0f766e 55%, #b8861d 100%);
-      color: #fff; border-radius: 18px; padding: 20px 22px;
-      margin-bottom: 20px; box-shadow: 0 12px 30px rgba(6, 70, 57, 0.22);
+      color: #fff; border-radius: 16px; padding: 18px 20px;
+      margin-bottom: 18px; box-shadow: 0 12px 28px rgba(6, 70, 57, 0.22);
       border: 1.5px solid #f2cb6e;
     }
-    .eid-banner h2 { font-size: 1.28rem; color: #fef08a; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .eid-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 12px; }
-    .eid-pill { background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px; padding: 10px 12px; font-size: 0.88rem; }
-    .eid-pill strong { display: block; color: #fef08a; font-size: 1rem; }
+    .eid-banner h2 { font-size: 1.22rem; color: #fef08a; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .eid-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-top: 10px; }
+    .eid-pill { background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px; padding: 9px 12px; font-size: 0.86rem; }
+    .eid-pill strong { display: block; color: #fef08a; font-size: 0.98rem; }
 
     .ramadan-hero {
       background: linear-gradient(135deg, #063b30 0%, #0d6b58 100%);
-      color: #fff; border-radius: 18px; padding: 20px;
-      margin-bottom: 22px; border: 1.5px solid var(--gold);
-      box-shadow: 0 12px 28px rgba(6, 70, 57, 0.2);
+      color: #fff; border-radius: 16px; padding: 18px;
+      margin-bottom: 18px; border: 1.5px solid var(--gold);
+      box-shadow: 0 10px 26px rgba(6, 70, 57, 0.2);
     }
-    .ramadan-today-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
-    .ramadan-box { background: rgba(255,255,255,0.12); border: 1px solid rgba(242,203,110,0.35); border-radius: 14px; padding: 13px; text-align: center; }
-    .ramadan-box .r-lbl { font-size: 0.8rem; opacity: 0.92; }
-    .ramadan-box .r-val { font-size: 1.28rem; font-weight: 700; color: #fef08a; }
+    .ramadan-today-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 10px; margin: 12px 0; }
+    .ramadan-box { background: rgba(255,255,255,0.12); border: 1px solid rgba(242,203,110,0.35); border-radius: 12px; padding: 11px; text-align: center; }
+    .ramadan-box .r-lbl { font-size: 0.78rem; opacity: 0.92; }
+    .ramadan-box .r-val { font-size: 1.2rem; font-weight: 700; color: #fef08a; }
 
-    /* =========================================
-       AUTHENTIC DIGITAL MOSQUE LED PRAYER BOARD
-       ========================================= */
+    /* ============================================================
+       DIGITAL MOSQUE LED PRAYER BOARD (FULL & COMPACT MODES)
+       ============================================================ */
     .led-board-outer {
       max-width: 440px;
-      margin: 0 auto 26px;
+      margin: 0 auto 24px;
       padding: 12px;
       border-radius: 22px;
       background:
@@ -264,67 +264,115 @@
     }
     .led-arch-top { display: flex; align-items: center; justify-content: space-between; padding: 4px 10px 8px; }
     .led-medallion {
-      width: 46px; height: 46px; border-radius: 50%;
+      width: 44px; height: 44px; border-radius: 50%;
       background: radial-gradient(circle, #1a1a1a 55%, #d99b26 100%);
       border: 2.5px solid #ffd670; color: #ffd670;
-      display: grid; place-items: center; font-size: 1.05rem; font-weight: 700;
+      display: grid; place-items: center; font-size: 1rem; font-weight: 700;
       box-shadow: 0 0 10px rgba(255, 214, 112, 0.45);
     }
     .led-screen {
       background: #050505;
-      border-radius: 90px 90px 14px 14px;
+      border-radius: 86px 86px 14px 14px;
       border: 4px solid #e2e8f0;
       box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.95), 0 0 0 3px #b91c1c;
-      padding: 16px 14px 14px; color: #fff; text-align: center;
+      padding: 15px 14px 13px; color: #fff; text-align: center;
     }
-    .led-bismillah { color: #ffd670; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; }
-    .led-kalima { color: #22c55e; font-size: 0.88rem; font-weight: 700; text-shadow: 0 0 8px rgba(34, 197, 94, 0.55); margin-top: 2px; }
-    .led-sub-kalima { color: #4ade80; font-size: 0.75rem; margin-bottom: 8px; }
+    .led-bismillah { color: #ffd670; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.4px; }
+    .led-kalima { color: #22c55e; font-size: 0.86rem; font-weight: 700; text-shadow: 0 0 8px rgba(34, 197, 94, 0.55); margin-top: 2px; }
+    .led-sub-kalima { color: #4ade80; font-size: 0.74rem; margin-bottom: 8px; }
     .led-main-clock {
       font-family: 'Orbitron', monospace; display: flex; align-items: baseline; justify-content: center; gap: 6px;
-      background: #0d0d0d; border: 1px solid #222; border-radius: 10px; padding: 8px 6px; margin-bottom: 10px;
+      background: #0d0d0d; border: 1px solid #222; border-radius: 10px; padding: 7px 6px; margin-bottom: 9px;
     }
-    .led-hm { font-size: 2.55rem; font-weight: 800; color: #ff1e1e; text-shadow: 0 0 14px rgba(255, 30, 30, 0.85), 0 0 4px #ff5555; letter-spacing: 2px; line-height: 1; }
+    .led-hm { font-size: 2.45rem; font-weight: 800; color: #ff1e1e; text-shadow: 0 0 14px rgba(255, 30, 30, 0.85), 0 0 4px #ff5555; letter-spacing: 2px; line-height: 1; }
     .led-sec-wrap { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1; }
-    .led-sec { font-size: 1.25rem; font-weight: 700; color: #ff2e2e; text-shadow: 0 0 10px rgba(255, 30, 30, 0.8); }
-    .led-ampm { font-size: 0.68rem; font-weight: 700; color: #ffd670; margin-top: 2px; }
+    .led-sec { font-size: 1.2rem; font-weight: 700; color: #ff2e2e; text-shadow: 0 0 10px rgba(255, 30, 30, 0.8); }
+    .led-ampm { font-size: 0.66rem; font-weight: 700; color: #ffd670; margin-top: 2px; }
     .led-date-row { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
-    .led-date-item { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; color: #ff4d4d; font-weight: 700; }
+    .led-date-item { display: inline-flex; align-items: center; gap: 4px; font-size: 0.76rem; color: #ff4d4d; font-weight: 700; }
     .led-green-num {
       font-family: 'Orbitron', monospace; background: #0c140c; border: 1px solid #1b381b;
-      padding: 2px 7px; border-radius: 5px; color: #22ff44; font-size: 1.05rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 5px; color: #22ff44; font-size: 1rem; font-weight: 700;
       text-shadow: 0 0 10px rgba(34, 255, 68, 0.8); letter-spacing: 1px;
     }
-    .led-days-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 9px; padding: 4px; background: #0d0d0d; border-radius: 8px; border: 1px solid #222; }
-    .led-day { font-size: 0.72rem; font-weight: 700; color: #7f1d1d; padding: 2px 0; border-radius: 5px; }
+    .led-days-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 8px; padding: 4px; background: #0d0d0d; border-radius: 8px; border: 1px solid #222; }
+    .led-day { font-size: 0.7rem; font-weight: 700; color: #7f1d1d; padding: 2px 0; border-radius: 5px; }
     .led-day.active { color: #ff2a2a; background: rgba(255, 30, 30, 0.16); text-shadow: 0 0 8px rgba(255, 42, 42, 0.9); border: 1px solid rgba(255, 42, 42, 0.5); }
-    .led-table-heading { background: linear-gradient(90deg, #1d4ed8, #2563eb, #1d4ed8); color: #fff; font-size: 0.88rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px; }
-    .led-rows { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+    .led-table-heading { background: linear-gradient(90deg, #1d4ed8, #2563eb, #1d4ed8); color: #fff; font-size: 0.85rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px; }
+    .led-rows { display: flex; flex-direction: column; gap: 5px; margin-bottom: 9px; }
     .led-row { display: grid; grid-template-columns: 1.15fr 0.7fr 1.15fr; align-items: center; background: #0b0b0b; border: 1px solid #1e1e1e; border-radius: 8px; padding: 5px 8px; }
     .led-row.highlight { border-color: #d99b26; background: #141006; }
-    .led-waqt-bn { text-align: left; font-size: 1.05rem; font-weight: 700; color: #22ee44; text-shadow: 0 0 8px rgba(34, 238, 68, 0.5); line-height: 1.15; }
-    .led-waqt-sub { display: block; font-size: 0.65rem; color: #9ca3af; font-weight: 500; text-shadow: none; }
-    .led-waqt-ar { font-size: 0.78rem; color: #ffd670; border: 1px solid rgba(255, 214, 112, 0.45); border-radius: 999px; padding: 1px 6px; display: inline-block; margin: 0 auto; }
-    .led-time-red { text-align: right; font-family: 'Orbitron', monospace; font-size: 1.25rem; font-weight: 700; color: #ff2222; text-shadow: 0 0 10px rgba(255, 34, 34, 0.85); letter-spacing: 1px; }
-    .led-footer-warn { font-size: 0.72rem; color: #ff4444; font-weight: 700; margin-top: 4px; }
-    .led-footer-khutba { font-size: 0.76rem; color: #22ee44; font-weight: 700; margin-top: 2px; }
-    .led-bottom-action { margin-top: 10px; text-align: center; }
+    .led-waqt-bn { text-align: left; font-size: 1.04rem; font-weight: 700; color: #22ee44; text-shadow: 0 0 8px rgba(34, 238, 68, 0.5); line-height: 1.15; }
+    .led-waqt-sub { display: block; font-size: 0.64rem; color: #9ca3af; font-weight: 500; text-shadow: none; }
+    .led-waqt-ar { font-size: 0.76rem; color: #ffd670; border: 1px solid rgba(255, 214, 112, 0.45); border-radius: 999px; padding: 1px 6px; display: inline-block; margin: 0 auto; }
+    .led-time-red { text-align: right; font-family: 'Orbitron', monospace; font-size: 1.24rem; font-weight: 700; color: #ff2222; text-shadow: 0 0 10px rgba(255, 34, 34, 0.85); letter-spacing: 1px; }
+    .led-footer-warn { font-size: 0.7rem; color: #ff4444; font-weight: 700; margin-top: 4px; }
+    .led-footer-khutba { font-size: 0.74rem; color: #22ee44; font-weight: 700; margin-top: 2px; }
+    .led-bottom-action { margin-top: 8px; text-align: center; }
 
-    /* =========================================
+    /* Compact 2-Column LED Mode for Minimal Home Page */
+    .led-board-outer.compact {
+      max-width: 400px;
+      margin: 0 auto 18px;
+      padding: 8px;
+      border-radius: 18px;
+    }
+    .led-board-outer.compact .led-arch-top { padding: 2px 8px 6px; }
+    .led-board-outer.compact .led-medallion { width: 34px; height: 34px; font-size: 0.82rem; border-width: 2px; }
+    .led-board-outer.compact .led-screen { border-radius: 42px 42px 12px 12px; border-width: 3px; padding: 10px 9px 9px; }
+    .led-board-outer.compact .led-bismillah { font-size: 0.68rem; }
+    .led-board-outer.compact .led-kalima { font-size: 0.76rem; }
+    .led-board-outer.compact .led-sub-kalima { font-size: 0.66rem; margin-bottom: 5px; }
+    .led-board-outer.compact .led-main-clock { padding: 5px; margin-bottom: 6px; }
+    .led-board-outer.compact .led-hm { font-size: 1.85rem; }
+    .led-board-outer.compact .led-sec { font-size: 0.94rem; }
+    .led-board-outer.compact .led-date-row { gap: 6px; margin-bottom: 5px; }
+    .led-board-outer.compact .led-green-num { font-size: 0.84rem; padding: 1px 5px; }
+    .led-board-outer.compact .led-days-row { margin-bottom: 6px; padding: 3px; }
+    .led-board-outer.compact .led-day { font-size: 0.64rem; }
+    .led-board-outer.compact .led-table-heading { font-size: 0.76rem; padding: 3px 8px; margin-bottom: 6px; }
+    .led-board-outer.compact .led-rows { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; margin-bottom: 6px; }
+    .led-board-outer.compact .led-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 7px; border-radius: 7px; }
+    .led-board-outer.compact .led-waqt-bn { font-size: 0.86rem; }
+    .led-board-outer.compact .led-waqt-sub { font-size: 0.58rem; }
+    .led-board-outer.compact .led-waqt-ar { display: none; }
+    .led-board-outer.compact .led-time-red { font-size: 0.96rem; }
+    .led-board-outer.compact .led-footer-warn { font-size: 0.64rem; }
+    .led-board-outer.compact .led-footer-khutba { font-size: 0.66rem; }
+
+    /* ============================================================
+       PROJECT SELECTOR PILLS & DUAL PROGRESS TRACK (PAID + PLEDGED)
+       ============================================================ */
+    .proj-selector-bar {
+      display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px;
+      margin-bottom: 14px; scrollbar-width: none;
+    }
+    .proj-selector-bar::-webkit-scrollbar { display: none; }
+    .proj-pill-btn {
+      padding: 8px 15px; border-radius: 999px; border: 1.5px solid var(--border);
+      background: var(--surface); color: var(--text); font-family: inherit;
+      font-weight: 700; font-size: 0.84rem; cursor: pointer; white-space: nowrap; transition: all 0.2s;
+    }
+    .proj-pill-btn.active {
+      background: var(--primary); color: #fff; border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(13, 107, 88, 0.24);
+    }
+
+    .dual-track {
+      height: 12px; background: var(--primary-soft); border-radius: 999px;
+      overflow: hidden; display: flex;
+    }
+    .dual-paid { height: 100%; background: linear-gradient(90deg, #0d6b58, #14b8a6); transition: width 0.4s ease; }
+    .dual-pledged { height: 100%; background: linear-gradient(90deg, #e5b94c, #d4a135); transition: width 0.4s ease; }
+
+    /* ============================================================
        BANGLA QR CARD
-       ========================================= */
+       ============================================================ */
     .bqr-card {
       background: linear-gradient(135deg, var(--surface) 0%, var(--primary-soft) 100%);
-      border: 1.5px solid var(--primary);
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 22px;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
+      border: 1.5px solid var(--primary); border-radius: 18px; padding: 18px;
+      margin-bottom: 20px; box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
     }
     .bqr-info { flex: 1; min-width: 240px; }
     .bqr-badge {
@@ -332,28 +380,26 @@
       background: var(--primary); color: #fef08a; font-weight: 700;
       font-size: 0.78rem; padding: 4px 12px; border-radius: 999px; margin-bottom: 8px;
     }
-    .bqr-apps { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+    .bqr-apps { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 9px; }
     .bqr-app-chip {
       font-size: 0.74rem; font-weight: 700; padding: 4px 10px;
-      border-radius: 8px; background: var(--surface); color: var(--primary-dark);
-      border: 1px solid var(--border);
+      border-radius: 8px; background: var(--surface); color: var(--primary-dark); border: 1px solid var(--border);
     }
     .bqr-img-box {
-      width: 178px; min-height: 178px; background: var(--surface);
-      border: 2px dashed var(--primary); border-radius: 16px;
-      padding: 10px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; text-align: center;
-      flex-shrink: 0; cursor: pointer; transition: transform 0.2s ease;
+      width: 174px; min-height: 174px; background: var(--surface);
+      border: 2px dashed var(--primary); border-radius: 16px; padding: 9px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; flex-shrink: 0; cursor: pointer; transition: transform 0.2s ease;
     }
     .bqr-img-box:hover { transform: scale(1.02); }
-    .bqr-img-box img { width: 100%; height: 150px; object-fit: contain; border-radius: 10px; display: block; }
+    .bqr-img-box img { width: 100%; height: 148px; object-fit: contain; border-radius: 10px; display: block; }
 
-    /* =========================================
+    /* ============================================================
        CARDS, KPIS, PROGRESS, BADGES & BUTTONS
-       ========================================= */
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-bottom: 24px; }
+       ============================================================ */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px; }
     .kpi-card {
-      background: var(--surface); border-radius: var(--radius); padding: 18px;
+      background: var(--surface); border-radius: var(--radius); padding: 16px;
       box-shadow: var(--shadow-sm); border: 1px solid var(--border);
       position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -361,40 +407,38 @@
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
       background: linear-gradient(90deg, var(--primary), var(--accent));
     }
-    .kpi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
     .kpi-card.gold::before { background: linear-gradient(90deg, #d4a135, #f5cf6b); }
     .kpi-card.info::before { background: linear-gradient(90deg, #1d6fa5, #38bdf8); }
     .kpi-card.danger::before { background: linear-gradient(90deg, #d13438, #f87171); }
     .kpi-card.success::before { background: linear-gradient(90deg, #15803d, #34d399); }
-    .kpi-label { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
-    .kpi-value { font-size: 1.54rem; font-weight: 700; color: var(--text); margin-top: 4px; }
-    .kpi-sub { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+    .kpi-label { font-size: 0.84rem; color: var(--muted); font-weight: 600; }
+    .kpi-value { font-size: 1.48rem; font-weight: 700; color: var(--text); margin-top: 4px; }
+    .kpi-sub { font-size: 0.76rem; color: var(--muted); margin-top: 2px; }
 
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-bottom: 22px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; margin-bottom: 22px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-bottom: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); gap: 16px; margin-bottom: 20px; }
 
     .card {
-      background: var(--surface); border-radius: var(--radius); padding: 20px;
-      box-shadow: var(--shadow-sm); border: 1px solid var(--border);
-      transition: box-shadow 0.2s ease;
+      background: var(--surface); border-radius: var(--radius); padding: 18px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border); transition: box-shadow 0.2s ease;
     }
     .card:hover { box-shadow: var(--shadow); }
-    .card h3 { font-size: 1.06rem; color: var(--primary-dark); margin-bottom: 14px; font-weight: 700; }
+    .card h3 { font-size: 1.04rem; color: var(--primary-dark); margin-bottom: 12px; font-weight: 700; }
 
     .notice-card {
       background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--primary);
-      border-radius: 14px; padding: 15px 16px; margin-bottom: 12px; box-shadow: var(--shadow-sm);
+      border-radius: 13px; padding: 14px 15px; margin-bottom: 10px; box-shadow: var(--shadow-sm);
     }
     .notice-card.urgent { border-left-color: var(--danger); background: rgba(209, 52, 56, 0.04); }
     .notice-card.event { border-left-color: var(--gold); }
 
-    .progress-wrap { margin: 10px 0; }
-    .progress-header { display: flex; justify-content: space-between; font-size: 0.83rem; font-weight: 600; margin-bottom: 5px; }
+    .progress-wrap { margin: 9px 0; }
+    .progress-header { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; margin-bottom: 4px; }
     .progress-track { height: 10px; background: var(--primary-soft); border-radius: 999px; overflow: hidden; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, #0d6b58, #14b8a6); border-radius: 999px; transition: width 0.45s ease; }
-    .progress-fill.gold { background: linear-gradient(90deg, #d4a135, #f5cf6b); }
 
-    .badge { display: inline-block; padding: 3px 11px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; }
     .badge-ongoing { background: #e0f2fe; color: #0369a1; }
     .badge-completed { background: #dcfce7; color: #15803d; }
     .badge-planned { background: #fef3c7; color: #92400e; }
@@ -407,8 +451,8 @@
 
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      padding: 9px 16px; border-radius: var(--radius-sm); border: none; font-family: inherit;
-      font-weight: 600; font-size: 0.88rem; cursor: pointer; transition: all 0.18s ease; text-decoration: none;
+      padding: 9px 15px; border-radius: var(--radius-sm); border: none; font-family: inherit;
+      font-weight: 600; font-size: 0.86rem; cursor: pointer; transition: all 0.18s ease; text-decoration: none;
     }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .btn-primary { background: linear-gradient(135deg, #0d6b58, #0f766e); color: #fff; box-shadow: 0 4px 12px rgba(13, 107, 88, 0.22); }
@@ -418,97 +462,90 @@
     .btn-outline { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
     .btn-outline:hover { background: var(--primary-soft); }
     .btn-danger { background: var(--danger); color: #fff; }
-    .btn-sm { padding: 6px 12px; font-size: 0.8rem; border-radius: 9px; }
+    .btn-sm { padding: 6px 11px; font-size: 0.79rem; border-radius: 9px; }
 
-    /* =========================================
+    /* ============================================================
        FORMS, TABLES & PAYMENT TABS
-       ========================================= */
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-    .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: var(--text); }
+       ============================================================ */
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 11px; }
+    .form-group { margin-bottom: 11px; }
+    .form-group label { display: block; font-size: 0.84rem; font-weight: 600; margin-bottom: 4px; color: var(--text); }
     input, select, textarea {
-      width: 100%; padding: 10px 13px; border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm); font-family: inherit; font-size: 0.9rem;
+      width: 100%; padding: 9px 12px; border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm); font-family: inherit; font-size: 0.88rem;
       background: var(--surface); color: var(--text); transition: border-color 0.2s, box-shadow 0.2s;
     }
     input:focus, select:focus, textarea:focus {
-      outline: none; border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(13, 107, 88, 0.14);
+      outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(13, 107, 88, 0.14);
     }
 
     .table-wrap { overflow-x: auto; border-radius: 10px; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-    th, td { padding: 11px 13px; text-align: left; border-bottom: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
     th { background: var(--primary-soft); color: var(--primary-dark); font-weight: 700; white-space: nowrap; }
     tr:hover td { background: var(--surface-alt); }
     tr.today-row td { background: var(--gold-light) !important; font-weight: 700; }
 
-    .pay-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .pay-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
     .pay-tab-btn {
-      flex: 1; min-width: 135px; padding: 11px 14px; border-radius: 12px;
+      flex: 1; min-width: 130px; padding: 10px 12px; border-radius: 12px;
       border: 1.5px solid var(--border); background: var(--surface); font-family: inherit;
-      font-weight: 700; font-size: 0.88rem; cursor: pointer; color: var(--text); transition: all 0.2s;
+      font-weight: 700; font-size: 0.86rem; cursor: pointer; color: var(--text); transition: all 0.2s;
     }
-    .pay-tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 12px rgba(13, 107, 88, 0.24); }
+    .pay-tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
     .pay-panel { display: none; }
     .pay-panel.active { display: block; }
     .pay-box {
       border: 1.5px dashed var(--primary); background: var(--primary-soft);
-      border-radius: 14px; padding: 14px; display: flex; align-items: center;
+      border-radius: 14px; padding: 13px; display: flex; align-items: center;
       justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;
     }
-    .pay-brand { display: flex; align-items: center; gap: 11px; }
+    .pay-brand { display: flex; align-items: center; gap: 10px; }
     .pay-logo {
-      width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center;
-      font-weight: 800; font-size: 0.78rem; color: #fff; flex-shrink: 0;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+      width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center;
+      font-weight: 800; font-size: 0.76rem; color: #fff; flex-shrink: 0;
     }
-    .pay-num { font-size: 1.08rem; font-weight: 700; color: var(--primary-dark); letter-spacing: 0.4px; }
+    .pay-num { font-size: 1.06rem; font-weight: 700; color: var(--primary-dark); letter-spacing: 0.3px; }
 
-    /* =========================================
+    /* ============================================================
        GALLERY, PROJECT COVERS & COMMITTEE
-       ========================================= */
+       ============================================================ */
     .proj-cover-wrap {
-      width: 100%; height: 158px; border-radius: 12px; margin-bottom: 12px;
-      overflow: hidden; background: var(--primary-soft); display: flex;
-      align-items: center; justify-content: center;
+      width: 100%; height: 142px; border-radius: 12px; margin-bottom: 10px;
+      overflow: hidden; background: var(--primary-soft); display: flex; align-items: center; justify-content: center;
     }
     .proj-cover-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 18px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
     .gallery-card {
       background: var(--surface); border-radius: var(--radius); overflow: hidden;
       border: 1px solid var(--border); box-shadow: var(--shadow-sm); cursor: pointer;
       transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
-    .gallery-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-    .gallery-media { width: 100%; height: 190px; overflow: hidden; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; }
+    .gallery-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .gallery-media { width: 100%; height: 185px; overflow: hidden; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; }
     .gallery-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .gallery-body { padding: 14px; }
+    .gallery-body { padding: 13px; }
 
-    .term-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .term-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
     .term-pill {
-      padding: 8px 18px; border-radius: 999px; border: 1.5px solid var(--border);
-      background: var(--surface); font-family: inherit; font-weight: 700; cursor: pointer;
-      color: var(--text); transition: all 0.2s;
+      padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--border);
+      background: var(--surface); font-family: inherit; font-weight: 700; cursor: pointer; color: var(--text); transition: all 0.2s;
     }
-    .term-pill.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 12px rgba(13, 107, 88, 0.25); }
+    .term-pill.active { background: var(--primary); color: #fff; border-color: var(--primary); }
     .member-card {
-      display: flex; align-items: center; gap: 14px; background: var(--surface);
-      padding: 15px; border-radius: var(--radius); border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex; align-items: center; gap: 13px; background: var(--surface);
+      padding: 14px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm);
     }
-    .member-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
     .avatar {
-      width: 60px; height: 60px; border-radius: 50%; background: var(--primary-soft);
-      color: var(--primary-dark); font-weight: 700; font-size: 1.3rem;
-      display: grid; place-items: center; overflow: hidden; flex-shrink: 0;
-      border: 2.5px solid var(--primary);
+      width: 58px; height: 58px; border-radius: 50%; background: var(--primary-soft);
+      color: var(--primary-dark); font-weight: 700; font-size: 1.25rem;
+      display: grid; place-items: center; overflow: hidden; flex-shrink: 0; border: 2.5px solid var(--primary);
     }
     .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* =========================================
+    /* ============================================================
        MODALS, ADMIN PANEL, FOOTER & TOAST
-       ========================================= */
+       ============================================================ */
     .modal-backdrop {
       position: fixed; inset: 0; background: rgba(4, 24, 19, 0.65);
       backdrop-filter: blur(4px);
@@ -517,66 +554,63 @@
     .modal-backdrop.open { display: flex; }
     .modal {
       background: var(--surface); color: var(--text); border-radius: 18px; max-width: 960px; width: 100%;
-      max-height: 92vh; overflow-y: auto; padding: 22px;
-      box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+      max-height: 92vh; overflow-y: auto; padding: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);
     }
     .modal-header {
       display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;
+      border-bottom: 1px solid var(--border); padding-bottom: 11px; margin-bottom: 14px;
     }
     .close-btn {
       background: var(--primary-soft); color: var(--text); border: none;
-      width: 36px; height: 36px; border-radius: 50%; font-size: 1.25rem; cursor: pointer;
+      width: 34px; height: 34px; border-radius: 50%; font-size: 1.2rem; cursor: pointer;
     }
 
     .sync-bar {
       background: linear-gradient(135deg, #064639 0%, #0d6b58 100%);
-      color: #fff; border-radius: 14px; padding: 13px 16px; margin-bottom: 16px;
+      color: #fff; border-radius: 14px; padding: 12px 15px; margin-bottom: 14px;
       display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
     }
     .sync-bar.disconnected { background: linear-gradient(135deg, #5d4037 0%, #795548 100%); }
-    .sync-status-text { font-size: 0.86rem; line-height: 1.45; }
+    .sync-status-text { font-size: 0.85rem; line-height: 1.45; }
     .sync-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .admin-tabs {
-      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;
-      border-bottom: 1px solid var(--border); padding-bottom: 12px;
+      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;
+      border-bottom: 1px solid var(--border); padding-bottom: 10px;
     }
     .admin-tab-btn {
-      padding: 7px 12px; border-radius: 9px; border: 1px solid var(--border);
+      padding: 7px 11px; border-radius: 9px; border: 1px solid var(--border);
       background: var(--surface-alt); color: var(--text); font-family: inherit;
-      font-weight: 600; font-size: 0.82rem; cursor: pointer; transition: 0.15s;
+      font-weight: 600; font-size: 0.8rem; cursor: pointer;
     }
     .admin-tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
     .admin-pane { display: none; }
     .admin-pane.active { display: block; }
 
     footer {
-      text-align: center; padding: 30px 16px; color: var(--muted);
-      font-size: 0.88rem; border-top: 1px solid var(--border); background: var(--surface);
+      text-align: center; padding: 28px 16px; color: var(--muted);
+      font-size: 0.86rem; border-top: 1px solid var(--border); background: var(--surface);
     }
-    .social-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 14px 0; }
+    .social-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
     .social-btn {
-      display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px;
-      border-radius: 999px; font-weight: 700; font-size: 0.86rem; text-decoration: none; color: #fff;
-      transition: transform 0.15s ease;
+      display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px;
+      border-radius: 999px; font-weight: 700; font-size: 0.84rem; text-decoration: none; color: #fff;
     }
-    .social-btn:hover { transform: translateY(-2px); }
     .social-wa { background: linear-gradient(135deg, #22c55e, #15803d); }
     .social-msg { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
 
     #toast {
       position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(90px);
       background: #063b30; color: #fff; padding: 11px 20px; border-radius: 999px;
-      font-size: 0.9rem; font-weight: 600; z-index: 600; transition: transform 0.25s ease;
+      font-size: 0.88rem; font-weight: 600; z-index: 700; transition: transform 0.25s ease;
       box-shadow: 0 10px 28px rgba(0,0,0,0.28); max-width: 90vw; text-align: center;
       border: 1px solid rgba(242, 203, 110, 0.45);
     }
     #toast.show { transform: translateX(-50%) translateY(0); }
 
-    .chart-box { position: relative; height: 280px; width: 100%; }
-    .filter-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
-    .filter-row > * { flex: 1; min-width: 170px; }
+    .chart-box { position: relative; height: 270px; width: 100%; }
+    .filter-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+    .filter-row > * { flex: 1; min-width: 155px; }
   </style>
 </head>
 <body>
@@ -597,7 +631,6 @@
       <button class="btn-donate-top" onclick="switchTab('donate')">🤲 দান করুন এখানে</button>
     </div>
   </div>
-  <!-- PILL NAVIGATION BAR -->
   <nav class="nav-bar">
     <div class="nav-inner">
       <button class="nav-btn active" data-tab="home" onclick="switchTab('home')">🏠 হোম</button>
@@ -613,7 +646,7 @@
   </nav>
 </header>
 
-<!-- RUNNING HADITH & QURAN AYAH TICKER -->
+<!-- RUNNING DAILY HADITH & QURAN TICKER -->
 <div class="ticker-wrap" title="থামাতে ট্যাপ করুন বা মাউস রাখুন">
   <div class="ticker-label">✨ দৈনিক বাণী</div>
   <div class="ticker-track">
@@ -622,69 +655,45 @@
 </div>
 
 <main>
-  <!-- ==================== 1. HOME SECTION ==================== -->
+  <!-- ==================== 1. MINIMAL HOME SECTION ==================== -->
   <section id="sec-home" class="section active">
     <div class="welcome-hero">
       <div>
-        <h2>🕌 আসসালামু আলাইকুম — <span id="heroMosqueName">চৈনপুর পূর্বপাড়া জামে মসজিদ</span></h2>
-        <p>আল্লাহর ঘরের খেদমত, স্বচ্ছ হিসাব ও সময়মতো জামাতের ডিজিটাল ব্যবস্থাপনা</p>
+        <h2>🕌 <span id="heroMosqueName">চৈনপুর পূর্বপাড়া জামে মসজিদ</span></h2>
+        <p>সময়মতো জামাত, স্বচ্ছ হিসাব ও উন্নয়ন প্রকল্পের ডিজিটাল পোর্টাল</p>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn btn-gold btn-sm" onclick="switchTab('donate')">🤲 প্রজেক্টে দান করুন</button>
-        <button class="btn btn-sm" style="background:rgba(255,255,255,0.14);color:#fff;border:1px solid rgba(254,240,138,0.45);" onclick="switchTab('accounts')">📒 মাসিক হিসাব</button>
+        <button class="btn btn-gold btn-sm" onclick="switchTab('donate')">🤲 দান করুন</button>
+        <button class="btn btn-sm" style="background:rgba(255,255,255,0.16);color:#fff;border:1px solid rgba(254,240,138,0.45);" onclick="switchTab('accounts')">📒 মাসিক হিসাব</button>
       </div>
     </div>
 
     <!-- Dynamic Eid Alert Banner -->
     <div id="homeEidBanner"></div>
-    <!-- Dynamic Ramadan Calendar Hero -->
+    <!-- Dynamic Ramadan Hero Banner -->
     <div id="homeRamadanHero"></div>
-    <!-- Authentic Digital Mosque LED Prayer Board -->
+    <!-- Compact 2-Column Digital LED Prayer Board -->
     <div id="homePrayerBoard"></div>
 
-    <!-- Latest Notices Preview -->
-    <div class="card" style="margin-bottom:22px;">
+    <!-- 4 Minimal KPI Summary Cards -->
+    <div class="kpi-grid" id="homeKpis"></div>
+
+    <!-- Latest 2 Notices Preview -->
+    <div class="card" style="margin-bottom:18px;">
       <div class="section-title" style="margin-bottom:10px;">
-        <span style="font-size:1.1rem;">📢 সাম্প্রতিক নোটিশ বোর্ড</span>
-        <button class="btn btn-outline btn-sm" onclick="switchTab('notices')">সব নোটিশ দেখুন →</button>
+        <span style="font-size:1.05rem;">📢 সাম্প্রতিক নোটিশ</span>
+        <button class="btn btn-outline btn-sm" onclick="switchTab('notices')">সব নোটিশ →</button>
       </div>
       <div id="homeNoticesPreview"></div>
     </div>
 
-    <!-- Financial KPIs & Charts -->
-    <div class="section-title">
-      <span>📊 সার্বিক প্রকল্প ও ফান্ডের চিত্র</span>
-      <button class="btn btn-gold btn-sm" onclick="switchTab('donate')">🤲 এখনই দান করুন</button>
-    </div>
-    <div class="kpi-grid" id="homeKpis"></div>
-
-    <div class="grid-2">
-      <div class="card">
-        <h3>📈 প্রকল্পভিত্তিক ব্যয় বনাম কালেকশন (৳)</h3>
-        <div class="chart-box"><canvas id="homeBarChart"></canvas></div>
-      </div>
-      <div class="card">
-        <h3>🍩 প্রকল্পভিত্তিক ফান্ড বণ্টন</h3>
-        <div class="chart-box"><canvas id="homeDonutChart"></canvas></div>
-      </div>
-    </div>
-
-    <!-- Ongoing Projects Preview -->
-    <div class="card" style="margin-bottom:22px;">
-      <div class="section-title" style="margin-bottom:10px;">
-        <span style="font-size:1.1rem;">🏗️ চলমান প্রকল্পসমূহ (ছবিসহ)</span>
-        <button class="btn btn-outline btn-sm" onclick="switchTab('projects')">সব প্রকল্প দেখুন →</button>
-      </div>
-      <div class="grid-3" id="homeProjectsPreview" style="margin-bottom:0;"></div>
-    </div>
-
-    <!-- Current Committee Preview -->
+    <!-- Ongoing Projects Preview (up to 3) -->
     <div class="card">
       <div class="section-title" style="margin-bottom:10px;">
-        <span style="font-size:1.1rem;">👥 বর্তমান মসজিদ কমিটি (সংক্ষিপ্ত)</span>
-        <button class="btn btn-outline btn-sm" onclick="switchTab('committee')">সকল সময়কাল দেখুন →</button>
+        <span style="font-size:1.05rem;">🏗️ চলমান প্রকল্পসমূহ</span>
+        <button class="btn btn-outline btn-sm" onclick="switchTab('projects')">সব প্রকল্প →</button>
       </div>
-      <div class="grid-3" id="homeCommitteePreview" style="margin-bottom:0;"></div>
+      <div class="grid-3" id="homeProjectsPreview" style="margin-bottom:0;"></div>
     </div>
   </section>
 
@@ -694,21 +703,20 @@
       <span>🕌 ৫ ওয়াক্ত নামাজ, জুমা ও চিরস্থায়ী রোজার সময়সূচি</span>
       <span class="badge badge-gold">কুমিল্লা অঞ্চল ভিত্তিক</span>
     </div>
+    <!-- Full-Size Digital LED Prayer Board -->
     <div id="fullPrayerBoard"></div>
 
-    <div class="card" style="margin-bottom:22px;">
+    <div class="card" style="margin-bottom:20px;">
       <div class="section-title" style="margin-bottom:10px;">
-        <span style="font-size:1.08rem;">🌙 চিরস্থায়ী নামাজ, সেহরি ও ইফতারের সময়সূচি (১২ মাস)</span>
+        <span style="font-size:1.06rem;">🌙 চিরস্থায়ী নামাজ, সেহরি ও ইফতারের সময়সূচি (১২ মাস)</span>
         <select id="perpetualMonthSelect" onchange="renderPerpetualTable()" style="width:auto;min-width:160px;"></select>
       </div>
-      <p style="font-size:0.84rem;color:var(--muted);margin-bottom:12px;">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:12px;">
         ইসলামিক ফাউন্ডেশন বাংলাদেশ (কুমিল্লা জেলা সংশোধিত) অনুযায়ী সারা বছরের চিরস্থায়ী সাহরি, ফজর, সূর্যোদয়, জোহর, আসর, ইফতার/মাগরিব ও এশার সময়সূচি।
       </p>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr><th>তারিখ</th><th>সেহরির শেষ</th><th>ফজর শুরু</th><th>সূর্যোদয়</th><th>জোহর শুরু</th><th>আসর শুরু</th><th>ইফতার / মাগরিব</th><th>এশা শুরু</th></tr>
-          </thead>
+          <thead><tr><th>তারিখ</th><th>সেহরির শেষ</th><th>ফজর শুরু</th><th>সূর্যোদয়</th><th>জোহর শুরু</th><th>আসর শুরু</th><th>ইফতার / মাগরিব</th><th>এশা শুরু</th></tr></thead>
           <tbody id="perpetualTableBody"></tbody>
         </table>
       </div>
@@ -716,7 +724,7 @@
 
     <div class="card">
       <div class="section-title" style="margin-bottom:10px;">
-        <span style="font-size:1.08rem;">✨ পবিত্র রমাদান ক্যালেন্ডার (৩০ রোজা)</span>
+        <span style="font-size:1.06rem;">✨ পবিত্র রমাদান ক্যালেন্ডার (৩০ রোজা)</span>
         <span class="badge badge-completed" id="ramadanYearBadge">রমাদান ক্যালেন্ডার</span>
       </div>
       <div class="table-wrap">
@@ -728,35 +736,49 @@
     </div>
   </section>
 
-  <!-- ==================== 3. PROJECT DONATE SECTION ==================== -->
+  <!-- ==================== 3. PROJECT-WISE DONATE & PLEDGE DASHBOARD ==================== -->
   <section id="sec-donate" class="section">
     <div class="section-title">
-      <span>🤲 প্রজেক্ট ভিত্তিক দান ড্যাশবোর্ড</span>
-      <span class="badge badge-gold">স্বচ্ছ ও সরাসরি হিসাব</span>
+      <span>🤲 প্রজেক্ট ভিত্তিক দান ও ওয়াদা ড্যাশবোর্ড</span>
+      <span class="badge badge-gold">প্রকল্পভিত্তিক স্বচ্ছ হিসাব</span>
     </div>
+
     <!-- Top Bangla QR Hero Card -->
     <div id="donateBanglaQrBox"></div>
-    <!-- 4 Financial KPIs -->
-    <div class="kpi-grid" id="donateKpis"></div>
 
-    <div class="card" style="margin-bottom:22px;">
-      <h3>📊 প্রকল্পভিত্তিক সম্ভাব্য ব্যয়, প্রত্যাশিত দান ও কালেকশন তুলনা</h3>
+    <!-- Project Selector Pills (Defaults to 1st Ongoing Project) -->
+    <div class="card" style="margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+        <h3 style="margin:0;">🎯 প্রজেক্ট ভিত্তিক হিসাব নির্বাচন করুন</h3>
+        <span class="badge badge-ongoing" id="donateSelectedBadge">চলমান</span>
+      </div>
+      <div class="proj-selector-bar" id="donateProjSelectorPills"></div>
+      <div class="kpi-grid" id="donateKpis" style="margin-bottom:14px;"></div>
+      <div id="donateSelectedProjDetail"></div>
+    </div>
+
+    <!-- Comparison Bar Chart -->
+    <div class="card" style="margin-bottom:20px;">
+      <h3>📊 প্রকল্পভিত্তিক সম্ভাব্য ব্যয়, অলরেডি আদায় ও অনাদায়ী ওয়াদা তুলনা</h3>
       <div class="chart-box"><canvas id="donateCompareChart"></canvas></div>
     </div>
 
-    <h3 style="margin-bottom:12px;color:var(--primary-dark);">📌 প্রতিটি প্রকল্পের আর্থিক অবস্থান</h3>
+    <!-- Individual Project Cards -->
+    <h3 style="margin-bottom:12px;color:var(--primary-dark);">📌 প্রতিটি প্রকল্পের আদায় ও ওয়াদার অবস্থা</h3>
     <div class="grid-3" id="donateProjectCards"></div>
 
-    <div class="card" style="margin-bottom:22px;">
-      <h3>📑 প্রকল্পভিত্তিক ফান্ড সারসংক্ষেপ টেবিল</h3>
+    <!-- Summary Table -->
+    <div class="card" style="margin-bottom:20px;">
+      <h3>📑 প্রকল্পভিত্তিক ফান্ড ও ওয়াদার সারসংক্ষেপ টেবিল</h3>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>প্রকল্পের নাম</th><th>সম্ভাব্য ব্যয়</th><th>প্রত্যাশিত দান</th><th>কালেকশন</th><th>অবশিষ্ট</th><th>অগ্রগতি</th></tr></thead>
+          <thead><tr><th>প্রকল্পের নাম</th><th>সম্ভাব্য ব্যয়</th><th>মোট ওয়াদা</th><th>অলরেডি আদায়</th><th>ওয়াদা (অনাদায়ী)</th><th>আরও প্রয়োজন</th><th>অগ্রগতি</th></tr></thead>
           <tbody id="donateSummaryTable"></tbody>
         </table>
       </div>
     </div>
 
+    <!-- Payment Methods & Public Donation/Pledge Form -->
     <div class="grid-2">
       <div class="card">
         <h3>💳 দানের মাধ্যমসমূহ</h3>
@@ -771,17 +793,24 @@
       </div>
 
       <div class="card" id="donationFormCard">
-        <h3>📝 দানের তথ্য জমা দিন (রসিদ ও হোয়াটসঅ্যাপ নোটিফিকেশন)</h3>
-        <p style="font-size:0.84rem;color:var(--muted);margin-bottom:12px;">
-          দান পাঠানোর পর নিচের ফর্মটি পূরণ করলে তাৎক্ষণিক রসিদ পাবেন এবং ১ ক্লিকেই মসজিদের হোয়াটসঅ্যাপে পাঠাতে পারবেন।
+        <h3>📝 দান অথবা ওয়াদার তথ্য জমা দিন</h3>
+        <p style="font-size:0.83rem;color:var(--muted);margin-bottom:12px;">
+          এখনই দান পাঠালে বা পরে পরিশোধের ওয়াদা করলে ফর্মটি পূরণ করে ১ ক্লিকে হোয়াটসঅ্যাপে রসিদ পাঠান।
         </p>
         <form onsubmit="submitPublicDonation(event)">
-          <div class="form-group"><label>কোন প্রকল্পে দান করছেন?</label><select id="pubDonProject" required></select></div>
+          <div class="form-group"><label>কোন প্রকল্পে দান / ওয়াদা করছেন?</label><select id="pubDonProject" required></select></div>
           <div class="form-grid">
+            <div class="form-group">
+              <label>দানের ধরন</label>
+              <select id="pubDonType">
+                <option value="paid">✅ এখনই পরিশোধ করেছি</option>
+                <option value="pledge">🤝 ওয়াদা করছি (পরে পরিশোধ করব)</option>
+              </select>
+            </div>
             <div class="form-group"><label>দাতার নাম</label><input type="text" id="pubDonName" placeholder="আপনার নাম লিখুন" required /></div>
-            <div class="form-group"><label>দানের পরিমাণ (৳)</label><input type="number" id="pubDonAmount" min="10" placeholder="যেমন: 1000" required /></div>
           </div>
           <div class="form-grid">
+            <div class="form-group"><label>পরিমাণ (৳)</label><input type="number" id="pubDonAmount" min="10" placeholder="যেমন: 1000" required /></div>
             <div class="form-group">
               <label>দানের মাধ্যম</label>
               <select id="pubDonMethod" required>
@@ -790,15 +819,16 @@
                 <option value="মোবাইল ব্যাংকিং (রকেট)">মোবাইল ব্যাংকিং (রকেট)</option>
                 <option value="ব্যাংক ট্রান্সফার">ব্যাংক ট্রান্সফার</option>
                 <option value="নগদ (ক্যাশ)">সরাসরি নগদ (ক্যাশ)</option>
+                <option value="ওয়াদা (পরে পরিশোধ)">ওয়াদা (পরে পরিশোধ)</option>
               </select>
             </div>
-            <div class="form-group"><label>ট্রানজেকশন আইডি / শেষ ৪ ডিজিট</label><input type="text" id="pubDonTrx" placeholder="যেমন: 9X7K2L / 4521" /></div>
           </div>
+          <div class="form-group"><label>ট্রানজেকশন আইডি / সম্ভাব্য পরিশোধের সময় (ঐচ্ছিক)</label><input type="text" id="pubDonTrx" placeholder="যেমন: 9X7K2L / আগামী শুক্রবার ক্যাশ দেব" /></div>
           <div class="form-group" style="display:flex;align-items:center;gap:8px;">
             <input type="checkbox" id="pubDonAnon" style="width:auto;" />
             <label for="pubDonAnon" style="margin:0;cursor:pointer;">দাতাদের তালিকায় আমার নাম গোপন রাখুন (“নাম প্রকাশে অনিচ্ছুক”)</label>
           </div>
-          <button type="submit" class="btn btn-primary" style="width:100%;">✅ রসিদ তৈরি করুন</button>
+          <button type="submit" class="btn btn-primary" style="width:100%;">✅ রসিদ / ওয়াদা স্লিপ তৈরি করুন</button>
         </form>
       </div>
     </div>
@@ -858,23 +888,33 @@
     <div class="gallery-grid" id="galleryGrid"></div>
   </section>
 
-  <!-- ==================== 8. DONORS SECTION ==================== -->
+  <!-- ==================== 8. DONORS & PLEDGERS LIST ==================== -->
   <section id="sec-donors" class="section">
     <div class="section-title">
-      <span>📋 সম্মানিত দাতাদের তালিকা</span>
+      <span>📋 সম্মানিত দাতা ও ওয়াদাকারীদের তালিকা</span>
       <span class="badge badge-completed" id="donorTotalBadge"></span>
     </div>
     <div class="filter-row">
       <input type="text" id="donorSearch" placeholder="🔍 দাতার নাম খুঁজুন..." oninput="renderDonors()" />
       <select id="donorProjFilter" onchange="renderDonors()"></select>
+      <select id="donorStatusFilter" onchange="renderDonors()">
+        <option value="all">সকল অবস্থা</option>
+        <option value="paid">✅ সম্পূর্ণ আদায়</option>
+        <option value="partial">🟡 আংশিক আদায়</option>
+        <option value="unpaid">⏳ ওয়াদা (অনাদায়ী)</option>
+      </select>
       <select id="donorMethodFilter" onchange="renderDonors()">
-        <option value="all">সকল মাধ্যম</option><option value="মোবাইল ব্যাংকিং">মোবাইল ব্যাংকিং</option><option value="ব্যাংক">ব্যাংক ট্রান্সফার</option><option value="নগদ">নগদ (ক্যাশ)</option>
+        <option value="all">সকল মাধ্যম</option>
+        <option value="মোবাইল ব্যাংকিং">মোবাইল ব্যাংকিং</option>
+        <option value="ব্যাংক">ব্যাংক ট্রান্সফার</option>
+        <option value="নগদ">নগদ (ক্যাশ)</option>
+        <option value="ওয়াদা">ওয়াদা</option>
       </select>
     </div>
     <div class="card">
       <div class="table-wrap">
         <table>
-          <thead><tr><th>তারিখ</th><th>দাতার নাম</th><th>প্রকল্প</th><th>মাধ্যম</th><th>পরিমাণ (৳)</th></tr></thead>
+          <thead><tr><th>তারিখ</th><th>দাতার নাম</th><th>প্রকল্প</th><th>ওয়াদাকৃত (৳)</th><th>আদায়কৃত (৳)</th><th>অনাদায়ী (৳)</th><th>অবস্থা</th></tr></thead>
           <tbody id="donorsTableBody"></tbody>
         </table>
       </div>
@@ -892,7 +932,7 @@
   </section>
 </main>
 
-<!-- FOOTER WITH WHATSAPP & MESSENGER GROUP BUTTONS -->
+<!-- FOOTER -->
 <footer>
   <strong id="footerName">চৈনপুর পূর্বপাড়া জামে মসজিদ</strong> — <span id="footerAddress">চৈনপুর পূর্বপাড়া, বাঙ্গরা বাজার, মুরাদনগর, কুমিল্লা</span>
   <div class="social-row" id="footerSocials"></div>
@@ -901,9 +941,9 @@
 
 <!-- LIGHTBOX MODAL -->
 <div class="modal-backdrop" id="lightboxModal" onclick="if(event.target===this) closeModal('lightboxModal')">
-  <div class="modal" style="max-width:720px;">
+  <div class="modal" style="max-width:700px;">
     <div class="modal-header"><h3 id="lbTitle" style="margin:0;">ছবি</h3><button class="close-btn" onclick="closeModal('lightboxModal')">×</button></div>
-    <div id="lbMediaWrap" style="width:100%;max-height:60vh;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--surface-alt);overflow:hidden;"></div>
+    <div id="lbMediaWrap" style="width:100%;max-height:58vh;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--surface-alt);overflow:hidden;"></div>
     <p id="lbDesc" style="margin-top:12px;color:var(--muted);"></p>
   </div>
 </div>
@@ -912,7 +952,7 @@
 <div class="modal-backdrop" id="commentsModal" onclick="if(event.target===this) closeModal('commentsModal')">
   <div class="modal" style="max-width:560px;">
     <div class="modal-header"><h3 id="cmModalTitle" style="margin:0;">💬 প্রকল্প মন্তব্য</h3><button class="close-btn" onclick="closeModal('commentsModal')">×</button></div>
-    <div id="cmModalList" style="max-height:42vh;overflow-y:auto;margin-bottom:14px;"></div>
+    <div id="cmModalList" style="max-height:40vh;overflow-y:auto;margin-bottom:14px;"></div>
     <form onsubmit="submitProjectComment(event)" style="background:var(--surface-alt);padding:12px;border-radius:12px;">
       <input type="hidden" id="cmProjId" />
       <div class="form-group"><label>আপনার নাম</label><input type="text" id="cmAuthor" placeholder="আপনার নাম লিখুন" required /></div>
@@ -927,8 +967,8 @@
   <div class="modal" style="max-width:480px;text-align:center;">
     <div style="font-size:44px;margin-bottom:6px;">🤲</div>
     <h3 style="color:var(--primary-dark);margin-bottom:6px;">জাযাকাল্লাহু খাইরান!</h3>
-    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:14px;">আপনার দানের রসিদ প্রস্তুত হয়েছে। নিচের বাটনে ক্লিক করে হোয়াটসঅ্যাপে পাঠিয়ে দিন।</p>
-    <div id="receiptBody" style="text-align:left;background:var(--primary-light);padding:14px;border-radius:12px;font-size:0.9rem;margin-bottom:16px;"></div>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">আপনার রসিদ / ওয়াদা স্লিপ প্রস্তুত হয়েছে। নিচের বাটনে ক্লিক করে হোয়াটসঅ্যাপে পাঠিয়ে দিন।</p>
+    <div id="receiptBody" style="text-align:left;background:var(--primary-light);padding:14px;border-radius:12px;font-size:0.88rem;margin-bottom:16px;"></div>
     <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
       <a id="waReceiptLink" href="#" target="_blank" class="btn btn-primary">💬 হোয়াটসঅ্যাপে পাঠান</a>
       <button class="btn btn-outline" onclick="closeModal('receiptModal')">বন্ধ করুন</button>
@@ -936,16 +976,47 @@
   </div>
 </div>
 
-<!-- CUSTOM CONFIRMATION MODAL (No browser confirm/alert) -->
+<!-- CUSTOM CONFIRMATION MODAL (No browser confirm()) -->
 <div class="modal-backdrop" id="confirmModal" onclick="if(event.target===this) resolveCustomConfirm(false)">
   <div class="modal" style="max-width:400px;text-align:center;">
     <div style="font-size:36px;margin-bottom:6px;">⚠️</div>
     <h3 style="margin-bottom:8px;color:var(--primary-dark);">নিশ্চিত করুন</h3>
-    <p id="confirmModalMsg" style="font-size:0.92rem;color:var(--muted);margin-bottom:18px;"></p>
+    <p id="confirmModalMsg" style="font-size:0.9rem;color:var(--muted);margin-bottom:18px;"></p>
     <div style="display:flex;gap:10px;justify-content:center;">
       <button class="btn btn-danger btn-sm" onclick="resolveCustomConfirm(true)">হ্যাঁ, নিশ্চিত</button>
       <button class="btn btn-outline btn-sm" onclick="resolveCustomConfirm(false)">বাতিল</button>
     </div>
+  </div>
+</div>
+
+<!-- CUSTOM COLLECT DUE MODAL (No browser prompt()) -->
+<div class="modal-backdrop" id="collectDueModal" onclick="if(event.target===this) closeModal('collectDueModal')">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header">
+      <h3 style="margin:0;">💰 ওয়াদার টাকা আদায় করুন</h3>
+      <button class="close-btn" onclick="closeModal('collectDueModal')">×</button>
+    </div>
+    <p id="collectDueInfo" style="font-size:0.88rem;color:var(--muted);margin-bottom:12px;"></p>
+    <form onsubmit="submitCollectDonorDue(event)">
+      <input type="hidden" id="collectDueDonorId" />
+      <div class="form-group">
+        <label>এখন কত টাকা আদায় হলো? (৳)</label>
+        <input type="number" id="collectDueAmount" min="1" required />
+      </div>
+      <div class="form-group">
+        <label>আদায়ের মাধ্যম</label>
+        <select id="collectDueMethod">
+          <option value="নগদ (ক্যাশ)">নগদ (ক্যাশ)</option>
+          <option value="মোবাইল ব্যাংকিং (বিকাশ)">মোবাইল ব্যাংকিং (বিকাশ)</option>
+          <option value="মোবাইল ব্যাংকিং (নগদ)">মোবাইল ব্যাংকিং (নগদ)</option>
+          <option value="ব্যাংক ট্রান্সফার">ব্যাংক ট্রান্সফার</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('collectDueModal')">বাতিল</button>
+        <button type="submit" class="btn btn-primary btn-sm">✅ আদায় নিশ্চিত করুন</button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -976,7 +1047,7 @@
         <button class="admin-tab-btn" data-pane="ap-accounts" onclick="switchAdminPane('ap-accounts', this)">📒 মাসিক আয়-ব্যয়</button>
         <button class="admin-tab-btn" data-pane="ap-notices" onclick="switchAdminPane('ap-notices', this)">📢 নোটিশ</button>
         <button class="admin-tab-btn" data-pane="ap-projects" onclick="switchAdminPane('ap-projects', this)">🏗️ প্রকল্প</button>
-        <button class="admin-tab-btn" data-pane="ap-donors" onclick="switchAdminPane('ap-donors', this)">📋 দাতা</button>
+        <button class="admin-tab-btn" data-pane="ap-donors" onclick="switchAdminPane('ap-donors', this)">📋 দাতা / ওয়াদা</button>
         <button class="admin-tab-btn" data-pane="ap-gallery" onclick="switchAdminPane('ap-gallery', this)">📸 ছবি</button>
         <button class="admin-tab-btn" data-pane="ap-ticker" onclick="switchAdminPane('ap-ticker', this)">✨ বাণী</button>
         <button class="admin-tab-btn" data-pane="ap-committee" onclick="switchAdminPane('ap-committee', this)">👥 কমিটি</button>
@@ -985,7 +1056,7 @@
         <button class="admin-tab-btn" data-pane="ap-github" onclick="switchAdminPane('ap-github', this)">🚀 GitHub সিঙ্ক</button>
       </div>
 
-      <!-- Admin Pane: Prayer / Ramadan / Eid -->
+      <!-- Pane: Prayer, Ramadan & Eid -->
       <div id="ap-prayer" class="admin-pane active">
         <form onsubmit="savePrayerTimes(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
           <h4 style="margin-bottom:10px;">🕌 ৫ ওয়াক্ত নামাজ ও জুমার সময়সূচি</h4>
@@ -1021,9 +1092,9 @@
         </form>
       </div>
 
-      <!-- Admin Pane: Monthly Accounts -->
+      <!-- Pane: Monthly Accounts -->
       <div id="ap-accounts" class="admin-pane">
-        <form onsubmit="addAccountEntry(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:16px;">
+        <form onsubmit="addAccountEntry(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
           <h4 style="margin-bottom:10px;">📒 নতুন মাসিক আয় বা ব্যয়ের হিসাব যোগ করুন</h4>
           <div class="form-grid">
             <div class="form-group"><label>মাস ও বছর</label><input type="month" id="acMonth" required /></div>
@@ -1038,9 +1109,9 @@
         <div id="adminAccountsList"></div>
       </div>
 
-      <!-- Admin Pane: Notices -->
+      <!-- Pane: Notices -->
       <div id="ap-notices" class="admin-pane">
-        <form onsubmit="addNotice(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:16px;">
+        <form onsubmit="addNotice(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
           <h4 style="margin-bottom:10px;">📢 নতুন নোটিশ প্রকাশ করুন</h4>
           <div class="form-grid">
             <div class="form-group"><label>শিরোনাম</label><input type="text" id="ntTitle" required /></div>
@@ -1053,9 +1124,9 @@
         <div id="adminNoticesList"></div>
       </div>
 
-      <!-- Admin Pane: Projects -->
+      <!-- Pane: Projects -->
       <div id="ap-projects" class="admin-pane">
-        <form onsubmit="saveProject(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:16px;">
+        <form onsubmit="saveProject(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
           <input type="hidden" id="editProjId" />
           <h4 style="margin-bottom:10px;">নতুন প্রকল্প যোগ / এডিট করুন</h4>
           <div class="form-grid">
@@ -1073,26 +1144,31 @@
         <div id="adminProjectsList"></div>
       </div>
 
-      <!-- Admin Pane: Donors -->
+      <!-- Pane: Donors & Pledges -->
       <div id="ap-donors" class="admin-pane">
-        <form onsubmit="addAdminDonor(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:16px;">
-          <h4 style="margin-bottom:10px;">➕ নতুন দাতা যোগ করুন (প্রকল্পের ফান্ডে স্বয়ংক্রিয়ভাবে যোগ হবে)</h4>
+        <form onsubmit="addAdminDonor(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
+          <h4 style="margin-bottom:10px;">➕ নতুন দান বা ওয়াদা যোগ করুন (প্রকল্পের ফান্ড অটো আপডেট হবে)</h4>
           <div class="form-grid">
             <div class="form-group"><label>দাতার নাম</label><input type="text" id="adName" required /></div>
             <div class="form-group"><label>প্রকল্প</label><select id="adProject" required></select></div>
-            <div class="form-group"><label>পরিমাণ (৳)</label><input type="number" id="adAmount" min="1" required /></div>
-            <div class="form-group"><label>মাধ্যম</label><select id="adMethod"><option value="মোবাইল ব্যাংকিং (বিকাশ)">মোবাইল ব্যাংকিং (বিকাশ)</option><option value="মোবাইল ব্যাংকিং (নগদ)">মোবাইল ব্যাংকিং (নগদ)</option><option value="মোবাইল ব্যাংকিং (রকেট)">মোবাইল ব্যাংকিং (রকেট)</option><option value="ব্যাংক ট্রান্সফার">ব্যাংক ট্রান্সফার</option><option value="নগদ (ক্যাশ)">নগদ (ক্যাশ)</option></select></div>
+            <div class="form-group"><label>মোট ওয়াদাকৃত / দানের পরিমাণ (৳)</label><input type="number" id="adPledged" min="1" required oninput="syncAdPaidField()" /></div>
+            <div class="form-group"><label>ইতিমধ্যে আদায়কৃত (৳) (বাকি থাকলে 0 দিন)</label><input type="number" id="adPaid" min="0" placeholder="0" readonly /></div>
+            <div class="form-group"><label>মাধ্যম</label><select id="adMethod"><option value="নগদ (ক্যাশ)">নগদ (ক্যাশ)</option><option value="ওয়াদা (পরে পরিশোধ)">ওয়াদা (পরে পরিশোধ)</option><option value="মোবাইল ব্যাংকিং (বিকাশ)">মোবাইল ব্যাংকিং (বিকাশ)</option><option value="মোবাইল ব্যাংকিং (নগদ)">মোবাইল ব্যাংকিং (নগদ)</option><option value="মোবাইল ব্যাংকিং (রকেট)">মোবাইল ব্যাংকিং (রকেট)</option><option value="ব্যাংক ট্রান্সফার">ব্যাংক ট্রান্সফার</option></select></div>
             <div class="form-group"><label>তারিখ</label><input type="date" id="adDate" required /></div>
           </div>
-          <button type="submit" class="btn btn-primary btn-sm">➕ দাতা যুক্ত করুন</button>
+          <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="adFullPaid" checked style="width:auto;" onchange="syncAdPaidField()" />
+            <label for="adFullPaid" style="margin:0;cursor:pointer;"><strong>সম্পূর্ণ টাকা ইতিমধ্যে আদায় হয়েছে</strong> (শুধু ওয়াদা বা আংশিক আদায় হলে টিক তুলে দিন)</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm">➕ দাতা / ওয়াদা যুক্ত করুন</button>
         </form>
         <div id="adminDonorsList"></div>
       </div>
 
-      <!-- Admin Pane: Gallery -->
+      <!-- Pane: Gallery -->
       <div id="ap-gallery" class="admin-pane">
-        <form onsubmit="addGalleryPhoto(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:16px;">
-          <h4 style="margin-bottom:10px;">📸 কাজের নতুন ছবি আপলোড করুন (ক্যামেরা / গ্যালারি)</h4>
+        <form onsubmit="addGalleryPhoto(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
+          <h4 style="margin-bottom:10px;">📸 কাজের নতুন ছবি আপলোড করুন</h4>
           <div class="form-grid">
             <div class="form-group"><label>প্রকল্প নির্বাচন</label><select id="gProject" required></select></div>
             <div class="form-group"><label>ছবির শিরোনাম</label><input type="text" id="gTitle" required /></div>
@@ -1104,9 +1180,9 @@
         <div id="adminGalleryList"></div>
       </div>
 
-      <!-- Admin Pane: Ticker -->
+      <!-- Pane: Ticker -->
       <div id="ap-ticker" class="admin-pane">
-        <form onsubmit="addTickerItem(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:16px;">
+        <form onsubmit="addTickerItem(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
           <h4 style="margin-bottom:10px;">✨ নতুন হাদীস / কুরআনের আয়াত যোগ করুন</h4>
           <div class="form-group"><textarea id="tText" rows="2" required></textarea></div>
           <button type="submit" class="btn btn-primary btn-sm">➕ যোগ করুন</button>
@@ -1114,7 +1190,7 @@
         <div id="adminTickerList"></div>
       </div>
 
-      <!-- Admin Pane: Committee -->
+      <!-- Pane: Committee -->
       <div id="ap-committee" class="admin-pane">
         <form onsubmit="addCommitteeTerm(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
           <h4 style="margin-bottom:8px;">📅 নতুন কমিটির সময়কাল তৈরি করুন</h4>
@@ -1124,8 +1200,8 @@
           </div>
           <button type="submit" class="btn btn-primary btn-sm">➕ সময়কাল যোগ করুন</button>
         </form>
-        <form onsubmit="addCommitteeMember(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:16px;">
-          <h4 style="margin-bottom:8px;">👤 দায়িত্বশীল সদস্য যোগ করুন (ছবিসহ)</h4>
+        <form onsubmit="addCommitteeMember(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
+          <h4 style="margin-bottom:8px;">👤 দায়িত্বশীল সদস্য যোগ করুন</h4>
           <div class="form-grid">
             <div class="form-group"><label>সময়কাল</label><select id="cmTerm" required></select></div>
             <div class="form-group"><label>নাম</label><input type="text" id="cmName" required /></div>
@@ -1141,7 +1217,7 @@
         <div id="adminCommitteeList"></div>
       </div>
 
-      <!-- Admin Pane: Settings -->
+      <!-- Pane: Settings -->
       <div id="ap-settings" class="admin-pane">
         <form onsubmit="saveSettings(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;margin-bottom:14px;">
           <h4 style="margin-bottom:10px;">🕌 মসজিদ, পেমেন্ট, বাংলা QR ও সোশ্যাল সেটিংস</h4>
@@ -1176,14 +1252,14 @@
         </div>
       </div>
 
-      <!-- Admin Pane: Admin-Only Smart PDF Reports -->
+      <!-- Pane: Admin-Only Smart PDF Reports -->
       <div id="ap-pdf" class="admin-pane">
-        <div style="background:var(--gold-light);border:1px solid var(--gold);padding:12px;border-radius:12px;margin-bottom:14px;font-size:0.86rem;">
+        <div style="background:var(--gold-light);border:1px solid var(--gold);padding:12px;border-radius:12px;margin-bottom:14px;font-size:0.85rem;">
           <strong>🔒 শুধুমাত্র এডমিনের জন্য:</strong> এই স্মার্ট PDF রিপোর্ট সিস্টেমটি পাবলিক ভিজিটররা দেখতে পাবেন না। নিচের যেকোনো রিপোর্ট তৈরি করে সরাসরি <strong>Save as PDF</strong> বা প্রিন্ট করতে পারবেন।
         </div>
         <div class="grid-2" style="margin-bottom:12px;">
           <div style="background:var(--surface-alt);border:1px solid var(--border);padding:14px;border-radius:12px;">
-            <h4 style="margin-bottom:8px;color:var(--primary-dark);">📒 ১. মাসিক আয়-ব্যয়ের PDF রিপোর্ট</h4>
+            <h4 style="margin-bottom:8px;color:var(--primary-dark);">📒 ১. মাসিক আয়-ব্যয়ের PDF</h4>
             <div class="form-group"><label>মাস নির্বাচন করুন</label><select id="pdfAccMonth"></select></div>
             <button class="btn btn-primary btn-sm" style="width:100%;" onclick="generateSmartPdf('monthly')">📄 মাসিক আয়-ব্যয় PDF তৈরি করুন</button>
           </div>
@@ -1193,21 +1269,21 @@
             <button class="btn btn-primary btn-sm" style="width:100%;" onclick="generateSmartPdf('project')">📄 প্রজেক্ট হিসাব PDF তৈরি করুন</button>
           </div>
           <div style="background:var(--surface-alt);border:1px solid var(--border);padding:14px;border-radius:12px;">
-            <h4 style="margin-bottom:8px;color:var(--primary-dark);">📋 ৩. ডোনার / দাতা ভিত্তিক PDF</h4>
+            <h4 style="margin-bottom:8px;color:var(--primary-dark);">📋 ৩. দাতা ও ওয়াদা ভিত্তিক PDF</h4>
             <div class="form-group"><label>দাতার নাম (সকল দাতার জন্য খালি রাখুন)</label><input type="text" id="pdfDonorSearch" placeholder="নির্দিষ্ট দাতার নাম অথবা খালি রাখুন" /></div>
-            <button class="btn btn-primary btn-sm" style="width:100%;" onclick="generateSmartPdf('donor')">📄 দাতা ভিত্তিক PDF তৈরি করুন</button>
+            <button class="btn btn-primary btn-sm" style="width:100%;" onclick="generateSmartPdf('donor')">📄 দাতা ও ওয়াদা PDF তৈরি করুন</button>
           </div>
           <div style="background:var(--surface-alt);border:1px solid var(--border);padding:14px;border-radius:12px;">
             <h4 style="margin-bottom:8px;color:var(--primary-dark);">📊 ৪. সার্বিক মাস্টার রিপোর্ট PDF</h4>
-            <p style="font-size:0.82rem;color:var(--muted);margin-bottom:12px;">সকল প্রকল্পের ফান্ড, মোট দাতা ও সাধারণ আয়-ব্যয়ের পূর্ণাঙ্গ সারসংক্ষেপ।</p>
+            <p style="font-size:0.81rem;color:var(--muted);margin-bottom:12px;">সকল প্রকল্পের আদায়, অনাদায়ী ওয়াদা ও সাধারণ আয়-ব্যয়ের পূর্ণাঙ্গ সারসংক্ষেপ।</p>
             <button class="btn btn-gold btn-sm" style="width:100%;" onclick="generateSmartPdf('master')">📄 পূর্ণাঙ্গ মাস্টার PDF তৈরি করুন</button>
           </div>
         </div>
       </div>
 
-      <!-- Admin Pane: GitHub Sync -->
+      <!-- Pane: GitHub Sync -->
       <div id="ap-github" class="admin-pane">
-        <div style="background:var(--primary-light);border:1px solid var(--border);padding:12px;border-radius:12px;margin-bottom:14px;font-size:0.86rem;">
+        <div style="background:var(--primary-light);border:1px solid var(--border);padding:12px;border-radius:12px;margin-bottom:14px;font-size:0.85rem;">
           <strong>🔒 নিরাপত্তা নোট:</strong> আপনার GitHub Token শুধুমাত্র আপনার ফোনের ব্রাউজারে সেভ থাকে—কখনোই পাবলিক <code>data.json</code> ফাইলে প্রকাশ হয় না।
         </div>
         <form onsubmit="saveGhConfig(event)" style="background:var(--surface-alt);padding:14px;border-radius:12px;">
@@ -1237,16 +1313,20 @@
 <div id="toast"></div>
 
 <script>
-/* =========================================================
-   CONFIGURATION, CONSTANTS & DEFAULT SAMPLE DATA
-   ========================================================= */
+/* ============================================================
+   CONSTANTS, STORAGE KEYS & LIVE GITHUB FALLBACK CONFIG
+   ============================================================ */
 const STORAGE_KEY = 'chainpur_masjid_v2';
 const GH_CONFIG_KEY = 'chainpur_masjid_gh_cfg_v2';
+const DEFAULT_GH_OWNER = 'mdfaruk6420';
+const DEFAULT_GH_REPO = 'ChainpurPurboParaJameMasjid';
+const FALLBACK_LIVE_JSON = `https://${DEFAULT_GH_OWNER}.github.io/${DEFAULT_GH_REPO}/data.json`;
+
 const INCOME_CATS = ['জুমার দানবাক্স', 'মাসিক চাঁদা', 'এককালীন অনুদান', 'ফিতরা ও যাকাত', 'দোকান/জমি ভাড়া', 'অন্যান্য আয়'];
 const EXPENSE_CATS = ['ইমাম ও মুয়াজ্জিনের বেতন', 'বিদ্যুৎ ও গ্যাস বিল', 'পরিষ্কার-পরিচ্ছন্নতা', 'রক্ষণাবেক্ষণ ও মেরামত', 'ওয়াজ মাহফিল ও আপ্যায়ন', 'অন্যান্য ব্যয়'];
 const BN_MONTHS = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
 
-// Perpetual Prayer & Fasting anchors for Comilla / Bangladesh (1st & 15th of each month)
+// Perpetual Prayer & Fasting anchors for Comilla / BD (1st & 15th of each month)
 // Format: [sehriEnd, fajrStart, sunrise, dhuhr, asr, maghrib/iftar, isha] in minutes from midnight
 const PERPETUAL_ANCHORS = [
   [[316,322,399,721,949,1040,1119], [319,325,400,726,957,1049,1127]],
@@ -1263,8 +1343,9 @@ const PERPETUAL_ANCHORS = [
   [[306,312,383,706,934,1025,1105], [312,318,392,712,940,1030,1110]]
 ];
 
+// Default fallback data (old timestamp ensures live GitHub data.json always wins on first load)
 const defaultData = {
-  updatedAt: new Date().toISOString(),
+  updatedAt: '2020-01-01T00:00:00.000Z',
   settings: {
     name: 'চৈনপুর পূর্বপাড়া জামে মসজিদ',
     address: 'চৈনপুর পূর্বপাড়া, বাঙ্গরা বাজার, মুরাদনগর, কুমিল্লা',
@@ -1327,17 +1408,20 @@ const defaultData = {
     'চৈনপুর পূর্বপাড়া জামে মসজিদের উন্নয়নমূলক প্রকল্পে আপনার সামর্থ্য অনুযায়ী অংশগ্রহণ করুন।'
   ],
   projects: [
-    { id: 'p1', name: 'দ্বিতীয় তলা ছাদ ঢালাই ও সম্প্রসারণ', status: 'চলমান', budget: 1200000, expected: 1000000, baseCollected: 620000, collected: 685000, progress: 62, desc: 'মুসল্লিদের স্থান সংকুলানের জন্য মসজিদের দ্বিতীয় তলার ছাদ ও বারান্দা সম্প্রসারণ কাজ চলমান রয়েছে।', coverImg: '' },
-    { id: 'p2', name: 'আধুনিক অজুখানা ও শৌচাগার সংস্কার', status: 'চলমান', budget: 350000, expected: 320000, baseCollected: 235000, collected: 245000, progress: 75, desc: 'নিরবচ্ছিন্ন পানির ব্যবস্থা, টাইলস ও শীতকালে গরম পানির সুবিধাসহ আধুনিক অজুখানা নির্মাণ।', coverImg: '' },
+    { id: 'p1', name: 'দ্বিতীয় তলা ছাদ ঢালাই ও সম্প্রসারণ', status: 'চলমান', budget: 1200000, expected: 1000000, baseCollected: 600000, collected: 685000, progress: 62, desc: 'মুসল্লিদের স্থান সংকুলানের জন্য মসজিদের দ্বিতীয় তলার ছাদ ও বারান্দা সম্প্রসারণ কাজ চলমান রয়েছে।', coverImg: '' },
+    { id: 'p2', name: 'আধুনিক অজুখানা ও শৌচাগার সংস্কার', status: 'চলমান', budget: 350000, expected: 320000, baseCollected: 210000, collected: 235000, progress: 75, desc: 'নিরবচ্ছিন্ন পানির ব্যবস্থা, টাইলস ও শীতকালে গরম পানির সুবিধাসহ আধুনিক অজুখানা নির্মাণ।', coverImg: '' },
     { id: 'p3', name: 'সোলার প্যানেল ও সাউন্ড সিস্টেম স্থাপন', status: 'সম্পন্ন', budget: 180000, expected: 180000, baseCollected: 175000, collected: 180000, progress: 100, desc: 'বিদ্যুৎ বিভ্রাটমুক্ত নামাজ ও স্পষ্ট আজানের জন্য সোলার আইপিএস ও উন্নত সাউন্ড সিস্টেম স্থাপন সম্পন্ন।', coverImg: '' },
     { id: 'p4', name: 'মসজিদের মেঝেতে মার্বেল টাইলস ও কার্পেট', status: 'পরিকল্পিত', budget: 450000, expected: 400000, baseCollected: 70000, collected: 95000, progress: 15, desc: 'মূল নামাজঘরের মেঝেতে উন্নত মানের টাইলস ও আরামদায়ক জায়নামাজ কার্পেট বিছানোর পরিকল্পনা।', coverImg: '' }
   ],
   donors: [
-    { id: 'd1', date: '2026-11-18', name: 'হাজী মোঃ রফিকুল ইসলাম', projectId: 'p1', method: 'ব্যাংক ট্রান্সফার', amount: 50000 },
-    { id: 'd2', date: '2026-11-16', name: 'নাম প্রকাশে অনিচ্ছুক', projectId: 'p1', method: 'মোবাইল ব্যাংকিং (বিকাশ)', amount: 15000 },
-    { id: 'd3', date: '2026-11-14', name: 'মোঃ সাইফুল ইসলাম', projectId: 'p2', method: 'মোবাইল ব্যাংকিং (নগদ)', amount: 10000 },
-    { id: 'd4', date: '2026-11-10', name: 'আলহাজ্ব শামসুল হক', projectId: 'p4', method: 'নগদ (ক্যাশ)', amount: 25000 },
-    { id: 'd5', date: '2026-11-05', name: 'মোঃ কামরুল হাসান', projectId: 'p3', method: 'মোবাইল ব্যাংকিং (বিকাশ)', amount: 5000 }
+    { id: 'd1', date: '2026-11-23', name: 'হাজী মোঃ রফিকুল ইসলাম', projectId: 'p1', method: 'ব্যাংক ট্রান্সফার', pledged: 50000, paid: 50000, amount: 50000 },
+    { id: 'd2', date: '2026-11-22', name: 'মোঃ মাহবুবুর রহমান (আংশিক আদায়)', projectId: 'p1', method: 'নগদ (ক্যাশ)', pledged: 50000, paid: 20000, amount: 20000 },
+    { id: 'd3', date: '2026-11-21', name: 'আলহাজ্ব মোঃ হাবিবুর রহমান (ওয়াদা)', projectId: 'p1', method: 'ওয়াদা (পরে পরিশোধ)', pledged: 100000, paid: 0, amount: 0 },
+    { id: 'd4', date: '2026-11-18', name: 'নাম প্রকাশে অনিচ্ছুক', projectId: 'p1', method: 'মোবাইল ব্যাংকিং (বিকাশ)', pledged: 15000, paid: 15000, amount: 15000 },
+    { id: 'd5', date: '2026-11-15', name: 'মোঃ সাইফুল ইসলাম', projectId: 'p2', method: 'মোবাইল ব্যাংকিং (নগদ)', pledged: 40000, paid: 25000, amount: 25000 },
+    { id: 'd6', date: '2026-11-12', name: 'মোঃ নজরুল ইসলাম (ওয়াদা)', projectId: 'p2', method: 'ওয়াদা (পরে পরিশোধ)', pledged: 30000, paid: 0, amount: 0 },
+    { id: 'd7', date: '2026-11-10', name: 'আলহাজ্ব শামসুল হক', projectId: 'p4', method: 'নগদ (ক্যাশ)', pledged: 25000, paid: 25000, amount: 25000 },
+    { id: 'd8', date: '2026-11-05', name: 'মোঃ কামরুল হাসান', projectId: 'p3', method: 'মোবাইল ব্যাংকিং (বিকাশ)', pledged: 5000, paid: 5000, amount: 5000 }
   ],
   gallery: [
     { id: 'g1', projectId: 'p1', title: 'দ্বিতীয় তলার পিলার ও রড বাঁধাই', desc: 'মিস্ত্রিদের তত্ত্বাবধানে দ্বিতীয় তলার মূল পিলার ও বিমের রড বাঁধাই কাজ সম্পন্ন হয়েছে।', date: '2026-11-15', img: '', icon: '🏗️' },
@@ -1363,6 +1447,10 @@ const defaultData = {
   ]
 };
 
+/**
+ * Safely merges incoming JSON (localStorage or GitHub data.json) with default schema
+ * ensuring 100% backwards compatibility with existing records.
+ */
 function mergeDb(incoming) {
   const base = structuredClone(defaultData);
   if (!incoming || typeof incoming !== 'object') return base;
@@ -1401,13 +1489,14 @@ let hasUnpublishedChanges = false;
 let isSyncing = false;
 let pendingSyncAfterCurrent = false;
 let selectedCommitteeTerm = db.committeeTerms[0]?.id || '';
+let selectedDonateProjId = '';
 let adminLoggedIn = false;
 let charts = {};
 let confirmResolver = null;
 
-/* =========================================================
-   CUSTOM CONFIRMATION MODAL (REPLACES confirm())
-   ========================================================= */
+/* ============================================================
+   CUSTOM CONFIRM MODAL (REPLACES confirm())
+   ============================================================ */
 function customConfirm(msg) {
   return new Promise(resolve => {
     confirmResolver = resolve;
@@ -1417,60 +1506,63 @@ function customConfirm(msg) {
 }
 function resolveCustomConfirm(val) {
   document.getElementById('confirmModal').classList.remove('open');
-  if (confirmResolver) {
-    const fn = confirmResolver;
-    confirmResolver = null;
-    fn(val);
-  }
+  if (confirmResolver) { const fn = confirmResolver; confirmResolver = null; fn(val); }
 }
 
-/* =========================================================
-   INLINE SVG ARTWORK GENERATORS (NO BASE64 PLACEHOLDERS)
-   ========================================================= */
+/* ============================================================
+   INLINE SVG ARTWORK (NO BASE64 PLACEHOLDERS)
+   ============================================================ */
 function svgPlaceholderBanner(title, subtitle, icon = '🕌') {
   return `
-    <svg viewBox="0 0 400 220" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 400 210" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="emGrad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stop-color="#064639" />
           <stop offset="100%" stop-color="#0f766e" />
         </linearGradient>
       </defs>
-      <rect width="400" height="220" fill="url(#emGrad)" />
-      <circle cx="350" cy="40" r="70" fill="#f6cf6b" fill-opacity="0.12" />
-      <circle cx="40" cy="190" r="60" fill="#ffffff" fill-opacity="0.06" />
-      <text x="200" y="96" text-anchor="middle" font-size="38">${icon}</text>
-      <text x="200" y="138" text-anchor="middle" fill="#fef08a" font-size="16" font-weight="700" font-family="Hind Siliguri, sans-serif">${title.slice(0, 32)}</text>
-      <text x="200" y="164" text-anchor="middle" fill="#d1fae5" font-size="12" font-family="Hind Siliguri, sans-serif">${subtitle}</text>
-    </svg>
-  `;
+      <rect width="400" height="210" fill="url(#emGrad)" />
+      <circle cx="345" cy="40" r="65" fill="#f6cf6b" fill-opacity="0.14" />
+      <circle cx="45" cy="180" r="55" fill="#ffffff" fill-opacity="0.06" />
+      <text x="200" y="90" text-anchor="middle" font-size="36">${icon}</text>
+      <text x="200" y="132" text-anchor="middle" fill="#fef08a" font-size="16" font-weight="700" font-family="Hind Siliguri, sans-serif">${String(title).slice(0, 32)}</text>
+      <text x="200" y="158" text-anchor="middle" fill="#d1fae5" font-size="12" font-family="Hind Siliguri, sans-serif">${subtitle}</text>
+    </svg>`;
 }
 
 function svgQrPlaceholder() {
   return `
-    <svg viewBox="0 0 180 150" width="150" height="135" xmlns="http://www.w3.org/2000/svg">
-      <rect x="8" y="8" width="164" height="134" rx="12" fill="none" stroke="#0d6b58" stroke-width="2.5" stroke-dasharray="6 5" />
-      <rect x="28" y="24" width="28" height="28" rx="4" fill="none" stroke="#0d6b58" stroke-width="4" />
-      <rect x="36" y="32" width="12" height="12" fill="#0d6b58" />
-      <rect x="124" y="24" width="28" height="28" rx="4" fill="none" stroke="#0d6b58" stroke-width="4" />
-      <rect x="132" y="32" width="12" height="12" fill="#0d6b58" />
-      <rect x="28" y="96" width="28" height="28" rx="4" fill="none" stroke="#0d6b58" stroke-width="4" />
-      <rect x="36" y="104" width="12" height="12" fill="#0d6b58" />
-      <text x="90" y="84" text-anchor="middle" fill="#0d6b58" font-size="15" font-weight="700" font-family="Hind Siliguri, sans-serif">Bangla QR</text>
-      <text x="116" y="114" text-anchor="middle" fill="#d4a135" font-size="11" font-weight="700" font-family="Hind Siliguri, sans-serif">আপলোড করুন</text>
-    </svg>
-  `;
+    <svg viewBox="0 0 180 148" width="148" height="132" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="8" width="164" height="132" rx="12" fill="none" stroke="#0d6b58" stroke-width="2.5" stroke-dasharray="6 5" />
+      <rect x="26" y="22" width="28" height="28" rx="4" fill="none" stroke="#0d6b58" stroke-width="4" />
+      <rect x="34" y="30" width="12" height="12" fill="#0d6b58" />
+      <rect x="126" y="22" width="28" height="28" rx="4" fill="none" stroke="#0d6b58" stroke-width="4" />
+      <rect x="134" y="30" width="12" height="12" fill="#0d6b58" />
+      <rect x="26" y="94" width="28" height="28" rx="4" fill="none" stroke="#0d6b58" stroke-width="4" />
+      <rect x="34" y="102" width="12" height="12" fill="#0d6b58" />
+      <text x="90" y="82" text-anchor="middle" fill="#0d6b58" font-size="15" font-weight="700" font-family="Hind Siliguri, sans-serif">Bangla QR</text>
+      <text x="116" y="112" text-anchor="middle" fill="#d4a135" font-size="11" font-weight="700" font-family="Hind Siliguri, sans-serif">আপলোড করুন</text>
+    </svg>`;
 }
 
-/* =========================================================
-   GITHUB 1-CLICK LIVE SYNC & STORAGE
-   ========================================================= */
+/* ============================================================
+   GITHUB 1-CLICK LIVE SYNC & STORAGE (WITH LIVE FALLBACK)
+   ============================================================ */
 function loadGhConfig() {
   try {
     const raw = localStorage.getItem(GH_CONFIG_KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return {
+        owner: parsed.owner || DEFAULT_GH_OWNER,
+        repo: parsed.repo || DEFAULT_GH_REPO,
+        branch: parsed.branch || 'main',
+        token: parsed.token || '',
+        autoSync: parsed.autoSync !== undefined ? parsed.autoSync : true
+      };
+    }
   } catch {}
-  let owner = '', repo = '';
+  let owner = DEFAULT_GH_OWNER, repo = DEFAULT_GH_REPO;
   if (location.hostname.endsWith('.github.io')) {
     owner = location.hostname.replace('.github.io', '');
     const parts = location.pathname.split('/').filter(Boolean);
@@ -1501,76 +1593,76 @@ function saveData(triggerAutoSync = true) {
   }
 }
 
+/**
+ * Fetches live data.json from relative path first (GitHub Pages),
+ * and automatically falls back to the live GitHub Pages URL so real data
+ * loads even inside the Preview sandbox.
+ */
 async function pullFromGitHub(manual = false) {
   const badge = document.getElementById('liveSyncBadge');
-  try {
-    const res = await fetch('./data.json?t=' + Date.now(), { cache: 'no-store' });
-    if (res.ok) {
-      const remote = await res.json();
-      if (remote && remote.projects && remote.settings) {
-        const hasLocal = Boolean(localStorage.getItem(STORAGE_KEY));
-        const localTime = db.updatedAt ? new Date(db.updatedAt).getTime() : 0;
-        const remoteTime = remote.updatedAt ? new Date(remote.updatedAt).getTime() : 0;
-        if (manual || !hasLocal || remoteTime > localTime) {
-          db = mergeDb(remote);
-          safeLocalSave();
-          hasUnpublishedChanges = false;
-          renderAll();
-          badge.textContent = '🟢 লাইভ সিঙ্কড';
-          if (manual) showToast('GitHub থেকে সর্বশেষ লাইভ ডেটা লোড হয়েছে!');
-        } else {
-          badge.textContent = '🟢 লাইভ';
+  const ts = Date.now();
+  const urls = ['./data.json?t=' + ts, FALLBACK_LIVE_JSON + '?t=' + ts];
+  let remote = null;
+
+  for (const url of urls) {
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (res.ok) {
+        const json = await res.json();
+        if (json && json.projects && json.settings) {
+          remote = json;
+          break;
         }
-        return;
       }
+    } catch {
+      // Try next URL in fallback chain
     }
-    if (manual) showToast('GitHub-এ এখনো data.json তৈরি হয়নি।');
-  } catch {
-    if (manual) showToast('লোকাল প্রিভিউ মোডে আছেন বা data.json পাওয়া যায়নি।');
   }
+
+  if (remote) {
+    const hasLocal = Boolean(localStorage.getItem(STORAGE_KEY));
+    const localTime = db.updatedAt ? new Date(db.updatedAt).getTime() : 0;
+    const remoteTime = remote.updatedAt ? new Date(remote.updatedAt).getTime() : 0;
+    if (manual || !hasLocal || remoteTime >= localTime) {
+      db = mergeDb(remote);
+      safeLocalSave();
+      hasUnpublishedChanges = false;
+      renderAll();
+      if (badge) badge.textContent = '🟢 লাইভ সিঙ্কড';
+      if (manual) showToast('GitHub থেকে সর্বশেষ লাইভ ডেটা লোড হয়েছে!');
+    } else {
+      if (badge) badge.textContent = '🟢 লাইভ';
+    }
+    return;
+  }
+
+  if (manual) showToast('এখনো GitHub-এ data.json পাওয়া যায়নি বা অফলাইন আছেন।');
 }
 
 async function pushToGitHub(silent = false) {
   if (isSyncing) { pendingSyncAfterCurrent = true; return; }
   if (!ghCfg.owner || !ghCfg.repo || !ghCfg.token) {
-    if (!silent) {
-      showToast('প্রথমে GitHub সেটআপ ট্যাবে গিয়ে Token ও রিপোজিটরি তথ্য দিন।');
-      switchAdminPaneById('ap-github');
-    }
+    if (!silent) { showToast('প্রথমে GitHub সেটআপ ট্যাবে গিয়ে Token ও রিপোজিটরি তথ্য দিন।'); switchAdminPaneById('ap-github'); }
     return;
   }
-  isSyncing = true;
-  pendingSyncAfterCurrent = false;
+  isSyncing = true; pendingSyncAfterCurrent = false;
   const btn = document.getElementById('btnPushLive');
   if (btn) { btn.disabled = true; btn.textContent = '⏳ লাইভ আপডেট হচ্ছে...'; }
 
   const apiUrl = `https://api.github.com/repos/${ghCfg.owner}/${ghCfg.repo}/contents/data.json`;
-  const headers = {
-    'Authorization': `Bearer ${ghCfg.token}`,
-    'Accept': 'application/vnd.github+json',
-    'Content-Type': 'application/json'
-  };
+  const headers = { 'Authorization': `Bearer ${ghCfg.token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' };
 
   try {
     let sha;
     const getRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(ghCfg.branch || 'main')}&t=${Date.now()}`, { headers });
     if (getRes.ok) sha = (await getRes.json()).sha;
-    else if (getRes.status !== 404) {
-      const errData = await getRes.json().catch(() => ({}));
-      throw new Error(errData.message || `HTTP ${getRes.status}`);
-    }
-    const payload = {
-      message: `Update masjid data (${new Date().toLocaleString('bn-BD')})`,
-      content: utf8ToBase64(JSON.stringify(db, null, 2)),
-      branch: ghCfg.branch || 'main'
-    };
-    if (sha) payload.sha = sha;
+    else if (getRes.status !== 404) throw new Error((await getRes.json().catch(() => ({}))).message || `HTTP ${getRes.status}`);
 
+    const payload = { message: `Update masjid data (${new Date().toLocaleString('bn-BD')})`, content: utf8ToBase64(JSON.stringify(db, null, 2)), branch: ghCfg.branch || 'main' };
+    if (sha) payload.sha = sha;
     const putRes = await fetch(apiUrl, { method: 'PUT', headers, body: JSON.stringify(payload) });
-    if (!putRes.ok) {
-      const errData = await putRes.json().catch(() => ({}));
-      throw new Error(errData.message || `HTTP ${putRes.status}`);
-    }
+    if (!putRes.ok) throw new Error((await putRes.json().catch(() => ({}))).message || `HTTP ${putRes.status}`);
+
     hasUnpublishedChanges = false;
     document.getElementById('liveSyncBadge').textContent = '🟢 লাইভ আপডেটেড';
     showToast('✅ সফল! ৩০-৬০ সেকেন্ডের মধ্যে সবার ফোনে আপডেট দেখা যাবে।');
@@ -1585,18 +1677,13 @@ async function pushToGitHub(silent = false) {
 }
 
 function updateSyncUI() {
-  const bar = document.getElementById('ghSyncBar');
-  const txt = document.getElementById('ghSyncStatusText');
+  const bar = document.getElementById('ghSyncBar'), txt = document.getElementById('ghSyncStatusText');
   if (!bar || !txt) return;
   const connected = Boolean(ghCfg.owner && ghCfg.repo && ghCfg.token);
   bar.classList.toggle('disconnected', !connected);
-  if (!connected) {
-    txt.innerHTML = '<strong>⚠️ GitHub সিঙ্ক সেটআপ করা নেই</strong><br><span>১ ক্লিকে সবার জন্য লাইভ আপডেট চালু করতে “GitHub সেটআপ” বাটনে ক্লিক করুন।</span>';
-  } else if (hasUnpublishedChanges) {
-    txt.innerHTML = `<strong>🟡 নতুন পরিবর্তন অপেক্ষমাণ (${ghCfg.owner}/${ghCfg.repo})</strong><br><span>“১ ক্লিকে লাইভ আপডেট করুন” বাটনে ট্যাপ করুন।</span>`;
-  } else {
-    txt.innerHTML = `<strong>🟢 GitHub সংযুক্ত (${ghCfg.owner}/${ghCfg.repo})</strong><br><span>${ghCfg.autoSync ? 'অটো-সিঙ্ক চালু আছে — প্রতিটি সেভ সাথে সাথেই লাইভ হয়।' : 'সব তথ্য লাইভ ওয়েবসাইটে প্রকাশিত আছে।'}</span>`;
-  }
+  if (!connected) txt.innerHTML = '<strong>⚠️ GitHub সিঙ্ক সেটআপ করা নেই</strong><br><span>১ ক্লিকে লাইভ আপডেট চালু করতে “GitHub সেটআপ” বাটনে ক্লিক করুন।</span>';
+  else if (hasUnpublishedChanges) txt.innerHTML = `<strong>🟡 নতুন পরিবর্তন অপেক্ষমাণ (${ghCfg.owner}/${ghCfg.repo})</strong><br><span>“১ ক্লিকে লাইভ আপডেট করুন” বাটনে ট্যাপ করুন।</span>`;
+  else txt.innerHTML = `<strong>🟢 GitHub সংযুক্ত (${ghCfg.owner}/${ghCfg.repo})</strong><br><span>${ghCfg.autoSync ? 'অটো-সিঙ্ক চালু আছে — প্রতিটি সেভ সাথে সাথেই লাইভ হয়।' : 'সব তথ্য লাইভ ওয়েবসাইটে প্রকাশিত আছে।'}</span>`;
 }
 
 async function saveGhConfig(e) {
@@ -1609,22 +1696,19 @@ async function saveGhConfig(e) {
     autoSync: document.getElementById('ghAutoSync').checked
   };
   localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(ghCfg));
-  updateSyncUI();
-  showToast('কানেকশন সেভ হয়েছে! লাইভ সিঙ্ক টেস্ট হচ্ছে...');
+  updateSyncUI(); showToast('কানেকশন সেভ হয়েছে! লাইভ সিঙ্ক টেস্ট হচ্ছে...');
   await pushToGitHub(false);
 }
 
 async function clearGhConfig() {
   if (!(await customConfirm('GitHub Token এই ফোন থেকে মুছে ফেলবেন?'))) return;
   localStorage.removeItem(GH_CONFIG_KEY);
-  ghCfg = loadGhConfig();
-  renderAdminLists(); updateSyncUI();
-  showToast('GitHub ডিসকানেক্ট করা হয়েছে।');
+  ghCfg = loadGhConfig(); renderAdminLists(); updateSyncUI(); showToast('GitHub ডিসকানেক্ট করা হয়েছে।');
 }
 
-/* =========================================================
-   DARK / LIGHT THEME TOGGLE
-   ========================================================= */
+/* ============================================================
+   THEME TOGGLE & PLEDGE/DONATION AUTO-CALCULATION
+   ============================================================ */
 function initTheme() {
   const saved = localStorage.getItem('chainpur_masjid_theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
@@ -1632,8 +1716,7 @@ function initTheme() {
   if (btn) btn.textContent = saved === 'dark' ? '☀️' : '🌙';
 }
 function toggleTheme() {
-  const cur = document.documentElement.getAttribute('data-theme') || 'light';
-  const next = cur === 'dark' ? 'light' : 'dark';
+  const next = (document.documentElement.getAttribute('data-theme') || 'light') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('chainpur_masjid_theme', next);
   const btn = document.getElementById('themeToggleBtn');
@@ -1641,24 +1724,38 @@ function toggleTheme() {
 }
 initTheme();
 
-/* =========================================================
-   AUTO-CALCULATE PROJECT COLLECTED FUND FROM DONORS
-   ========================================================= */
+/**
+ * Normalizes any donor record (both legacy {amount} and new {pledged, paid})
+ * so existing data.json records remain 100% compatible.
+ */
+function normalizeDonor(d) {
+  const pledged = Number(d.pledged !== undefined ? d.pledged : (d.amount || 0));
+  const paid = Number(d.paid !== undefined ? d.paid : (d.amount || 0));
+  const due = Math.max(0, pledged - paid);
+  const statusKey = due === 0 ? 'paid' : (paid > 0 ? 'partial' : 'unpaid');
+  const statusLabel = due === 0 ? 'আদায়কৃত' : (paid > 0 ? 'আংশিক আদায়' : 'ওয়াদা (অনাদায়ী)');
+  return { ...d, pledged, paid, due, amount: paid, statusKey, statusLabel };
+}
+
 function syncAllProjectCollections() {
+  db.donors = db.donors.map(normalizeDonor);
   db.projects.forEach(p => {
-    const donorSum = db.donors
-      .filter(d => d.projectId === p.id)
-      .reduce((s, d) => s + Number(d.amount || 0), 0);
+    const pDonors = db.donors.filter(d => d.projectId === p.id);
+    const paidSum = pDonors.reduce((s, d) => s + Number(d.paid || 0), 0);
+    const pledgedSum = pDonors.reduce((s, d) => s + Number(d.pledged || 0), 0);
+    const unpaidPledge = pDonors.reduce((s, d) => s + Number(d.due || 0), 0);
     if (typeof p.baseCollected === 'undefined') {
-      p.baseCollected = Math.max(0, Number(p.collected || 0) - donorSum);
+      p.baseCollected = Math.max(0, Number(p.collected || 0) - paidSum);
     }
-    p.collected = Number(p.baseCollected || 0) + donorSum;
+    p.collected = Number(p.baseCollected || 0) + paidSum;
+    p.pledgedTotal = Number(p.baseCollected || 0) + pledgedSum;
+    p.unpaidPledge = unpaidPledge;
   });
 }
 
-/* =========================================================
+/* ============================================================
    ADMIN-ONLY SMART PDF REPORT GENERATOR
-   ========================================================= */
+   ============================================================ */
 function generateSmartPdf(type) {
   if (!adminLoggedIn) { showToast('শুধুমাত্র এডমিন PDF ডাউনলোড করতে পারবেন।'); return; }
   syncAllProjectCollections();
@@ -1671,11 +1768,8 @@ function generateSmartPdf(type) {
     const monthLabel = `${BN_MONTHS[Number(mo)-1]} ${toBnNum(y)}`;
     title = `মাসিক আয়-ব্যয়ের হিসাব রিপোর্ট — ${monthLabel}`;
     const items = db.accounts.filter(a => a.month === month);
-    const inc = items.filter(a => a.type === 'income');
-    const exp = items.filter(a => a.type === 'expense');
-    const totalIn = inc.reduce((s, x) => s + Number(x.amount), 0);
-    const totalOut = exp.reduce((s, x) => s + Number(x.amount), 0);
-    const net = totalIn - totalOut;
+    const inc = items.filter(a => a.type === 'income'), exp = items.filter(a => a.type === 'expense');
+    const totalIn = inc.reduce((s, x) => s + Number(x.amount), 0), totalOut = exp.reduce((s, x) => s + Number(x.amount), 0), net = totalIn - totalOut;
     bodyHtml = `
       <div class="kpi-row">
         <div class="kpi"><span>মোট আয়</span><strong>${fmtTaka(totalIn)}</strong></div>
@@ -1695,54 +1789,53 @@ function generateSmartPdf(type) {
   } else if (type === 'project') {
     const pid = document.getElementById('pdfProjSelect').value;
     const projs = pid === 'all' ? db.projects : db.projects.filter(p => p.id === pid);
-    title = pid === 'all' ? 'সকল প্রকল্পের আর্থিক হিসাব রিপোর্ট' : `প্রকল্প ভিত্তিক হিসাব — ${projs[0]?.name || ''}`;
-    const tBud = projs.reduce((s, p) => s + Number(p.budget), 0);
-    const tCol = projs.reduce((s, p) => s + Number(p.collected), 0);
+    title = pid === 'all' ? 'সকল প্রকল্পের আর্থিক ও ওয়াদা হিসাব' : `প্রকল্প ভিত্তিক হিসাব — ${projs[0]?.name || ''}`;
+    const tBud = projs.reduce((s, p) => s + Number(p.budget), 0), tCol = projs.reduce((s, p) => s + Number(p.collected), 0), tUnp = projs.reduce((s, p) => s + Number(p.unpaidPledge || 0), 0);
     const relDonors = pid === 'all' ? db.donors : db.donors.filter(d => d.projectId === pid);
     bodyHtml = `
       <div class="kpi-row">
-        <div class="kpi"><span>মোট সম্ভাব্য ব্যয়</span><strong>${fmtTaka(tBud)}</strong></div>
-        <div class="kpi"><span>মোট সংগৃহীত ফান্ড</span><strong style="color:#0d6b58;">${fmtTaka(tCol)}</strong></div>
-        <div class="kpi"><span>অবশিষ্ট প্রয়োজন</span><strong style="color:#d13438;">${fmtTaka(Math.max(0, tBud - tCol))}</strong></div>
+        <div class="kpi"><span>সম্ভাব্য ব্যয়</span><strong>${fmtTaka(tBud)}</strong></div>
+        <div class="kpi"><span>অলরেডি আদায়</span><strong style="color:#0d6b58;">${fmtTaka(tCol)}</strong></div>
+        <div class="kpi"><span>ওয়াদা (অনাদায়ী)</span><strong style="color:#a97b18;">${fmtTaka(tUnp)}</strong></div>
+        <div class="kpi"><span>আরও প্রয়োজন</span><strong style="color:#d13438;">${fmtTaka(Math.max(0, tBud - tCol))}</strong></div>
       </div>
       <h3>🏗️ প্রকল্পসমূহের সারসংক্ষেপ</h3>
-      <table><thead><tr><th>প্রকল্পের নাম</th><th>অবস্থা</th><th>সম্ভাব্য ব্যয়</th><th>কালেকশন</th><th>অবশিষ্ট</th><th>অগ্রগতি</th></tr></thead><tbody>
-        ${projs.map(p => `<tr><td>${p.name}</td><td>${p.status}</td><td>${fmtTaka(p.budget)}</td><td style="font-weight:700;">${fmtTaka(p.collected)}</td><td>${fmtTaka(Math.max(0, p.budget - p.collected))}</td><td>${toBnNum(p.progress)}%</td></tr>`).join('')}
+      <table><thead><tr><th>প্রকল্পের নাম</th><th>অবস্থা</th><th>বাজেট</th><th>অলরেডি আদায়</th><th>ওয়াদা (অনাদায়ী)</th><th>বাকি</th></tr></thead><tbody>
+        ${projs.map(p => `<tr><td>${p.name}</td><td>${p.status}</td><td>${fmtTaka(p.budget)}</td><td style="font-weight:700;color:#0d6b58;">${fmtTaka(p.collected)}</td><td style="font-weight:700;color:#a97b18;">${fmtTaka(p.unpaidPledge || 0)}</td><td>${fmtTaka(Math.max(0, p.budget - p.collected))}</td></tr>`).join('')}
       </tbody></table>
-      <h3>📋 সংশ্লিষ্ট দাতাদের তালিকা (${toBnNum(relDonors.length)} টি এন্ট্রি)</h3>
-      <table><thead><tr><th>তারিখ</th><th>দাতার নাম</th><th>প্রকল্প</th><th>মাধ্যম</th><th style="text-align:right;">টাকা</th></tr></thead><tbody>
-        ${relDonors.map(d => `<tr><td>${d.date}</td><td>${d.name}</td><td>${db.projects.find(p=>p.id===d.projectId)?.name || '-'}</td><td>${d.method}</td><td style="text-align:right;font-weight:700;">${fmtTaka(d.amount)}</td></tr>`).join('') || '<tr><td colspan="5">কোনো দাতা নেই</td></tr>'}
+      <h3>📋 সংশ্লিষ্ট দাতা ও ওয়াদাকারী (${toBnNum(relDonors.length)} টি এন্ট্রি)</h3>
+      <table><thead><tr><th>তারিখ</th><th>দাতার নাম</th><th>ওয়াদাকৃত</th><th>আদায়কৃত</th><th>অনাদায়ী</th><th>অবস্থা</th></tr></thead><tbody>
+        ${relDonors.map(d => `<tr><td>${d.date}</td><td>${d.name}</td><td>${fmtTaka(d.pledged)}</td><td style="font-weight:700;">${fmtTaka(d.paid)}</td><td>${fmtTaka(d.due)}</td><td>${d.statusLabel}</td></tr>`).join('') || '<tr><td colspan="6">কোনো দাতা নেই</td></tr>'}
       </tbody></table>`;
   } else if (type === 'donor') {
     const q = (document.getElementById('pdfDonorSearch').value || '').trim().toLowerCase();
     const list = q ? db.donors.filter(d => d.name.toLowerCase().includes(q)) : db.donors;
-    const sum = list.reduce((s, d) => s + Number(d.amount), 0);
-    title = q ? `দাতা ভিত্তিক অনুদান রিপোর্ট — "${document.getElementById('pdfDonorSearch').value.trim()}"` : 'সকল সম্মানিত দাতাদের অনুদান রিপোর্ট';
+    const sp = list.reduce((s, d) => s + Number(d.pledged || 0), 0), sc = list.reduce((s, d) => s + Number(d.paid || 0), 0), sd = list.reduce((s, d) => s + Number(d.due || 0), 0);
+    title = q ? `দাতা ভিত্তিক অনুদান ও ওয়াদা রিপোর্ট — "${document.getElementById('pdfDonorSearch').value.trim()}"` : 'সকল সম্মানিত দাতা ও ওয়াদাকারীদের রিপোর্ট';
     bodyHtml = `
       <div class="kpi-row">
-        <div class="kpi"><span>মোট এন্ট্রি</span><strong>${toBnNum(list.length)} টি</strong></div>
-        <div class="kpi"><span>সর্বমোট অনুদান</span><strong style="color:#0d6b58;">${fmtTaka(sum)}</strong></div>
+        <div class="kpi"><span>মোট ওয়াদাকৃত</span><strong>${fmtTaka(sp)}</strong></div>
+        <div class="kpi"><span>অলরেডি আদায়কৃত</span><strong style="color:#0d6b58;">${fmtTaka(sc)}</strong></div>
+        <div class="kpi"><span>অনাদায়ী ওয়াদা</span><strong style="color:#d13438;">${fmtTaka(sd)}</strong></div>
       </div>
-      <table><thead><tr><th>তারিখ</th><th>দাতার নাম</th><th>প্রকল্প</th><th>দানের মাধ্যম</th><th style="text-align:right;">টাকা</th></tr></thead><tbody>
-        ${list.map(d => `<tr><td>${d.date}</td><td><strong>${d.name}</strong></td><td>${db.projects.find(p=>p.id===d.projectId)?.name || 'সাধারণ'}</td><td>${d.method}</td><td style="text-align:right;font-weight:700;">${fmtTaka(d.amount)}</td></tr>`).join('') || '<tr><td colspan="5">কোনো তথ্য পাওয়া যায়নি</td></tr>'}
-        <tr class="total-row"><td colspan="4">সর্বমোট</td><td style="text-align:right;">${fmtTaka(sum)}</td></tr>
+      <table><thead><tr><th>তারিখ</th><th>দাতার নাম</th><th>প্রকল্প</th><th>ওয়াদাকৃত</th><th>আদায়কৃত</th><th>অনাদায়ী</th><th>অবস্থা</th></tr></thead><tbody>
+        ${list.map(d => `<tr><td>${d.date}</td><td><strong>${d.name}</strong></td><td>${db.projects.find(p=>p.id===d.projectId)?.name || 'সাধারণ'}</td><td>${fmtTaka(d.pledged)}</td><td style="font-weight:700;color:#0d6b58;">${fmtTaka(d.paid)}</td><td style="color:#d13438;">${fmtTaka(d.due)}</td><td>${d.statusLabel}</td></tr>`).join('') || '<tr><td colspan="7">কোনো তথ্য পাওয়া যায়নি</td></tr>'}
+        <tr class="total-row"><td colspan="3">সর্বমোট</td><td>${fmtTaka(sp)}</td><td>${fmtTaka(sc)}</td><td>${fmtTaka(sd)}</td><td></td></tr>
       </tbody></table>`;
   } else {
-    title = 'সার্বিক মাস্টার রিপোর্ট (প্রকল্প, ফান্ড ও মাসিক হিসাব)';
-    const tBud = db.projects.reduce((s, p) => s + Number(p.budget), 0);
-    const tCol = db.projects.reduce((s, p) => s + Number(p.collected), 0);
-    const tIn = db.accounts.filter(a=>a.type==='income').reduce((s,x)=>s+Number(x.amount),0);
-    const tOut = db.accounts.filter(a=>a.type==='expense').reduce((s,x)=>s+Number(x.amount),0);
+    title = 'সার্বিক মাস্টার রিপোর্ট (প্রকল্প, আদায়, ওয়াদা ও মাসিক হিসাব)';
+    const tBud = db.projects.reduce((s, p) => s + Number(p.budget), 0), tCol = db.projects.reduce((s, p) => s + Number(p.collected), 0), tUnp = db.projects.reduce((s, p) => s + Number(p.unpaidPledge || 0), 0);
+    const tIn = db.accounts.filter(a=>a.type==='income').reduce((s,x)=>s+Number(x.amount),0), tOut = db.accounts.filter(a=>a.type==='expense').reduce((s,x)=>s+Number(x.amount),0);
     bodyHtml = `
       <div class="kpi-row">
         <div class="kpi"><span>মোট প্রকল্প ব্যয়</span><strong>${fmtTaka(tBud)}</strong></div>
-        <div class="kpi"><span>প্রকল্প ফান্ড সংগ্রহ</span><strong>${fmtTaka(tCol)}</strong></div>
-        <div class="kpi"><span>মোট সাধারণ আয়</span><strong>${fmtTaka(tIn)}</strong></div>
-        <div class="kpi"><span>মোট সাধারণ ব্যয়</span><strong>${fmtTaka(tOut)}</strong></div>
+        <div class="kpi"><span>প্রকল্প ফান্ড আদায়</span><strong style="color:#0d6b58;">${fmtTaka(tCol)}</strong></div>
+        <div class="kpi"><span>অনাদায়ী ওয়াদা</span><strong style="color:#a97b18;">${fmtTaka(tUnp)}</strong></div>
+        <div class="kpi"><span>সাধারণ আয় / ব্যয়</span><strong>${fmtTaka(tIn)} / ${fmtTaka(tOut)}</strong></div>
       </div>
       <h3>🏗️ সকল প্রকল্পের অবস্থান</h3>
-      <table><thead><tr><th>প্রকল্পের নাম</th><th>অবস্থা</th><th>ব্যয়</th><th>কালেকশন</th><th>অবশিষ্ট</th></tr></thead><tbody>
-        ${db.projects.map(p => `<tr><td>${p.name}</td><td>${p.status}</td><td>${fmtTaka(p.budget)}</td><td>${fmtTaka(p.collected)}</td><td>${fmtTaka(Math.max(0,p.budget-p.collected))}</td></tr>`).join('')}
+      <table><thead><tr><th>প্রকল্পের নাম</th><th>অবস্থা</th><th>ব্যয়</th><th>অলরেডি আদায়</th><th>ওয়াদা (অনাদায়ী)</th><th>অবশিষ্ট</th></tr></thead><tbody>
+        ${db.projects.map(p => `<tr><td>${p.name}</td><td>${p.status}</td><td>${fmtTaka(p.budget)}</td><td>${fmtTaka(p.collected)}</td><td>${fmtTaka(p.unpaidPledge || 0)}</td><td>${fmtTaka(Math.max(0,p.budget-p.collected))}</td></tr>`).join('')}
       </tbody></table>`;
   }
 
@@ -1759,9 +1852,9 @@ function generateSmartPdf(type) {
       .kpi-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
       .kpi{flex:1;min-width:140px;border:1px solid #d5e2dd;border-top:3px solid #d4a135;padding:10px;border-radius:8px;text-align:center;}
       .kpi span{display:block;font-size:0.8rem;color:#555;}
-      .kpi strong{font-size:1.15rem;color:#111;}
+      .kpi strong{font-size:1.12rem;color:#111;}
       h3{font-size:1.05rem;color:#064639;margin:16px 0 8px;}
-      table{width:100%;border-collapse:collapse;font-size:0.86rem;margin-bottom:14px;}
+      table{width:100%;border-collapse:collapse;font-size:0.85rem;margin-bottom:14px;}
       th,td{border:1px solid #d5e2dd;padding:7px 9px;text-align:left;}
       th{background:#e7f6f2;color:#064639;}
       .total-row td{background:#fdf8eb;font-weight:700;}
@@ -1790,47 +1883,36 @@ function generateSmartPdf(type) {
   win.document.close();
 }
 
-/* =========================================================
+/* ============================================================
    UTILITY HELPERS
-   ========================================================= */
+   ============================================================ */
 function toBnNum(val) { return String(val).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]); }
 function fmtTaka(n) { return '৳' + Number(n || 0).toLocaleString('bn-BD'); }
 function minsToTime(m) {
   m = Math.round(m);
-  let h = Math.floor(m / 60) % 24;
-  let min = m % 60;
+  let h = Math.floor(m / 60) % 24, min = m % 60;
   const ap = h >= 12 ? 'PM' : 'AM';
-  let h12 = h % 12 || 12;
-  return `${toBnNum(h12)}:${toBnNum(String(min).padStart(2,'0'))} ${ap}`;
+  return `${toBnNum(h % 12 || 12)}:${toBnNum(String(min).padStart(2,'0'))} ${ap}`;
 }
 function getPerpetualForDate(monthIdx, day) {
   const daysInM = [31,29,31,30,31,30,31,31,30,31,30,31][monthIdx];
   const cur1 = PERPETUAL_ANCHORS[monthIdx][0], cur15 = PERPETUAL_ANCHORS[monthIdx][1], next1 = PERPETUAL_ANCHORS[(monthIdx + 1) % 12][0];
-  let a, b, ratio;
-  if (day <= 15) { a = cur1; b = cur15; ratio = (day - 1) / 14; }
-  else { a = cur15; b = next1; ratio = (day - 15) / (daysInM - 14); }
+  const a = day <= 15 ? cur1 : cur15, b = day <= 15 ? cur15 : next1;
+  const ratio = day <= 15 ? (day - 1) / 14 : (day - 15) / (daysInM - 14);
   return a.map((v, i) => v + (b[i] - v) * ratio);
 }
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3200);
 }
 function copyText(text, label = 'নম্বর') {
   const clean = text.replace(/\s*\(.*?\)\s*/g, '').trim();
   const ta = document.createElement('textarea');
-  ta.value = clean;
-  ta.style.position = 'fixed';
-  ta.style.opacity = '0';
-  document.body.appendChild(ta);
-  ta.select();
-  try {
-    document.execCommand('copy');
-    showToast(`${label} কপি হয়েছে: ${clean}`);
-  } catch {
-    showToast(`${label}: ${clean}`);
-  }
+  ta.value = clean; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); showToast(`${label} কপি হয়েছে: ${clean}`); }
+  catch { showToast(`${label}: ${clean}`); }
   document.body.removeChild(ta);
 }
 function compressImageFile(file, maxW = 720, quality = 0.68) {
@@ -1841,16 +1923,13 @@ function compressImageFile(file, maxW = 720, quality = 0.68) {
       img.onload = () => {
         const canvas = document.createElement('canvas');
         const scale = Math.min(1, maxW / img.width);
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
+        canvas.width = img.width * scale; canvas.height = img.height * scale;
         canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
         resolve(canvas.toDataURL('image/jpeg', quality));
       };
-      img.onerror = reject;
-      img.src = ev.target.result;
+      img.onerror = reject; img.src = ev.target.result;
     };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+    reader.onerror = reject; reader.readAsDataURL(file);
   });
 }
 
@@ -1859,28 +1938,27 @@ function switchTab(tabId) {
   document.getElementById('sec-' + tabId)?.classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (tabId === 'home') renderHomeCharts();
-  if (tabId === 'donate') renderDonateChart();
+  if (tabId === 'donate') renderDonateDashboard();
   if (tabId === 'accounts') renderAccounts();
 }
 function switchPayTab(key, btn) {
-  document.querySelectorAll('.pay-tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  document.querySelectorAll('.pay-tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
   document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('pay-' + key).classList.add('active');
 }
 function goDonateForProject(projId) {
+  selectedDonateProjId = projId;
   switchTab('donate');
   setTimeout(() => {
     const sel = document.getElementById('pubDonProject');
     if (sel) sel.value = projId;
     document.getElementById('donationFormCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 150);
+  }, 180);
 }
 
-/* =========================================================
-   RENDERING ENGINE
-   ========================================================= */
+/* ============================================================
+   RENDER ALL SECTIONS
+   ============================================================ */
 function renderAll() {
   syncAllProjectCollections();
   document.getElementById('siteName').textContent = db.settings.name;
@@ -1895,8 +1973,7 @@ function renderAll() {
   const msgHref = db.settings.msgGroupLink || 'https://m.me/';
   document.getElementById('footerSocials').innerHTML = `
     <a class="social-btn social-wa" href="${waHref}" target="_blank">💬 হোয়াটসঅ্যাপ গ্রুপ</a>
-    <a class="social-btn social-msg" href="${msgHref}" target="_blank">⚡ মেসেঞ্জার গ্রুপ</a>
-  `;
+    <a class="social-btn social-msg" href="${msgHref}" target="_blank">⚡ মেসেঞ্জার গ্রুপ</a>`;
 
   renderSeasonalBanners();
   renderPrayerBoards();
@@ -1925,12 +2002,12 @@ function renderSeasonalBanners() {
     eidEl.innerHTML = `
       <div class="eid-banner">
         <h2>${isFitr ? '🌙 পবিত্র ঈদুল ফিতরের জামাতের বিশেষ বিজ্ঞপ্তি' : '🐑 পবিত্র ঈদুল আযহার জামাতের বিশেষ বিজ্ঞপ্তি'}</h2>
-        <p style="font-size:0.9rem;opacity:0.95;">${s.eidNote || ''}</p>
+        <p style="font-size:0.88rem;opacity:0.95;">${s.eidNote || ''}</p>
         <div class="eid-grid">
           <div class="eid-pill">📅 ঈদের তারিখ<strong>${s.eidDate || '-'}</strong></div>
           <div class="eid-pill">🕌 ১ম জামাত<strong>${s.eidJamaat1 || '-'}</strong></div>
           ${s.eidJamaat2 ? `<div class="eid-pill">🕌 ২য় জামাত<strong>${s.eidJamaat2}</strong></div>` : ''}
-          <div class="eid-pill">📍 স্থান ও ইমাম<strong>${s.eidPlace || '-'}</strong><span style="font-size:0.78rem;">${s.eidImam || ''}</span></div>
+          <div class="eid-pill">📍 স্থান ও ইমাম<strong>${s.eidPlace || '-'}</strong><span style="font-size:0.76rem;">${s.eidImam || ''}</span></div>
         </div>
       </div>`;
   } else { eidEl.innerHTML = ''; }
@@ -1941,13 +2018,13 @@ function renderSeasonalBanners() {
     ramEl.innerHTML = `
       <div class="ramadan-hero">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-          <h2 style="font-size:1.25rem;color:#fef08a;">🌙 ${s.ramadanTitle || 'পবিত্র রমাদান ক্যালেন্ডার'}</h2>
-          <button class="btn btn-gold btn-sm" onclick="switchTab('prayer')">📅 পূর্ণাঙ্গ ৩০ রোজার ক্যালেন্ডার →</button>
+          <h2 style="font-size:1.2rem;color:#fef08a;">🌙 ${s.ramadanTitle || 'পবিত্র রমাদান ক্যালেন্ডার'}</h2>
+          <button class="btn btn-gold btn-sm" onclick="switchTab('prayer')">📅 ৩০ রোজার ক্যালেন্ডার →</button>
         </div>
         <div class="ramadan-today-grid">
-          <div class="ramadan-box"><div class="r-lbl">আজকের সেহরির শেষ সময়</div><div class="r-val">${minsToTime(t[0])}</div></div>
+          <div class="ramadan-box"><div class="r-lbl">আজকের সেহরির শেষ</div><div class="r-val">${minsToTime(t[0])}</div></div>
           <div class="ramadan-box"><div class="r-lbl">ফজর শুরু</div><div class="r-val">${minsToTime(t[1])}</div></div>
-          <div class="ramadan-box"><div class="r-lbl">আজকের ইফতারের সময়</div><div class="r-val">${minsToTime(t[5])}</div></div>
+          <div class="ramadan-box"><div class="r-lbl">আজকের ইফতার</div><div class="r-val">${minsToTime(t[5])}</div></div>
         </div>
       </div>`;
   } else { ramEl.innerHTML = ''; }
@@ -1960,20 +2037,17 @@ function cleanLedTime(str) {
   return m ? `${m[1]}:${m[2]}` : bnToEn(str).replace(/[^\d:]/g, '') || '00:00';
 }
 function minsToLed(m) {
-  m = Math.round(m); let h = Math.floor(m / 60) % 24; let min = m % 60; let h12 = h % 12 || 12;
-  return `${h12}:${String(min).padStart(2, '0')}`;
+  m = Math.round(m);
+  return `${Math.floor(m / 60) % 12 || 12}:${String(m % 60).padStart(2, '0')}`;
 }
 
-function buildPrayerBoardHtml(showMoreBtn) {
+function buildPrayerBoardHtml(compactMode) {
   const now = new Date(), pt = db.prayerTimes, todayPerp = getPerpetualForDate(now.getMonth(), now.getDate());
   const h24 = now.getHours(), h12 = h24 % 12 || 12;
   const hmStr = `${String(h12).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
   const secStr = String(now.getSeconds()).padStart(2, '0'), ampm = h24 >= 12 ? 'PM' : 'AM';
   const dd = String(now.getDate()).padStart(2, '0'), mm = String(now.getMonth() + 1).padStart(2, '0'), yy = String(now.getFullYear()).slice(-2);
-  const dayList = [
-    { label: 'শনি', idx: 6 }, { label: 'রবি', idx: 0 }, { label: 'সোম', idx: 1 },
-    { label: 'মঙ্গল', idx: 2 }, { label: 'বুধ', idx: 3 }, { label: 'বৃহঃ', idx: 4 }, { label: 'শুক্র', idx: 5 }
-  ];
+  const dayList = [{ label: 'শনি', idx: 6 }, { label: 'রবি', idx: 0 }, { label: 'সোম', idx: 1 }, { label: 'মঙ্গল', idx: 2 }, { label: 'বুধ', idx: 3 }, { label: 'বৃহঃ', idx: 4 }, { label: 'শুক্র', idx: 5 }];
   const curDay = now.getDay();
   const rows = [
     { bn: 'ফজর', sub: `আযান: ${pt.fajr.azan}`, ar: 'الفجر', time: cleanLedTime(pt.fajr.jamaat) },
@@ -1983,14 +2057,14 @@ function buildPrayerBoardHtml(showMoreBtn) {
     { bn: 'এশা', sub: `আযান: ${pt.isha.azan}`, ar: 'العشاء', time: cleanLedTime(pt.isha.jamaat) },
     { bn: "জুম'আ", sub: `বয়ান: ${pt.jumuah.azan}`, ar: 'الجمعة', time: cleanLedTime(pt.jumuah.jamaat), hl: true },
     { bn: 'সেহরী শেষ', sub: `সূর্যোদয়: ${minsToTime(todayPerp[2])}`, ar: 'السحور', time: minsToLed(todayPerp[0]) },
-    { bn: 'ইফতার / সূর্যাস্ত', sub: 'আজকের ইফতারের সময়', ar: 'الإفطار', time: minsToLed(todayPerp[5]) }
+    { bn: 'ইফতার / সূর্যাস্ত', sub: 'আজকের ইফতার', ar: 'الإفطار', time: minsToLed(todayPerp[5]) }
   ];
 
   return `
-    <div class="led-board-outer">
+    <div class="led-board-outer ${compactMode ? 'compact' : ''}">
       <div class="led-arch-top">
         <div class="led-medallion">الله</div>
-        <div style="color:#ffd670;font-weight:700;font-size:0.86rem;text-align:center;">${db.settings.name}</div>
+        <div style="color:#ffd670;font-weight:700;font-size:${compactMode ? '0.78rem' : '0.86rem'};text-align:center;">${db.settings.name}</div>
         <div class="led-medallion">محمد</div>
       </div>
       <div class="led-screen">
@@ -2017,7 +2091,7 @@ function buildPrayerBoardHtml(showMoreBtn) {
         <div class="led-footer-warn">মসজিদে দুনিয়াবী কথা ও মোবাইল ফোন বন্ধ রাখুন</div>
         <div class="led-footer-khutba">খুতবার সময় কথা বলা নিষেধ</div>
       </div>
-      ${showMoreBtn ? `<div class="led-bottom-action"><button class="btn btn-gold btn-sm" onclick="switchTab('prayer')">📅 চিরস্থায়ী নামাজ ও রোজার ক্যালেন্ডার দেখুন →</button></div>` : ''}
+      ${compactMode ? `<div class="led-bottom-action"><button class="btn btn-gold btn-sm" onclick="switchTab('prayer')">📅 চিরস্থায়ী নামাজ ও রোজার ক্যালেন্ডার →</button></div>` : ''}
     </div>`;
 }
 
@@ -2042,7 +2116,6 @@ function renderPerpetualControls() {
     sel.value = new Date().getMonth();
   }
 }
-
 function renderPerpetualTable() {
   const mIdx = Number(document.getElementById('perpetualMonthSelect').value || 0);
   const days = [31,29,31,30,31,30,31,31,30,31,30,31][mIdx], now = new Date();
@@ -2053,7 +2126,6 @@ function renderPerpetualTable() {
   }
   document.getElementById('perpetualTableBody').innerHTML = rows;
 }
-
 function renderRamadanTable() {
   document.getElementById('ramadanYearBadge').textContent = db.seasonal.ramadanTitle || 'রমাদান ক্যালেন্ডার';
   const startDate = new Date((db.seasonal.ramadanStart || '2027-02-09') + 'T00:00:00');
@@ -2065,6 +2137,181 @@ function renderRamadanTable() {
   document.getElementById('ramadanTableBody').innerHTML = html;
 }
 
+function projectCoverHtml(p) {
+  const galImg = db.gallery.find(g => g.projectId === p.id && g.img)?.img;
+  const cover = p.coverImg || galImg || '';
+  if (cover) return `<div class="proj-cover-wrap"><img src="${cover}" alt="${p.name}" /></div>`;
+  return `<div class="proj-cover-wrap">${svgPlaceholderBanner(p.name, `কাজের অগ্রগতি: ${toBnNum(p.progress)}%`, '🏗️')}</div>`;
+}
+
+/* MINIMAL HOME RENDER */
+function renderHome() {
+  const totalBudget = db.projects.reduce((s, p) => s + Number(p.budget), 0);
+  const totalCollected = db.projects.reduce((s, p) => s + Number(p.collected), 0);
+  const totalUnpaid = db.projects.reduce((s, p) => s + Number(p.unpaidPledge || 0), 0);
+  const remaining = Math.max(0, totalBudget - totalCollected);
+
+  document.getElementById('homeKpis').innerHTML = `
+    <div class="kpi-card"><div class="kpi-label">মোট প্রকল্প</div><div class="kpi-value">${toBnNum(db.projects.length)} টি</div><div class="kpi-sub">চলমান: ${toBnNum(db.projects.filter(p=>p.status==='চলমান').length)} টি</div></div>
+    <div class="kpi-card success"><div class="kpi-label">অলরেডি দান আদায়</div><div class="kpi-value" style="color:var(--success);">${fmtTaka(totalCollected)}</div><div class="kpi-sub">হাতে প্রাপ্ত ফান্ড</div></div>
+    <div class="kpi-card gold"><div class="kpi-label">ওয়াদা (অনাদায়ী)</div><div class="kpi-value" style="color:var(--gold-dark);">${fmtTaka(totalUnpaid)}</div><div class="kpi-sub">পরিশোধের অপেক্ষায়</div></div>
+    <div class="kpi-card danger"><div class="kpi-label">আরও প্রয়োজন</div><div class="kpi-value" style="color:var(--danger);">${fmtTaka(remaining)}</div><div class="kpi-sub">মোট বাজেট: ${fmtTaka(totalBudget)}</div></div>`;
+
+  const ongoing = db.projects.filter(p => p.status === 'চলমান');
+  const previewList = (ongoing.length ? ongoing : db.projects).slice(0, 3);
+  document.getElementById('homeProjectsPreview').innerHTML = previewList.map(p => {
+    const paidPct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
+    const pledgePct = p.budget ? Math.min(100 - paidPct, Math.round(((p.unpaidPledge || 0) / p.budget) * 100)) : 0;
+    const cCount = db.comments.filter(c => c.projectId === p.id).length;
+    return `
+      <div style="border:1px solid var(--border);border-radius:14px;padding:13px;background:var(--surface-alt);">
+        ${projectCoverHtml(p)}
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:6px;">
+          <strong style="font-size:0.94rem;">${p.name}</strong>
+          <span class="badge ${p.status==='সম্পন্ন'?'badge-completed':p.status==='পরিকল্পিত'?'badge-planned':'badge-ongoing'}">${p.status}</span>
+        </div>
+        <div style="font-size:0.79rem;color:var(--muted);margin-bottom:6px;">
+          আদায়: <strong style="color:var(--success);">${fmtTaka(p.collected)}</strong> | ওয়াদা বাকি: <strong style="color:var(--gold-dark);">${fmtTaka(p.unpaidPledge || 0)}</strong>
+        </div>
+        <div class="dual-track" style="margin-bottom:9px;">
+          <div class="dual-paid" style="width:${paidPct}%"></div>
+          <div class="dual-pledged" style="width:${pledgePct}%"></div>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-gold btn-sm" style="flex:1;" onclick="goDonateForProject('${p.id}')">🤲 দান / ওয়াদা</button>
+          <button class="btn btn-outline btn-sm" onclick="openCommentsModal('${p.id}')">💬 (${toBnNum(cCount)})</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* PROJECT-WISE DONATE & PLEDGE DASHBOARD */
+function selectDonateProject(pid) { selectedDonateProjId = pid; renderDonateDashboard(); }
+
+function renderDonateDashboard() {
+  const qrImg = db.settings.banglaQrImg;
+  const qrNote = db.settings.banglaQrNote || 'যেকোনো ব্যাংক বা মোবাইল ব্যাংকিং অ্যাপ থেকে বাংলা QR স্ক্যান করে সরাসরি দান করুন।';
+  document.getElementById('donateBanglaQrBox').innerHTML = `
+    <div class="bqr-card">
+      <div class="bqr-info">
+        <div class="bqr-badge">🇧🇩 বাংলা QR (Bangla QR)</div>
+        <h3 style="margin-bottom:5px;color:var(--primary-dark);font-size:1.12rem;">স্ক্যান করে সরাসরি দান করুন</h3>
+        <p style="font-size:0.86rem;color:var(--muted);">${qrNote}</p>
+        <div class="bqr-apps"><span class="bqr-app-chip">bKash</span><span class="bqr-app-chip">Nagad</span><span class="bqr-app-chip">Rocket</span><span class="bqr-app-chip">CellFin</span><span class="bqr-app-chip">ব্যাংক অ্যাপ</span></div>
+        ${qrImg ? `<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-primary btn-sm" onclick="openQrLightbox()">🔍 বড় করে দেখুন</button><a class="btn btn-outline btn-sm" href="${qrImg}" download="masjid-bangla-qr.jpg">⬇️ QR ডাউনলোড</a></div>`
+                 : `<div style="margin-top:8px;font-size:0.78rem;color:var(--muted);">💡 এডমিন প্যানেল → ⚙️ সেটিংস থেকে বাংলা QR ছবি আপলোড করুন।</div>`}
+      </div>
+      <div class="bqr-img-box" onclick="${qrImg ? 'openQrLightbox()' : 'openAdminModal()'}">
+        ${qrImg ? `<img src="${qrImg}" alt="Bangla QR" />` : svgQrPlaceholder()}
+        <span style="font-size:0.72rem;color:var(--primary-dark);font-weight:700;margin-top:4px;">${qrImg ? 'ট্যাপ করে বড় করুন' : 'QR আপলোড করুন'}</span>
+      </div>
+    </div>`;
+
+  // Default to 1st ongoing project (NOT all projects)
+  const validIds = db.projects.map(p => p.id);
+  if (!selectedDonateProjId || (selectedDonateProjId !== 'all' && !validIds.includes(selectedDonateProjId))) {
+    const firstOngoing = db.projects.find(p => p.status === 'চলমান') || db.projects[0];
+    selectedDonateProjId = firstOngoing ? firstOngoing.id : 'all';
+  }
+
+  document.getElementById('donateProjSelectorPills').innerHTML =
+    db.projects.map(p => `<button class="proj-pill-btn ${selectedDonateProjId === p.id ? 'active' : ''}" onclick="selectDonateProject('${p.id}')">🏗️ ${p.name}</button>`).join('') +
+    `<button class="proj-pill-btn ${selectedDonateProjId === 'all' ? 'active' : ''}" onclick="selectDonateProject('all')">📊 সকল প্রকল্প (মোট)</button>`;
+
+  const isAll = selectedDonateProjId === 'all', curProj = isAll ? null : db.projects.find(p => p.id === selectedDonateProjId);
+  const budget = isAll ? db.projects.reduce((s, p) => s + Number(p.budget), 0) : Number(curProj?.budget || 0);
+  const collected = isAll ? db.projects.reduce((s, p) => s + Number(p.collected), 0) : Number(curProj?.collected || 0);
+  const unpaidPledge = isAll ? db.projects.reduce((s, p) => s + Number(p.unpaidPledge || 0), 0) : Number(curProj?.unpaidPledge || 0);
+  const totalPledged = collected + unpaidPledge, remaining = Math.max(0, budget - collected);
+  const paidPct = budget ? Math.min(100, Math.round((collected / budget) * 100)) : 0;
+  const pledgePct = budget ? Math.min(100 - paidPct, Math.round((unpaidPledge / budget) * 100)) : 0;
+
+  document.getElementById('donateSelectedBadge').textContent = isAll ? 'সকল প্রকল্পের মোট' : (curProj?.status || 'প্রকল্প');
+  document.getElementById('donateKpis').innerHTML = `
+    <div class="kpi-card info"><div class="kpi-label">সম্ভাব্য ব্যয় (বাজেট)</div><div class="kpi-value">${fmtTaka(budget)}</div><div class="kpi-sub">${isAll ? toBnNum(db.projects.length) + ' টি প্রকল্প' : curProj?.name}</div></div>
+    <div class="kpi-card success"><div class="kpi-label">অলরেডি দান আদায়</div><div class="kpi-value" style="color:var(--success);">${fmtTaka(collected)}</div><div class="kpi-sub">বাজেটের ${toBnNum(paidPct)}% হাতে প্রাপ্ত</div></div>
+    <div class="kpi-card gold"><div class="kpi-label">ওয়াদা কিন্তু অনাদায়ী</div><div class="kpi-value" style="color:var(--gold-dark);">${fmtTaka(unpaidPledge)}</div><div class="kpi-sub">মোট ওয়াদা: ${fmtTaka(totalPledged)}</div></div>
+    <div class="kpi-card danger"><div class="kpi-label">আরও প্রয়োজন (বাকি)</div><div class="kpi-value" style="color:var(--danger);">${fmtTaka(remaining)}</div><div class="kpi-sub">ওয়াদা আদায় হলে বাকি: ${fmtTaka(Math.max(0, budget - totalPledged))}</div></div>`;
+
+  document.getElementById('donateSelectedProjDetail').innerHTML = `
+    <div style="background:var(--surface-alt);border:1px solid var(--border);border-radius:12px;padding:12px 14px;">
+      <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:700;margin-bottom:6px;flex-wrap:wrap;gap:6px;">
+        <span style="color:var(--success);">🟢 অলরেডি আদায়: ${toBnNum(paidPct)}%</span>
+        <span style="color:var(--gold-dark);">🟡 ওয়াদা (অনাদায়ী): ${toBnNum(pledgePct)}%</span>
+        <span style="color:var(--danger);">🔴 বাকি: ${toBnNum(Math.max(0, 100 - paidPct - pledgePct))}%</span>
+      </div>
+      <div class="dual-track"><div class="dual-paid" style="width:${paidPct}%"></div><div class="dual-pledged" style="width:${pledgePct}%"></div></div>
+    </div>`;
+
+  document.getElementById('donateProjectCards').innerHTML = db.projects.map(p => {
+    const rem = Math.max(0, p.budget - p.collected);
+    const pPaidPct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
+    const pPlPct = p.budget ? Math.min(100 - pPaidPct, Math.round(((p.unpaidPledge || 0) / p.budget) * 100)) : 0;
+    return `
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px;">
+          <h3 style="margin:0;">${p.name}</h3>
+          <span class="badge ${p.status==='সম্পন্ন'?'badge-completed':p.status==='পরিকল্পিত'?'badge-planned':'badge-ongoing'}">${p.status}</span>
+        </div>
+        <div style="font-size:0.84rem;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+          <div>সম্ভাব্য ব্যয়:<br><strong>${fmtTaka(p.budget)}</strong></div>
+          <div style="color:var(--success);">অলরেডি আদায়:<br><strong>${fmtTaka(p.collected)}</strong></div>
+          <div style="color:var(--gold-dark);">ওয়াদা (অনাদায়ী):<br><strong>${fmtTaka(p.unpaidPledge || 0)}</strong></div>
+          <div style="color:var(--danger);">আরও প্রয়োজন:<br><strong>${fmtTaka(rem)}</strong></div>
+        </div>
+        <div class="dual-track" style="margin-bottom:10px;"><div class="dual-paid" style="width:${pPaidPct}%"></div><div class="dual-pledged" style="width:${pPlPct}%"></div></div>
+        <button class="btn btn-primary btn-sm" style="width:100%;" onclick="goDonateForProject('${p.id}')">🤲 এই প্রজেক্টে দান / ওয়াদা করুন</button>
+      </div>`;
+  }).join('');
+
+  document.getElementById('donateSummaryTable').innerHTML = db.projects.map(p => {
+    const rem = Math.max(0, p.budget - p.collected), pct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
+    return `<tr><td><strong>${p.name}</strong></td><td>${fmtTaka(p.budget)}</td><td>${fmtTaka(p.pledgedTotal || p.collected)}</td><td style="color:var(--success);font-weight:700;">${fmtTaka(p.collected)}</td><td style="color:var(--gold-dark);font-weight:700;">${fmtTaka(p.unpaidPledge || 0)}</td><td style="color:var(--danger);font-weight:700;">${fmtTaka(rem)}</td><td>${toBnNum(pct)}%</td></tr>`;
+  }).join('');
+
+  const s = db.settings;
+  document.getElementById('pay-mobile').innerHTML = `
+    <div class="pay-box"><div class="pay-brand"><div class="pay-logo" style="background:#e2136e;">bKash</div><div><div style="font-size:0.78rem;color:var(--muted);">বিকাশ</div><div class="pay-num">${s.bkash}</div></div></div><button class="btn btn-primary btn-sm" onclick="copyText('${s.bkash}','বিকাশ নম্বর')">📋 কপি</button></div>
+    <div class="pay-box"><div class="pay-brand"><div class="pay-logo" style="background:#f26522;">Nagad</div><div><div style="font-size:0.78rem;color:var(--muted);">নগদ</div><div class="pay-num">${s.nagad}</div></div></div><button class="btn btn-primary btn-sm" onclick="copyText('${s.nagad}','নগদ নম্বর')">📋 কপি</button></div>
+    <div class="pay-box"><div class="pay-brand"><div class="pay-logo" style="background:#8c3494;">Rocket</div><div><div style="font-size:0.78rem;color:var(--muted);">রকেট</div><div class="pay-num">${s.rocket}</div></div></div><button class="btn btn-primary btn-sm" onclick="copyText('${s.rocket}','রকেট নম্বর')">📋 কপি</button></div>`;
+  document.getElementById('pay-bank').innerHTML = `
+    <div class="pay-box" style="display:block;">
+      <div class="pay-brand" style="margin-bottom:10px;"><div class="pay-logo" style="background:#0d6b58;font-size:1.2rem;">🏦</div><div><strong>${s.bankName}</strong><br><span style="font-size:0.8rem;color:var(--muted);">শাখা: ${s.bankBranch}</span></div></div>
+      <div style="font-size:0.88rem;margin-bottom:8px;">হিসাবের নাম: <strong>${s.bankAccName}</strong></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;"><div>হিসাব নম্বর: <span class="pay-num">${s.bankAccNo}</span></div><button class="btn btn-primary btn-sm" onclick="copyText('${s.bankAccNo}','হিসাব নম্বর')">📋 কপি</button></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;"><div>রাউটিং নম্বর: <strong>${s.bankRouting}</strong></div><button class="btn btn-outline btn-sm" onclick="copyText('${s.bankRouting}','রাউটিং নম্বর')">📋 কপি</button></div>
+    </div>`;
+  document.getElementById('pay-cash').innerHTML = `
+    <div class="pay-box" style="display:block;">
+      <div class="pay-brand" style="margin-bottom:8px;"><div class="pay-logo" style="background:#15803d;font-size:1.2rem;">💵</div><div><strong>সরাসরি নগদ অনুদান</strong><br><span style="font-size:0.8rem;color:var(--muted);">রসিদসহ মসজিদের কোষাধ্যক্ষের নিকট</span></div></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;"><div><strong>${s.cashName}</strong><br><span class="pay-num">${s.cashPhone}</span></div><a class="btn btn-primary btn-sm" href="tel:${s.cashPhone.replace(/[^0-9+]/g,'')}">📞 কল করুন</a></div>
+    </div>`;
+
+  const pubSel = document.getElementById('pubDonProject');
+  pubSel.innerHTML = db.projects.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+  if (curProj) pubSel.value = curProj.id;
+  renderDonateChart();
+}
+
+function renderDonateChart() {
+  const el = document.getElementById('donateCompareChart'); if (!el) return;
+  const labels = db.projects.map(p => p.name.length > 18 ? p.name.slice(0, 18) + '…' : p.name);
+  if (charts.donateCmp) charts.donateCmp.destroy();
+  charts.donateCmp = new Chart(el, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'সম্ভাব্য ব্যয়', data: db.projects.map(p => p.budget), backgroundColor: '#1d6fa5', borderRadius: 5 },
+        { label: 'অলরেডি আদায়', data: db.projects.map(p => p.collected), backgroundColor: '#0d6b58', borderRadius: 5 },
+        { label: 'ওয়াদা (অনাদায়ী)', data: db.projects.map(p => p.unpaidPledge || 0), backgroundColor: '#d4a135', borderRadius: 5 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+  });
+}
+
+/* ACCOUNTS, NOTICES, PROJECTS, GALLERY, DONORS, COMMITTEE */
 function renderAccountsFilters() {
   const sel = document.getElementById('accMonthFilter'), curVal = sel.value;
   const months = [...new Set(db.accounts.map(a => a.month))].sort().reverse(), thisMonth = new Date().toISOString().slice(0, 7);
@@ -2072,16 +2319,14 @@ function renderAccountsFilters() {
   sel.innerHTML = months.map(m => { const [y, mo] = m.split('-'); return `<option value="${m}">${BN_MONTHS[Number(mo)-1]} ${toBnNum(y)}</option>`; }).join('');
   if (curVal && months.includes(curVal)) sel.value = curVal;
 }
-
 function renderAccounts() {
   const month = document.getElementById('accMonthFilter').value, items = db.accounts.filter(a => a.month === month);
   const incomes = items.filter(a => a.type === 'income'), expenses = items.filter(a => a.type === 'expense');
-  const totalIn = incomes.reduce((s, x) => s + Number(x.amount), 0), totalOut = expenses.reduce((s, x) => s + Number(x.amount), 0);
-  const net = totalIn - totalOut, isSurplus = net >= 0;
+  const totalIn = incomes.reduce((s, x) => s + Number(x.amount), 0), totalOut = expenses.reduce((s, x) => s + Number(x.amount), 0), net = totalIn - totalOut, isSurplus = net >= 0;
 
   document.getElementById('accKpis').innerHTML = `
-    <div class="kpi-card success"><div class="kpi-label">মোট মাসিক আয়</div><div class="kpi-value" style="color:var(--success);">${fmtTaka(totalIn)}</div><div class="kpi-sub">${toBnNum(incomes.length)} টি খাত এন্ট্রি</div></div>
-    <div class="kpi-card danger"><div class="kpi-label">মোট মাসিক ব্যয়</div><div class="kpi-value" style="color:var(--danger);">${fmtTaka(totalOut)}</div><div class="kpi-sub">${toBnNum(expenses.length)} টি খাত এন্ট্রি</div></div>
+    <div class="kpi-card success"><div class="kpi-label">মোট মাসিক আয়</div><div class="kpi-value" style="color:var(--success);">${fmtTaka(totalIn)}</div><div class="kpi-sub">${toBnNum(incomes.length)} টি এন্ট্রি</div></div>
+    <div class="kpi-card danger"><div class="kpi-label">মোট মাসিক ব্যয়</div><div class="kpi-value" style="color:var(--danger);">${fmtTaka(totalOut)}</div><div class="kpi-sub">${toBnNum(expenses.length)} টি এন্ট্রি</div></div>
     <div class="kpi-card ${isSurplus ? 'gold' : 'danger'}"><div class="kpi-label">${isSurplus ? 'মাসিক উদ্বৃত্ত (Surplus)' : 'মাসিক ঘাটতি (Deficit)'}</div><div class="kpi-value" style="color:${isSurplus ? 'var(--primary-dark)' : 'var(--danger)'};">${fmtTaka(Math.abs(net))}</div><div class="kpi-sub">${isSurplus ? '✅ তহবিলে জমা আছে' : '⚠️ ঘাটতি পূরণ প্রয়োজন'}</div></div>
     <div class="kpi-card info"><div class="kpi-label">সর্বমোট এন্ট্রি</div><div class="kpi-value">${toBnNum(items.length)} টি</div><div class="kpi-sub">স্বচ্ছ মাসিক হিসাব</div></div>`;
 
@@ -2090,7 +2335,7 @@ function renderAccounts() {
 
   const catMap = {};
   items.forEach(x => { const k = (x.type === 'income' ? '📥 ' : '📤 ') + x.category; catMap[k] = (catMap[k] || 0) + Number(x.amount); });
-  document.getElementById('accCategorySummary').innerHTML = Object.entries(catMap).map(([k, v]) => `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--border);font-size:0.9rem;"><span>${k}</span><strong>${fmtTaka(v)}</strong></div>`).join('') || '<p style="color:var(--muted);">কোনো ডেটা নেই।</p>';
+  document.getElementById('accCategorySummary').innerHTML = Object.entries(catMap).map(([k, v]) => `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--border);font-size:0.88rem;"><span>${k}</span><strong>${fmtTaka(v)}</strong></div>`).join('') || '<p style="color:var(--muted);">কোনো ডেটা নেই।</p>';
 
   const el = document.getElementById('accBarChart');
   if (el) {
@@ -2110,192 +2355,22 @@ function renderNotices() {
     <div class="notice-card ${n.category==='জরুরি'?'urgent':n.category==='অনুষ্ঠান'?'event':''}">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
         <span class="badge ${n.category==='জরুরি'?'badge-danger':n.category==='অনুষ্ঠান'?'badge-gold':'badge-ongoing'}">${n.category}</span>
-        <span style="font-size:0.78rem;color:var(--muted);">📅 ${n.date}</span>
+        <span style="font-size:0.76rem;color:var(--muted);">📅 ${n.date}</span>
       </div>
-      <h4 style="font-size:1.02rem;color:var(--primary-dark);margin-bottom:4px;">${n.title}</h4>
-      <p style="font-size:0.88rem;color:var(--text);">${n.body}</p>
+      <h4 style="font-size:1rem;color:var(--primary-dark);margin-bottom:4px;">${n.title}</h4>
+      <p style="font-size:0.86rem;color:var(--text);">${n.body}</p>
     </div>`;
   document.getElementById('noticesList').innerHTML = list.map(rc).join('') || '<p style="color:var(--muted);">কোনো নোটিশ পাওয়া যায়নি।</p>';
   document.getElementById('homeNoticesPreview').innerHTML = db.notices.slice(0, 2).map(rc).join('') || '<p style="color:var(--muted);">কোনো নোটিশ নেই।</p>';
-}
-
-function projectCoverHtml(p) {
-  const galImg = db.gallery.find(g => g.projectId === p.id && g.img)?.img;
-  const cover = p.coverImg || galImg || '';
-  if (cover) return `<div class="proj-cover-wrap"><img src="${cover}" alt="${p.name}" /></div>`;
-  return `<div class="proj-cover-wrap">${svgPlaceholderBanner(p.name, `কাজের অগ্রগতি: ${toBnNum(p.progress)}%`, '🏗️')}</div>`;
-}
-
-function renderHome() {
-  const totalBudget = db.projects.reduce((s, p) => s + Number(p.budget), 0);
-  const totalCollected = db.projects.reduce((s, p) => s + Number(p.collected), 0);
-  const remaining = Math.max(0, totalBudget - totalCollected);
-  const avgProg = db.projects.length ? Math.round(db.projects.reduce((s, p) => s + Number(p.progress), 0) / db.projects.length) : 0;
-
-  document.getElementById('homeKpis').innerHTML = `
-    <div class="kpi-card"><div class="kpi-label">মোট প্রকল্প</div><div class="kpi-value">${toBnNum(db.projects.length)} টি</div><div class="kpi-sub">গড় কাজের অগ্রগতি: ${toBnNum(avgProg)}%</div></div>
-    <div class="kpi-card info"><div class="kpi-label">মোট সম্ভাব্য ব্যয়</div><div class="kpi-value">${fmtTaka(totalBudget)}</div><div class="kpi-sub">সকল প্রকল্পের প্রাক্কলিত ব্যয়</div></div>
-    <div class="kpi-card gold"><div class="kpi-label">মোট সংগৃহীত ফান্ড</div><div class="kpi-value">${fmtTaka(totalCollected)}</div><div class="kpi-sub">মোট দাতা এন্ট্রি: ${toBnNum(db.donors.length)} টি</div></div>
-    <div class="kpi-card danger"><div class="kpi-label">অবশিষ্ট প্রয়োজন</div><div class="kpi-value">${fmtTaka(remaining)}</div><div class="kpi-sub">আপনার দানে প্রকল্প এগিয়ে নিন</div></div>`;
-
-  document.getElementById('homeProjectsPreview').innerHTML = db.projects.slice(0, 3).map(p => {
-    const fundPct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
-    const cCount = db.comments.filter(c => c.projectId === p.id).length;
-    return `
-      <div style="border:1px solid var(--border);border-radius:14px;padding:14px;background:var(--surface-alt);">
-        ${projectCoverHtml(p)}
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:6px;">
-          <strong style="font-size:0.95rem;">${p.name}</strong>
-          <span class="badge ${p.status==='সম্পন্ন'?'badge-completed':p.status==='পরিকল্পিত'?'badge-planned':'badge-ongoing'}">${p.status}</span>
-        </div>
-        <div class="progress-wrap"><div class="progress-header"><span>কাজের অগ্রগতি</span><span>${toBnNum(p.progress)}%</span></div><div class="progress-track"><div class="progress-fill" style="width:${p.progress}%"></div></div></div>
-        <div class="progress-wrap"><div class="progress-header"><span>ফান্ড সংগ্রহ</span><span>${toBnNum(fundPct)}%</span></div><div class="progress-track"><div class="progress-fill gold" style="width:${fundPct}%"></div></div></div>
-        <div style="display:flex;gap:6px;margin-top:8px;">
-          <button class="btn btn-gold btn-sm" style="flex:1;" onclick="goDonateForProject('${p.id}')">🤲 দান করুন</button>
-          <button class="btn btn-outline btn-sm" onclick="openCommentsModal('${p.id}')">💬 (${toBnNum(cCount)})</button>
-        </div>
-      </div>`;
-  }).join('');
-
-  const curTerm = db.committeeTerms.find(t => t.isCurrent) || db.committeeTerms[0];
-  document.getElementById('homeCommitteePreview').innerHTML = (curTerm?.members || []).slice(0, 3).map(memberCardHtml).join('');
-  renderHomeCharts();
-}
-
-function renderHomeCharts() {
-  const labels = db.projects.map(p => p.name.length > 18 ? p.name.slice(0, 18) + '…' : p.name);
-  if (charts.homeBar) charts.homeBar.destroy();
-  charts.homeBar = new Chart(document.getElementById('homeBarChart'), {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        { label: 'সম্ভাব্য ব্যয় (৳)', data: db.projects.map(p => p.budget), backgroundColor: '#a7dfd1', borderRadius: 6 },
-        { label: 'সংগৃহীত ফান্ড (৳)', data: db.projects.map(p => p.collected), backgroundColor: '#0d6b58', borderRadius: 6 }
-      ]
-    },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-  });
-  if (charts.homeDonut) charts.homeDonut.destroy();
-  charts.homeDonut = new Chart(document.getElementById('homeDonutChart'), {
-    type: 'doughnut',
-    data: { labels, datasets: [{ data: db.projects.map(p => p.collected), backgroundColor: ['#0d6b58', '#d4a135', '#1d6fa5', '#15803d', '#0f766e', '#d13438'] }] },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-  });
-}
-
-function renderDonateDashboard() {
-  const qrImg = db.settings.banglaQrImg;
-  const qrNote = db.settings.banglaQrNote || 'যেকোনো ব্যাংক বা মোবাইল ব্যাংকিং অ্যাপ থেকে বাংলা QR স্ক্যান করে সরাসরি দান করুন।';
-
-  document.getElementById('donateBanglaQrBox').innerHTML = `
-    <div class="bqr-card">
-      <div class="bqr-info">
-        <div class="bqr-badge">🇧🇩 বাংলা QR (Bangla QR)</div>
-        <h3 style="margin-bottom:6px;color:var(--primary-dark);font-size:1.15rem;">স্ক্যান করে সরাসরি দান করুন</h3>
-        <p style="font-size:0.88rem;color:var(--muted);">${qrNote}</p>
-        <div class="bqr-apps">
-          <span class="bqr-app-chip">bKash</span><span class="bqr-app-chip">Nagad</span><span class="bqr-app-chip">Rocket</span><span class="bqr-app-chip">CellFin</span><span class="bqr-app-chip">ব্যাংক অ্যাপ</span>
-        </div>
-        ${qrImg ? `<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
-          <button class="btn btn-primary btn-sm" onclick="openQrLightbox()">🔍 বড় করে দেখুন</button>
-          <a class="btn btn-outline btn-sm" href="${qrImg}" download="masjid-bangla-qr.jpg">⬇️ QR ডাউনলোড</a>
-        </div>` : `<div style="margin-top:10px;font-size:0.78rem;color:var(--muted);">💡 এডমিন প্যানেল → ⚙️ সেটিংস থেকে বাংলা QR ছবি আপলোড করা যাবে।</div>`}
-      </div>
-      <div class="bqr-img-box" onclick="${qrImg ? 'openQrLightbox()' : 'openAdminModal()'}">
-        ${qrImg ? `<img src="${qrImg}" alt="Bangla QR" />` : svgQrPlaceholder()}
-        <span style="font-size:0.72rem;color:var(--primary-dark);font-weight:700;margin-top:4px;">${qrImg ? 'ট্যাপ করে বড় করুন' : 'QR আপলোড করুন'}</span>
-      </div>
-    </div>`;
-
-  const totalBudget = db.projects.reduce((s, p) => s + Number(p.budget), 0);
-  const totalExpected = db.projects.reduce((s, p) => s + Number(p.expected), 0);
-  const totalCollected = db.projects.reduce((s, p) => s + Number(p.collected), 0);
-  const totalRem = Math.max(0, totalBudget - totalCollected);
-
-  document.getElementById('donateKpis').innerHTML = `
-    <div class="kpi-card info"><div class="kpi-label">মোট সম্ভাব্য ব্যয়</div><div class="kpi-value">${fmtTaka(totalBudget)}</div></div>
-    <div class="kpi-card"><div class="kpi-label">প্রত্যাশিত দান প্রাপ্তি</div><div class="kpi-value">${fmtTaka(totalExpected)}</div></div>
-    <div class="kpi-card gold"><div class="kpi-label">এখন পর্যন্ত কালেকশন</div><div class="kpi-value">${fmtTaka(totalCollected)}</div></div>
-    <div class="kpi-card danger"><div class="kpi-label">অবশিষ্ট কালেকশন</div><div class="kpi-value">${fmtTaka(totalRem)}</div></div>`;
-
-  document.getElementById('donateProjectCards').innerHTML = db.projects.map(p => {
-    const rem = Math.max(0, p.budget - p.collected), pct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
-    return `
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px;">
-          <h3 style="margin:0;">${p.name}</h3>
-          <span class="badge ${p.status==='সম্পন্ন'?'badge-completed':p.status==='পরিকল্পিত'?'badge-planned':'badge-ongoing'}">${p.status}</span>
-        </div>
-        <div style="font-size:0.86rem;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
-          <div>সম্ভাব্য ব্যয়:<br><strong>${fmtTaka(p.budget)}</strong></div>
-          <div>প্রত্যাশিত দান:<br><strong>${fmtTaka(p.expected)}</strong></div>
-          <div style="color:var(--success);">কালেকশন:<br><strong>${fmtTaka(p.collected)}</strong></div>
-          <div style="color:var(--danger);">অবশিষ্ট:<br><strong>${fmtTaka(rem)}</strong></div>
-        </div>
-        <div class="progress-wrap"><div class="progress-header"><span>ফান্ড সংগ্রহ</span><span>${toBnNum(pct)}%</span></div><div class="progress-track"><div class="progress-fill gold" style="width:${pct}%"></div></div></div>
-        <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px;" onclick="goDonateForProject('${p.id}')">🤲 এই প্রজেক্টে দান করুন</button>
-      </div>`;
-  }).join('');
-
-  document.getElementById('donateSummaryTable').innerHTML = db.projects.map(p => {
-    const rem = Math.max(0, p.budget - p.collected), pct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
-    return `<tr><td><strong>${p.name}</strong></td><td>${fmtTaka(p.budget)}</td><td>${fmtTaka(p.expected)}</td><td style="color:var(--success);font-weight:700;">${fmtTaka(p.collected)}</td><td style="color:var(--danger);font-weight:700;">${fmtTaka(rem)}</td><td>${toBnNum(pct)}%</td></tr>`;
-  }).join('');
-
-  const s = db.settings;
-  document.getElementById('pay-mobile').innerHTML = `
-    <div class="pay-box"><div class="pay-brand"><div class="pay-logo" style="background:#e2136e;">bKash</div><div><div style="font-size:0.8rem;color:var(--muted);">বিকাশ</div><div class="pay-num">${s.bkash}</div></div></div><button class="btn btn-primary btn-sm" onclick="copyText('${s.bkash}','বিকাশ নম্বর')">📋 কপি</button></div>
-    <div class="pay-box"><div class="pay-brand"><div class="pay-logo" style="background:#f26522;">Nagad</div><div><div style="font-size:0.8rem;color:var(--muted);">নগদ</div><div class="pay-num">${s.nagad}</div></div></div><button class="btn btn-primary btn-sm" onclick="copyText('${s.nagad}','নগদ নম্বর')">📋 কপি</button></div>
-    <div class="pay-box"><div class="pay-brand"><div class="pay-logo" style="background:#8c3494;">Rocket</div><div><div style="font-size:0.8rem;color:var(--muted);">রকেট</div><div class="pay-num">${s.rocket}</div></div></div><button class="btn btn-primary btn-sm" onclick="copyText('${s.rocket}','রকেট নম্বর')">📋 কপি</button></div>`;
-  document.getElementById('pay-bank').innerHTML = `
-    <div class="pay-box" style="display:block;">
-      <div class="pay-brand" style="margin-bottom:10px;"><div class="pay-logo" style="background:#0d6b58;font-size:1.2rem;">🏦</div><div><strong>${s.bankName}</strong><br><span style="font-size:0.82rem;color:var(--muted);">শাখা: ${s.bankBranch}</span></div></div>
-      <div style="font-size:0.9rem;margin-bottom:8px;">হিসাবের নাম: <strong>${s.bankAccName}</strong></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
-        <div>হিসাব নম্বর: <span class="pay-num">${s.bankAccNo}</span></div>
-        <button class="btn btn-primary btn-sm" onclick="copyText('${s.bankAccNo}','হিসাব নম্বর')">📋 হিসাব কপি</button>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-        <div>রাউটিং নম্বর: <strong>${s.bankRouting}</strong></div>
-        <button class="btn btn-outline btn-sm" onclick="copyText('${s.bankRouting}','রাউটিং নম্বর')">📋 রাউটিং কপি</button>
-      </div>
-    </div>`;
-  document.getElementById('pay-cash').innerHTML = `
-    <div class="pay-box" style="display:block;">
-      <div class="pay-brand" style="margin-bottom:8px;"><div class="pay-logo" style="background:#15803d;font-size:1.2rem;">💵</div><div><strong>সরাসরি নগদ অনুদান</strong><br><span style="font-size:0.82rem;color:var(--muted);">রসিদসহ মসজিদের কোষাধ্যক্ষের নিকট</span></div></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;">
-        <div><strong>${s.cashName}</strong><br><span class="pay-num">${s.cashPhone}</span></div>
-        <a class="btn btn-primary btn-sm" href="tel:${s.cashPhone.replace(/[^0-9+]/g,'')}">📞 কল করুন</a>
-      </div>
-    </div>`;
-  document.getElementById('pubDonProject').innerHTML = db.projects.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-  renderDonateChart();
-}
-
-function renderDonateChart() {
-  const el = document.getElementById('donateCompareChart'); if (!el) return;
-  const labels = db.projects.map(p => p.name.length > 18 ? p.name.slice(0, 18) + '…' : p.name);
-  if (charts.donateCmp) charts.donateCmp.destroy();
-  charts.donateCmp = new Chart(el, {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        { label: 'সম্ভাব্য ব্যয়', data: db.projects.map(p => p.budget), backgroundColor: '#1d6fa5', borderRadius: 5 },
-        { label: 'প্রত্যাশিত দান', data: db.projects.map(p => p.expected), backgroundColor: '#d4a135', borderRadius: 5 },
-        { label: 'কালেকশন', data: db.projects.map(p => p.collected), backgroundColor: '#0d6b58', borderRadius: 5 }
-      ]
-    },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-  });
 }
 
 function renderProjects() {
   const status = document.getElementById('projStatusFilter').value;
   const list = status === 'all' ? db.projects : db.projects.filter(p => p.status === status);
   document.getElementById('projectsList').innerHTML = list.map(p => {
-    const rem = Math.max(0, p.budget - p.collected), fundPct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
+    const rem = Math.max(0, p.budget - p.collected);
+    const paidPct = p.budget ? Math.min(100, Math.round((p.collected / p.budget) * 100)) : 0;
+    const pledgePct = p.budget ? Math.min(100 - paidPct, Math.round(((p.unpaidPledge || 0) / p.budget) * 100)) : 0;
     const cCount = db.comments.filter(c => c.projectId === p.id).length;
     return `
       <div class="card">
@@ -2304,12 +2379,16 @@ function renderProjects() {
           <h3 style="margin:0;">${p.name}</h3>
           <span class="badge ${p.status==='সম্পন্ন'?'badge-completed':p.status==='পরিকল্পিত'?'badge-planned':'badge-ongoing'}">${p.status}</span>
         </div>
-        <p style="font-size:0.87rem;color:var(--muted);margin-bottom:10px;">${p.desc || ''}</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:10px;">${p.desc || ''}</p>
         <div class="progress-wrap"><div class="progress-header"><span>কাজের অগ্রগতি</span><span>${toBnNum(p.progress)}%</span></div><div class="progress-track"><div class="progress-fill" style="width:${p.progress}%"></div></div></div>
-        <div class="progress-wrap"><div class="progress-header"><span>ফান্ড সংগ্রহ (${fmtTaka(p.collected)} / ${fmtTaka(p.budget)})</span><span>${toBnNum(fundPct)}%</span></div><div class="progress-track"><div class="progress-fill gold" style="width:${fundPct}%"></div></div></div>
-        <div style="font-size:0.82rem;color:var(--danger);margin-bottom:10px;">অবশিষ্ট প্রয়োজন: <strong>${fmtTaka(rem)}</strong></div>
+        <div style="font-size:0.8rem;margin:8px 0 4px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;">
+          <span style="color:var(--success);font-weight:700;">আদায়: ${fmtTaka(p.collected)}</span>
+          <span style="color:var(--gold-dark);font-weight:700;">ওয়াদা বাকি: ${fmtTaka(p.unpaidPledge || 0)}</span>
+        </div>
+        <div class="dual-track" style="margin-bottom:8px;"><div class="dual-paid" style="width:${paidPct}%"></div><div class="dual-pledged" style="width:${pledgePct}%"></div></div>
+        <div style="font-size:0.8rem;color:var(--danger);margin-bottom:10px;">আরও প্রয়োজন: <strong>${fmtTaka(rem)}</strong> (বাজেট: ${fmtTaka(p.budget)})</div>
         <div style="display:flex;gap:8px;">
-          <button class="btn btn-gold btn-sm" style="flex:1;" onclick="goDonateForProject('${p.id}')">🤲 দান করুন</button>
+          <button class="btn btn-gold btn-sm" style="flex:1;" onclick="goDonateForProject('${p.id}')">🤲 দান / ওয়াদা</button>
           <button class="btn btn-outline btn-sm" onclick="openCommentsModal('${p.id}')">💬 মন্তব্য (${toBnNum(cCount)})</button>
         </div>
       </div>`;
@@ -2324,11 +2403,7 @@ function openCommentsModal(projId) {
 }
 function renderCommentsList(projId) {
   const list = db.comments.filter(c => c.projectId === projId);
-  document.getElementById('cmModalList').innerHTML = list.map(c => `
-    <div style="border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:8px;background:var(--surface-alt);">
-      <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:4px;"><strong>${c.author}</strong><span style="color:var(--muted);">${c.date}</span></div>
-      <div style="font-size:0.88rem;">${c.text}</div>
-    </div>`).join('') || '<p style="color:var(--muted);font-size:0.88rem;">এখনো কোনো মন্তব্য নেই। প্রথম মন্তব্য করুন!</p>';
+  document.getElementById('cmModalList').innerHTML = list.map(c => `<div style="border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:8px;background:var(--surface-alt);"><div style="display:flex;justify-content:space-between;font-size:0.79rem;margin-bottom:4px;"><strong>${c.author}</strong><span style="color:var(--muted);">${c.date}</span></div><div style="font-size:0.86rem;">${c.text}</div></div>`).join('') || '<p style="color:var(--muted);font-size:0.86rem;">এখনো কোনো মন্তব্য নেই। প্রথম মন্তব্য করুন!</p>';
 }
 function submitProjectComment(e) {
   e.preventDefault();
@@ -2349,22 +2424,13 @@ function renderGallery() {
   document.getElementById('galleryGrid').innerHTML = items.map(g => {
     const pName = db.projects.find(p => p.id === g.projectId)?.name || 'সাধারণ';
     const media = g.img ? `<img src="${g.img}" alt="${g.title}" />` : svgPlaceholderBanner(g.title, 'এডমিন থেকে আসল ছবি আপলোড করুন', g.icon || '📸');
-    return `
-      <div class="gallery-card" onclick="openLightbox('${g.id}')">
-        <div class="gallery-media">${media}</div>
-        <div class="gallery-body">
-          <span class="badge badge-ongoing" style="margin-bottom:6px;">${pName}</span>
-          <h4 style="font-size:0.96rem;margin-bottom:4px;">${g.title}</h4>
-          <p style="font-size:0.82rem;color:var(--muted);">${g.desc || ''}</p>
-          <div style="font-size:0.76rem;color:var(--muted);margin-top:6px;">📅 ${g.date}</div>
-        </div>
-      </div>`;
+    return `<div class="gallery-card" onclick="openLightbox('${g.id}')"><div class="gallery-media">${media}</div><div class="gallery-body"><span class="badge badge-ongoing" style="margin-bottom:6px;">${pName}</span><h4 style="font-size:0.95rem;margin-bottom:4px;">${g.title}</h4><p style="font-size:0.81rem;color:var(--muted);">${g.desc || ''}</p><div style="font-size:0.75rem;color:var(--muted);margin-top:6px;">📅 ${g.date}</div></div></div>`;
   }).join('') || '<p style="color:var(--muted);">এখনো কোনো ছবি যোগ করা হয়নি।</p>';
 }
 function openQrLightbox() {
   if (!db.settings.banglaQrImg) return;
   document.getElementById('lbTitle').textContent = '🇧🇩 বাংলা QR — ' + db.settings.name;
-  document.getElementById('lbMediaWrap').innerHTML = `<img src="${db.settings.banglaQrImg}" style="width:100%;max-height:58vh;object-fit:contain;" />`;
+  document.getElementById('lbMediaWrap').innerHTML = `<img src="${db.settings.banglaQrImg}" style="width:100%;max-height:56vh;object-fit:contain;" />`;
   document.getElementById('lbDesc').textContent = db.settings.banglaQrNote || 'যেকোনো ব্যাংক বা মোবাইল ব্যাংকিং অ্যাপ থেকে স্ক্যান করুন।';
   document.getElementById('lightboxModal').classList.add('open');
 }
@@ -2375,9 +2441,7 @@ async function removeBanglaQr() {
 function openLightbox(id) {
   const g = db.gallery.find(x => x.id === id); if (!g) return;
   document.getElementById('lbTitle').textContent = g.title;
-  document.getElementById('lbMediaWrap').innerHTML = g.img
-    ? `<img src="${g.img}" style="width:100%;max-height:58vh;object-fit:contain;" />`
-    : `<div style="width:100%;height:260px;">${svgPlaceholderBanner(g.title, g.date, g.icon || '📸')}</div>`;
+  document.getElementById('lbMediaWrap').innerHTML = g.img ? `<img src="${g.img}" style="width:100%;max-height:56vh;object-fit:contain;" />` : `<div style="width:100%;height:240px;">${svgPlaceholderBanner(g.title, g.date, g.icon || '📸')}</div>`;
   document.getElementById('lbDesc').textContent = `${g.desc || ''} (তারিখ: ${g.date})`;
   document.getElementById('lightboxModal').classList.add('open');
 }
@@ -2390,19 +2454,22 @@ function renderDonorFilters() {
 function renderDonors() {
   const q = (document.getElementById('donorSearch').value || '').trim().toLowerCase();
   const pf = document.getElementById('donorProjFilter').value || 'all';
+  const sf = document.getElementById('donorStatusFilter')?.value || 'all';
   const mf = document.getElementById('donorMethodFilter').value || 'all';
-  const list = db.donors.filter(d => (!q || d.name.toLowerCase().includes(q)) && (pf === 'all' || d.projectId === pf) && (mf === 'all' || d.method.includes(mf)));
-  document.getElementById('donorTotalBadge').textContent = `মোট: ${fmtTaka(list.reduce((s, d) => s + Number(d.amount), 0))} (${toBnNum(list.length)} জন)`;
+  const list = db.donors.filter(d => (!q || d.name.toLowerCase().includes(q)) && (pf === 'all' || d.projectId === pf) && (sf === 'all' || d.statusKey === sf) && (mf === 'all' || (d.method || '').includes(mf)));
+  const sumPaid = list.reduce((s, d) => s + Number(d.paid || 0), 0), sumDue = list.reduce((s, d) => s + Number(d.due || 0), 0);
+  document.getElementById('donorTotalBadge').textContent = `আদায়: ${fmtTaka(sumPaid)} | অনাদায়ী: ${fmtTaka(sumDue)} (${toBnNum(list.length)} টি)`;
   document.getElementById('donorsTableBody').innerHTML = list.map(d => {
     const pName = db.projects.find(p => p.id === d.projectId)?.name || 'সাধারণ ফান্ড';
-    return `<tr><td>${d.date}</td><td><strong>${d.name}</strong></td><td>${pName}</td><td><span class="badge badge-gold">${d.method}</span></td><td style="font-weight:700;color:var(--primary-dark);">${fmtTaka(d.amount)}</td></tr>`;
-  }).join('') || '<tr><td colspan="5" style="text-align:center;color:var(--muted);">কোনো তথ্য পাওয়া যায়নি।</td></tr>';
+    const bCls = d.statusKey === 'paid' ? 'badge-completed' : (d.statusKey === 'partial' ? 'badge-gold' : 'badge-danger');
+    return `<tr><td>${d.date}</td><td><strong>${d.name}</strong><div style="font-size:0.73rem;color:var(--muted);">${d.method || ''}</div></td><td>${pName}</td><td>${fmtTaka(d.pledged)}</td><td style="font-weight:700;color:var(--success);">${fmtTaka(d.paid)}</td><td style="font-weight:700;color:${d.due>0?'var(--danger)':'var(--muted)'};">${fmtTaka(d.due)}</td><td><span class="badge ${bCls}">${d.statusLabel}</span></td></tr>`;
+  }).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted);">কোনো তথ্য পাওয়া যায়নি।</td></tr>';
 }
 
 function memberCardHtml(m) {
   const avatarInner = m.photo ? `<img src="${m.photo}" alt="${m.name}" />` : (m.name || 'ম').trim().charAt(0);
   const telBtn = m.phone ? `<a class="btn btn-outline btn-sm" style="margin-top:6px;" href="tel:${m.phone.replace(/[^0-9+]/g,'')}">📞 ${m.phone}</a>` : '';
-  return `<div class="member-card"><div class="avatar">${avatarInner}</div><div style="flex:1;"><span class="badge badge-gold">${m.role}</span><div style="font-weight:700;font-size:1rem;margin-top:3px;">${m.name}</div><div style="font-size:0.82rem;color:var(--muted);">${m.note || ''}</div>${telBtn}</div></div>`;
+  return `<div class="member-card"><div class="avatar">${avatarInner}</div><div style="flex:1;"><span class="badge badge-gold">${m.role}</span><div style="font-weight:700;font-size:0.98rem;margin-top:3px;">${m.name}</div><div style="font-size:0.8rem;color:var(--muted);">${m.note || ''}</div>${telBtn}</div></div>`;
 }
 function renderCommittee() {
   if (!db.committeeTerms.some(t => t.id === selectedCommitteeTerm)) selectedCommitteeTerm = db.committeeTerms[0]?.id || '';
@@ -2414,22 +2481,23 @@ function renderCommittee() {
 function submitPublicDonation(e) {
   e.preventDefault();
   const projectId = document.getElementById('pubDonProject').value;
+  const donType = document.getElementById('pubDonType')?.value === 'pledge' ? 'ওয়াদা (পরে পরিশোধ)' : 'ইতিমধ্যে পরিশোধিত';
   const name = document.getElementById('pubDonAnon').checked ? 'নাম প্রকাশে অনিচ্ছুক' : document.getElementById('pubDonName').value.trim();
   const amount = Number(document.getElementById('pubDonAmount').value), method = document.getElementById('pubDonMethod').value;
   const trx = document.getElementById('pubDonTrx').value.trim(), date = new Date().toISOString().slice(0, 10), receiptId = String(Date.now()).slice(-6);
   const pName = db.projects.find(p => p.id === projectId)?.name || '';
-  document.getElementById('receiptBody').innerHTML = `<div><strong>রসিদ নং:</strong> #${receiptId}</div><div><strong>দাতার নাম:</strong> ${name}</div><div><strong>প্রকল্প:</strong> ${pName}</div><div><strong>পরিমাণ:</strong> ${fmtTaka(amount)}</div><div><strong>মাধ্যম:</strong> ${method} ${trx ? '(' + trx + ')' : ''}</div><div><strong>তারিখ:</strong> ${date}</div>`;
+  document.getElementById('receiptBody').innerHTML = `<div><strong>রসিদ নং:</strong> #${receiptId} (${donType})</div><div><strong>দাতার নাম:</strong> ${name}</div><div><strong>প্রকল্প:</strong> ${pName}</div><div><strong>পরিমাণ:</strong> ${fmtTaka(amount)}</div><div><strong>মাধ্যম:</strong> ${method} ${trx ? '(' + trx + ')' : ''}</div><div><strong>তারিখ:</strong> ${date}</div>`;
   const phoneDigits = (db.settings.whatsappNumber || db.settings.cashPhone || '').replace(/[^0-9]/g, '');
   const waNum = phoneDigits.startsWith('88') ? phoneDigits : (phoneDigits.startsWith('0') ? '88' + phoneDigits : phoneDigits);
-  const waMsg = encodeURIComponent(`আসসালামু আলাইকুম,\n${db.settings.name}-এর জন্য অনুদান পাঠিয়েছি:\nরসিদ: #${receiptId}\nনাম: ${name}\nপ্রকল্প: ${pName}\nপরিমাণ: ${amount} টাকা\nমাধ্যম: ${method}${trx ? '\nTrxID: ' + trx : ''}\nতারিখ: ${date}`);
+  const waMsg = encodeURIComponent(`আসসালামু আলাইকুম,\n${db.settings.name}-এর জন্য অনুদান/ওয়াদা পাঠিয়েছি:\nধরন: ${donType}\nরসিদ: #${receiptId}\nনাম: ${name}\nপ্রকল্প: ${pName}\nপরিমাণ: ${amount} টাকা\nমাধ্যম: ${method}${trx ? '\nTrxID/নোট: ' + trx : ''}\nতারিখ: ${date}`);
   document.getElementById('waReceiptLink').href = `https://wa.me/${waNum}?text=${waMsg}`;
   document.getElementById('receiptModal').classList.add('open');
   e.target.reset();
 }
 
-/* =========================================================
+/* ============================================================
    ADMIN PANEL & CRUD HANDLERS
-   ========================================================= */
+   ============================================================ */
 function openAdminModal() {
   document.getElementById('adminModal').classList.add('open');
   document.getElementById('adminLoginView').style.display = adminLoggedIn ? 'none' : 'block';
@@ -2476,23 +2544,40 @@ function renderAdminLists() {
   document.getElementById('acMonth').value = new Date().toISOString().slice(0, 7);
   document.getElementById('acDate').value = new Date().toISOString().slice(0, 10);
   updateAccountCatOptions();
-  document.getElementById('adminAccountsList').innerHTML = db.accounts.slice(0, 25).map(a => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.85rem;"><div><span class="badge ${a.type==='income'?'badge-completed':'badge-danger'}">${a.type==='income'?'আয়':'ব্যয়'}</span> <strong>${a.category}</strong> — ${fmtTaka(a.amount)} (${a.date})</div><button class="btn btn-danger btn-sm" onclick="deleteAccountEntry('${a.id}')">🗑️</button></div>`).join('');
+  document.getElementById('adminAccountsList').innerHTML = db.accounts.slice(0, 25).map(a => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.84rem;"><div><span class="badge ${a.type==='income'?'badge-completed':'badge-danger'}">${a.type==='income'?'আয়':'ব্যয়'}</span> <strong>${a.category}</strong> — ${fmtTaka(a.amount)} (${a.date})</div><button class="btn btn-danger btn-sm" onclick="deleteAccountEntry('${a.id}')">🗑️</button></div>`).join('');
 
   document.getElementById('ntDate').value = new Date().toISOString().slice(0, 10);
-  document.getElementById('adminNoticesList').innerHTML = db.notices.map(n => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.85rem;"><div><strong>[${n.category}] ${n.title}</strong> (${n.date})</div><button class="btn btn-danger btn-sm" onclick="deleteNotice('${n.id}')">🗑️</button></div>`).join('');
+  document.getElementById('adminNoticesList').innerHTML = db.notices.map(n => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.84rem;"><div><strong>[${n.category}] ${n.title}</strong> (${n.date})</div><button class="btn btn-danger btn-sm" onclick="deleteNotice('${n.id}')">🗑️</button></div>`).join('');
 
-  document.getElementById('adminProjectsList').innerHTML = db.projects.map(p => `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;flex-wrap:wrap;"><div><strong>${p.name}</strong> (${p.status}) — অগ্রগতি: ${p.progress}% | কালেকশন: ${fmtTaka(p.collected)}</div><div style="display:flex;gap:6px;"><button class="btn btn-outline btn-sm" onclick="editProject('${p.id}')">✏️ এডিট</button><button class="btn btn-danger btn-sm" onclick="deleteProject('${p.id}')">🗑️</button></div></div>`).join('');
+  document.getElementById('adminProjectsList').innerHTML = db.projects.map(p => `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;flex-wrap:wrap;font-size:0.85rem;"><div><strong>${p.name}</strong> (${p.status}) — আদায়: ${fmtTaka(p.collected)} | ওয়াদা বাকি: ${fmtTaka(p.unpaidPledge || 0)}</div><div style="display:flex;gap:6px;"><button class="btn btn-outline btn-sm" onclick="editProject('${p.id}')">✏️ এডিট</button><button class="btn btn-danger btn-sm" onclick="deleteProject('${p.id}')">🗑️</button></div></div>`).join('');
 
   const pOpts = db.projects.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
   document.getElementById('adProject').innerHTML = pOpts; document.getElementById('gProject').innerHTML = pOpts;
   document.getElementById('adDate').value = new Date().toISOString().slice(0, 10);
 
-  document.getElementById('adminDonorsList').innerHTML = db.donors.slice(0, 30).map(d => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.85rem;"><div><strong>${d.name}</strong> — ${fmtTaka(d.amount)} (${d.method}, ${d.date})</div><button class="btn btn-danger btn-sm" onclick="deleteDonor('${d.id}')">🗑️</button></div>`).join('');
-  document.getElementById('adminGalleryList').innerHTML = db.gallery.map(g => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;"><div style="font-size:0.86rem;"><strong>${g.title}</strong> (${g.date})</div><button class="btn btn-danger btn-sm" onclick="deleteGallery('${g.id}')">🗑️</button></div>`).join('');
-  document.getElementById('adminTickerList').innerHTML = db.tickers.map((t, i) => `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.85rem;"><div>${t}</div><button class="btn btn-danger btn-sm" onclick="deleteTicker(${i})">🗑️</button></div>`).join('');
+  document.getElementById('adminDonorsList').innerHTML = db.donors.slice(0, 40).map(d => {
+    const pName = db.projects.find(p => p.id === d.projectId)?.name || 'সাধারণ';
+    const bCls = d.statusKey === 'paid' ? 'badge-completed' : (d.statusKey === 'partial' ? 'badge-gold' : 'badge-danger');
+    return `
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 11px;border:1px solid var(--border);border-radius:10px;margin-bottom:7px;font-size:0.84rem;flex-wrap:wrap;">
+        <div>
+          <strong>${d.name}</strong> <span class="badge ${bCls}">${d.statusLabel}</span>
+          <div style="color:var(--muted);font-size:0.77rem;margin-top:2px;">
+            ${pName} | ওয়াদা: <strong>${fmtTaka(d.pledged)}</strong> | আদায়: <strong style="color:var(--success);">${fmtTaka(d.paid)}</strong>${d.due > 0 ? ` | বাকি: <strong style="color:var(--danger);">${fmtTaka(d.due)}</strong>` : ''} (${d.date})
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;">
+          ${d.due > 0 ? `<button class="btn btn-primary btn-sm" onclick="openCollectDueModal('${d.id}')">💰 আদায় নিন</button>` : ''}
+          <button class="btn btn-danger btn-sm" onclick="deleteDonor('${d.id}')">🗑️</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('adminGalleryList').innerHTML = db.gallery.map(g => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.84rem;"><div><strong>${g.title}</strong> (${g.date})</div><button class="btn btn-danger btn-sm" onclick="deleteGallery('${g.id}')">🗑️</button></div>`).join('');
+  document.getElementById('adminTickerList').innerHTML = db.tickers.map((t, i) => `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:0.84rem;"><div>${t}</div><button class="btn btn-danger btn-sm" onclick="deleteTicker(${i})">🗑️</button></div>`).join('');
 
   document.getElementById('cmTerm').innerHTML = db.committeeTerms.map(t => `<option value="${t.id}">${t.label}</option>`).join('');
-  document.getElementById('adminCommitteeList').innerHTML = db.committeeTerms.map(t => `<div style="border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:10px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><strong>${t.label} ${t.isCurrent ? '(বর্তমান)' : ''}</strong><button class="btn btn-danger btn-sm" onclick="deleteTerm('${t.id}')">সময়কাল মুছুন</button></div>${t.members.map(m => `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-top:1px dashed var(--border);font-size:0.85rem;"><div><strong>${m.name}</strong> — ${m.role} ${m.phone ? '(' + m.phone + ')' : ''}</div><button class="btn btn-danger btn-sm" onclick="deleteMember('${t.id}','${m.id}')">×</button></div>`).join('')}</div>`).join('');
+  document.getElementById('adminCommitteeList').innerHTML = db.committeeTerms.map(t => `<div style="border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:10px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><strong>${t.label} ${t.isCurrent ? '(বর্তমান)' : ''}</strong><button class="btn btn-danger btn-sm" onclick="deleteTerm('${t.id}')">সময়কাল মুছুন</button></div>${t.members.map(m => `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-top:1px dashed var(--border);font-size:0.84rem;"><div><strong>${m.name}</strong> — ${m.role} ${m.phone ? '(' + m.phone + ')' : ''}</div><button class="btn btn-danger btn-sm" onclick="deleteMember('${t.id}','${m.id}')">×</button></div>`).join('')}</div>`).join('');
 
   const s = db.settings;
   document.getElementById('sName').value = s.name; document.getElementById('sAddress').value = s.address;
@@ -2504,8 +2589,10 @@ function renderAdminLists() {
   document.getElementById('sWaGroup').value = s.waGroupLink || ''; document.getElementById('sMsgGroup').value = s.msgGroupLink || '';
   document.getElementById('sBqrNote').value = s.banglaQrNote || '';
 
-  document.getElementById('ghOwner').value = ghCfg.owner || ''; document.getElementById('ghRepo').value = ghCfg.repo || '';
-  document.getElementById('ghBranch').value = ghCfg.branch || 'main'; document.getElementById('ghToken').value = ghCfg.token || '';
+  document.getElementById('ghOwner').value = ghCfg.owner || DEFAULT_GH_OWNER;
+  document.getElementById('ghRepo').value = ghCfg.repo || DEFAULT_GH_REPO;
+  document.getElementById('ghBranch').value = ghCfg.branch || 'main';
+  document.getElementById('ghToken').value = ghCfg.token || '';
   document.getElementById('ghAutoSync').checked = Boolean(ghCfg.autoSync);
 
   const pdfMonths = [...new Set(db.accounts.map(a => a.month))].sort().reverse(), curMo = new Date().toISOString().slice(0, 7);
@@ -2526,7 +2613,6 @@ function savePrayerTimes(e) {
   };
   saveData(true); renderAll(); showToast('নামাজের সময়সূচি সংরক্ষিত হয়েছে!');
 }
-
 function saveSeasonalSettings(e) {
   e.preventDefault();
   db.seasonal = {
@@ -2543,14 +2629,12 @@ function saveSeasonalSettings(e) {
   };
   saveData(true); renderAll(); showToast('রমাদান ও ঈদ এলার্ট সেভ হয়েছে!');
 }
-
 function addAccountEntry(e) {
   e.preventDefault();
   db.accounts.unshift({ id: 'a_' + Date.now(), month: document.getElementById('acMonth').value, type: document.getElementById('acType').value, category: document.getElementById('acCategory').value, amount: Number(document.getElementById('acAmount').value), date: document.getElementById('acDate').value, note: document.getElementById('acNote').value.trim() });
   saveData(true); e.target.reset(); renderAll(); showToast('মাসিক হিসাব যুক্ত হয়েছে!');
 }
 function deleteAccountEntry(id) { db.accounts = db.accounts.filter(a => a.id !== id); saveData(true); renderAll(); }
-
 function addNotice(e) {
   e.preventDefault();
   db.notices.unshift({ id: 'n_' + Date.now(), title: document.getElementById('ntTitle').value.trim(), category: document.getElementById('ntCat').value, date: document.getElementById('ntDate').value, body: document.getElementById('ntBody').value.trim() });
@@ -2589,11 +2673,56 @@ async function deleteProject(id) {
   db.projects = db.projects.filter(p => p.id !== id); saveData(true); renderAll();
 }
 
+function syncAdPaidField() {
+  const full = document.getElementById('adFullPaid')?.checked;
+  const pledgedVal = document.getElementById('adPledged')?.value || '';
+  const paidEl = document.getElementById('adPaid');
+  if (!paidEl) return;
+  if (full) { paidEl.value = pledgedVal; paidEl.readOnly = true; }
+  else { paidEl.readOnly = false; if (paidEl.value === pledgedVal) paidEl.value = '0'; }
+}
+
 function addAdminDonor(e) {
   e.preventDefault();
-  db.donors.unshift({ id: 'd_' + Date.now(), date: document.getElementById('adDate').value, name: document.getElementById('adName').value.trim(), projectId: document.getElementById('adProject').value, method: document.getElementById('adMethod').value, amount: Number(document.getElementById('adAmount').value) });
-  syncAllProjectCollections(); saveData(true); e.target.reset(); renderAll(); showToast('দাতা যুক্ত হয়েছে ও প্রকল্পের ফান্ড অটো আপডেট হয়েছে!');
+  const pledged = Number(document.getElementById('adPledged').value || 0);
+  const full = document.getElementById('adFullPaid').checked;
+  const paid = full ? pledged : Math.min(pledged, Math.max(0, Number(document.getElementById('adPaid').value || 0)));
+  db.donors.unshift(normalizeDonor({
+    id: 'd_' + Date.now(), date: document.getElementById('adDate').value,
+    name: document.getElementById('adName').value.trim(), projectId: document.getElementById('adProject').value,
+    method: document.getElementById('adMethod').value, pledged, paid, amount: paid
+  }));
+  syncAllProjectCollections(); saveData(true); e.target.reset();
+  document.getElementById('adFullPaid').checked = true; syncAdPaidField(); renderAll();
+  showToast(paid < pledged ? 'ওয়াদা যুক্ত হয়েছে ও প্রকল্পের হিসাবে আপডেট হয়েছে!' : 'দাতা যুক্ত হয়েছে ও প্রকল্পের ফান্ড অটো আপডেট হয়েছে!');
 }
+
+function openCollectDueModal(id) {
+  const d = db.donors.find(x => x.id === id);
+  if (!d || d.due <= 0) return;
+  document.getElementById('collectDueDonorId').value = id;
+  document.getElementById('collectDueInfo').innerHTML = `<strong>${d.name}</strong> — মোট ওয়াদা: ${fmtTaka(d.pledged)}, আদায়কৃত: ${fmtTaka(d.paid)}, <strong style="color:var(--danger);">অনাদায়ী: ${fmtTaka(d.due)}</strong>`;
+  const amtEl = document.getElementById('collectDueAmount');
+  amtEl.value = d.due;
+  amtEl.max = d.due;
+  document.getElementById('collectDueModal').classList.add('open');
+}
+
+function submitCollectDonorDue(e) {
+  e.preventDefault();
+  const id = document.getElementById('collectDueDonorId').value;
+  const d = db.donors.find(x => x.id === id);
+  if (!d) return;
+  const addAmt = Number(document.getElementById('collectDueAmount').value || 0);
+  if (addAmt <= 0) { showToast('সঠিক টাকার পরিমাণ দিন।'); return; }
+  d.paid = Math.min(d.pledged, Number(d.paid || 0) + addAmt);
+  d.due = Math.max(0, d.pledged - d.paid);
+  d.amount = d.paid;
+  d.method = document.getElementById('collectDueMethod').value;
+  syncAllProjectCollections(); saveData(true); closeModal('collectDueModal'); renderAll();
+  showToast(`✅ ${fmtTaka(addAmt)} আদায় হয়েছে! প্রজেক্টের ফান্ড আপডেট হয়েছে।`);
+}
+
 function deleteDonor(id) { db.donors = db.donors.filter(d => d.id !== id); syncAllProjectCollections(); saveData(true); renderAll(); }
 
 async function addGalleryPhoto(e) {
@@ -2604,7 +2733,6 @@ async function addGalleryPhoto(e) {
   saveData(true); e.target.reset(); renderAll(); showToast('ছবি পোস্ট হয়েছে!');
 }
 function deleteGallery(id) { db.gallery = db.gallery.filter(g => g.id !== id); saveData(true); renderAll(); }
-
 function addTickerItem(e) { e.preventDefault(); db.tickers.push(document.getElementById('tText').value.trim()); saveData(true); e.target.reset(); renderAll(); }
 function deleteTicker(idx) { db.tickers.splice(idx, 1); saveData(true); renderAll(); }
 
@@ -2636,21 +2764,12 @@ function deleteMember(termId, memId) {
 async function saveSettings(e) {
   e.preventDefault();
   Object.assign(db.settings, {
-    name: document.getElementById('sName').value.trim(),
-    address: document.getElementById('sAddress').value.trim(),
-    bkash: document.getElementById('sBkash').value.trim(),
-    nagad: document.getElementById('sNagad').value.trim(),
-    rocket: document.getElementById('sRocket').value.trim(),
-    bankName: document.getElementById('sBankName').value.trim(),
-    bankBranch: document.getElementById('sBankBranch').value.trim(),
-    bankAccName: document.getElementById('sBankAccName').value.trim(),
-    bankAccNo: document.getElementById('sBankAccNo').value.trim(),
-    bankRouting: document.getElementById('sBankRouting').value.trim(),
-    cashName: document.getElementById('sCashName').value.trim(),
-    cashPhone: document.getElementById('sCashPhone').value.trim(),
-    whatsappNumber: document.getElementById('sWhatsapp').value.trim(),
-    waGroupLink: document.getElementById('sWaGroup').value.trim(),
-    msgGroupLink: document.getElementById('sMsgGroup').value.trim(),
+    name: document.getElementById('sName').value.trim(), address: document.getElementById('sAddress').value.trim(),
+    bkash: document.getElementById('sBkash').value.trim(), nagad: document.getElementById('sNagad').value.trim(), rocket: document.getElementById('sRocket').value.trim(),
+    bankName: document.getElementById('sBankName').value.trim(), bankBranch: document.getElementById('sBankBranch').value.trim(),
+    bankAccName: document.getElementById('sBankAccName').value.trim(), bankAccNo: document.getElementById('sBankAccNo').value.trim(), bankRouting: document.getElementById('sBankRouting').value.trim(),
+    cashName: document.getElementById('sCashName').value.trim(), cashPhone: document.getElementById('sCashPhone').value.trim(),
+    whatsappNumber: document.getElementById('sWhatsapp').value.trim(), waGroupLink: document.getElementById('sWaGroup').value.trim(), msgGroupLink: document.getElementById('sMsgGroup').value.trim(),
     banglaQrNote: document.getElementById('sBqrNote').value.trim()
   });
   const bqrFile = document.getElementById('sBqrFile').files[0];
@@ -2663,15 +2782,14 @@ async function saveSettings(e) {
 function exportBackup() {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' }));
-  a.download = 'masjid-backup.json';
-  a.click();
+  a.download = 'masjid-backup.json'; a.click();
 }
 async function resetAllData() {
   if (!(await customConfirm('সকল তথ্য প্রাথমিক অবস্থায় ফিরিয়ে আনবেন?'))) return;
   db = structuredClone(defaultData); saveData(true); renderAll(); showToast('ডিফল্ট ডেটায় রিসেট হয়েছে।');
 }
 
-/* INITIALIZE APP */
+/* BOOTSTRAP APP */
 window.onload = function () {
   renderAll();
   pullFromGitHub(false);
